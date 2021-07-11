@@ -3,6 +3,6 @@ class ModelUser extends CI_Model
 {
     public function getUserByUsername($username)
     {
-        return $this->db->get('user', ['username' => $username])->row_array();
+        return $this->db->get_where('user', ['username' => $username])->row_array();
     }
 }
