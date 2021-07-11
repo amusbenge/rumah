@@ -1,6 +1,13 @@
-.bg-login-img img{
+.container .img-auth {
     background-position: center;
-    background-size: cover;
-    height: 350px;
-    width: 430px;
+    height: 100px;
+    width: 100px;
+}
+
+.pass {
+    float: right;
+    margin-top: -33px;
+    margin-right: 10px;
+    position: relative;
+    z-index: 2;
 }
