@@ -16,15 +16,8 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
 
         if ($this->form_validation->run() == false) {
-            $this->session->set_flashdata('pesan', '
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Gagal!</strong> Input tidak boleh <strong>Kosong</strong>.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            ');
-            $this->load->view('auth');;
+            $data['title'] = 'Login';
+            $this->load->view('auth', $data);
         } else {
             $this->login();
         }
