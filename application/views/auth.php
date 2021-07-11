@@ -27,13 +27,6 @@
 <body class="bg-gradient-primary">
 
     <div class="container">
-        <div class="row justify-content-center mt-4">
-            <H1 class="text-gray-900">SISTEM PENDUKUNG KEPUTUSAN</H1>
-        </div>
-    </div>
-
-    <div class="container">
-
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
