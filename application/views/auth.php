@@ -45,11 +45,11 @@
                                 </div>
                                 <?= $this->session->flashdata('pesan'); ?>
                                 <form class="user" method="post" action="<?= base_url('auth'); ?>">
-                                    <div class="form-group">
+                                    <div class="form-group icon-cont">
                                         <input type="text" class="form-control form-control-user" id="username" name="username" placeholder="Masukan Username">
                                         <?= form_error('username', '<small class="text-warning ml-3">', '</small>') ?>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group icon-cont">
                                         <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Masukan Password">
                                         <span toggle="#password" class="fa fa-fw fa-eye pass toggle-pass" data-toggle="tooltip" data-placement="top" title="Lihat Password"></span>
                                         <?= form_error('password', '<small class="text-warning ml-3">', '</small>') ?>
