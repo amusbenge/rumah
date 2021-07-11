@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel="icon" type="image/png" href="<?= base_url('assets/img/icon/rumah     .png') ?>">
+    <link rel="icon" type="image/png" href="<?= base_url('assets/img/icon/rumah.png') ?>">
     <title><?= $title; ?></title>
 
     <!-- Custom fonts for this template-->
