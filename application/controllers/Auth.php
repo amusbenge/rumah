@@ -17,7 +17,7 @@ class Auth extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Login';
-            $this->load->view('auth', $data);
+            $this->load->view('auth/auth', $data);
         } else {
             $this->login();
         }
@@ -30,21 +30,21 @@ class Auth extends CI_Controller
 
         $user = $this->ModelUser->getUserByUsername($username);
 
-        if ($user) {
-            if ($user['aktif'] == "aktif") {
-                if (password_verify($password, $user['password'])) {
-                    if ($user['tipe'] == "admin") {
+        if ($user) { //jika user ada
+            if ($user['aktif'] == "aktif") { //jika user aktif
+                if (password_verify($password, $user['password'])) { //jika password benar
+                    if ($user['tipe'] == "admin") { //jika tipe nya admin
                         $data['user'] = $user;
                         $this->session->set_userdata($data);
                         echo 'Selamat Datang ' . $user['username'];
-                    } elseif ($user['tipe'] == "operator") {
+                    } elseif ($user['tipe'] == "operator") { //jika tipenya operatord
                         $data['user'] = $user;
                         $this->session->set_userdata($data);
                         echo 'Selamat Datang ' . $user['username'];
                     } else {
                         echo 'Selamat Datang ' . $user['username'];
                     }
-                } else {
+                } else { //jika password salah
                     $this->session->set_flashdata('pesan', '
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>Gagal!</strong> Password yang Anda Masukan Salah.
@@ -55,7 +55,7 @@ class Auth extends CI_Controller
                     ');
                     redirect('auth');
                 }
-            } else {
+            } else { //jika belum aktif
                 $this->session->set_flashdata('pesan', '
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <strong>Gagal!</strong> Akun anda belum aktif.
@@ -66,7 +66,7 @@ class Auth extends CI_Controller
                 ');
                 redirect('auth');
             }
-        } else {
+        } else { // jika user belum terdaftar
             $this->session->set_flashdata('pesan', '
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>Gagal!</strong> Akun anda belum terdaftar.
