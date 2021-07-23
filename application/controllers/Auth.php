@@ -36,13 +36,15 @@ class Auth extends CI_Controller
                     if ($user['tipe'] == "admin") { //jika tipe nya admin
                         $data['user'] = $user;
                         $this->session->set_userdata($data);
-                        echo 'Selamat Datang ' . $user['username'];
-                    } elseif ($user['tipe'] == "operator") { //jika tipenya operatord
+                        redirect('home');
+                    } elseif ($user['tipe'] == "operator") { //jika tipenya operator
                         $data['user'] = $user;
                         $this->session->set_userdata($data);
-                        echo 'Selamat Datang ' . $user['username'];
-                    } else {
-                        echo 'Selamat Datang ' . $user['username'];
+                        redirect('home');
+                    } else { // jika user diluar admin dan operator
+                        $data['user'] = $user;
+                        $this->session->set_userdata($data);
+                        redirect('home');
                     }
                 } else { //jika password salah
                     $this->session->set_flashdata('pesan', '
