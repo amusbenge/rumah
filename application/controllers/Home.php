@@ -6,6 +6,7 @@ class Home extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        is_login();
         $this->load->model('ModelUser');
     }
 
@@ -14,7 +15,6 @@ class Home extends CI_Controller
         $userdata = $this->session->userdata();
         $username = $userdata['user']['username'];
         $data['user'] = $this->ModelUser->getUserByUsername($username);
-        
         $this->load->view('home/index');
     }
 }
