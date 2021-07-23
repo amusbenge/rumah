@@ -50,7 +50,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Informasi Profil</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -58,17 +58,19 @@
             <div class="modal-body">
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-6">
+                        <div class="row justify-content-between">
+                            <div class="col-md">
+                                <?php if (!$user['foto']) : ?>
+                                    <img src="<?= base_url('assets/img/auth/user/profile.png') ?>" class="rounded-circle float-right" width="200px" height="200px" alt="">
+                                <?php else : ?>
+                                    <img src="<?= base_url('assets/img/auth/user/') . $user['foto'] ?>" class="rounded-circle float-right" width="150px" height="150px" alt="">
+                                <?php endif; ?>
+                            </div>
+                            <div class="col-md">
                                 <label for="">Nama : <?= $user['nama']; ?></label>
                                 <label for="">Username : <?= $user['username']; ?></label>
-                            </div>
-                            <div class="col-md-6">
-                                <?php if (!$user['foto']) : ?>
-                                    <img src="<?= base_url('assets/img/auth/user/profile.png') ?>" class="rounded float-right" alt="">
-                                <?php else : ?>
-                                    <img src="<?= base_url('assets/img/auth/user/') . $user['foto'] ?>" class="rounded float-right" alt="">
-                                <?php endif; ?>
+                                <label for="">Tipe : <?= $user['tipe']; ?></label>
+                                <label for="">Status : <?= $user['aktif']; ?></label>
                             </div>
                         </div>
                     </div>
@@ -76,7 +78,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
+                <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#editUserModal" data-dismiss="modal">Edit</a>
             </div>
         </div>
     </div>
@@ -93,7 +95,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="<?= base_url('user/edit/') . $user['id'] ?>" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="nama" class="col-form-label">Nama :</label>
                         <input type="text" class="form-control" id="nama" name="nama" value="<?= $user['nama']; ?>">
@@ -114,11 +116,8 @@
                         <label for="password2" class="col-form-label">Konfirmasi Password :</label>
                         <input type="password" class="form-control" id="password2" name="password2">
                     </div>
+                    <button type="button" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
             </div>
         </div>
     </div>
