@@ -25,15 +25,19 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="container-fluid">
+                    <div class="row justify-content-start">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <div class="row justify-content-center">
                         <div class="col-md-auto">
                             <img class="mt-2" src="<?= base_url('assets/img/auth/see-you-soon.png') ?>" width="100px" height="100px" alt="">
                             <img class="mt-2" src="<?= base_url('assets/img/auth/pesan-bye.png') ?>" width="100px" height="100px" alt="">
                         </div>
                     </div>
-                    <div class="row justify-content-center mt-4">
-                        <button class="btn btn-danger mr-2" type="button" data-dismiss="modal"><i class="fas fa-window-close"></i> Batal</button>
-                        <a class="btn btn-primary" href="<?= base_url('auth/logout') ?>"><i class="fas fa-sign-out-alt"></i> Keluar</a>
+                    <div class="row justify-content-end mt-4">
+                        <a class="btn btn-outline-warning" href="<?= base_url('auth/logout') ?>"><img src="<?= base_url('assets/img/icon/logout.png') ?>" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -41,7 +45,42 @@
     </div>
 </div>
 
-
+<!-- User Profil Info Modal -->
+<div class="modal fade" id="infoUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="">Nama : <?= $user['nama']; ?></label>
+                                <label for="">Username : <?= $user['username']; ?></label>
+                            </div>
+                            <div class="col-md-6">
+                                <?php if (!$user['foto']) : ?>
+                                    <img src="<?= base_url('assets/img/auth/user/profile.png') ?>" class="rounded float-right" alt="">
+                                <?php else : ?>
+                                    <img src="<?= base_url('assets/img/auth/user/') . $user['foto'] ?>" class="rounded float-right" alt="">
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Edit User Modal -->
 <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
