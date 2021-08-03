@@ -28,23 +28,23 @@ class Auth extends CI_Controller
         $username = $this->input->post('username');
         $password = $this->input->post('password');
 
-        $user = $this->ModelUser->getUserByUsername($username);
+        $user = $this->ModelUser->getUser($username);
 
         if ($user) { //jika user ada
             if ($user['aktif'] == "aktif") { //jika user aktif
                 if (password_verify($password, $user['password'])) { //jika password benar
-                    if ($user['tipe'] == "admin") { //jika tipe nya admin
+                    if ($user['tipe'] == "admin") { //jika tipe nya (1) admin
                         $data['user'] = $user;
                         $this->session->set_userdata($data);
-                        redirect('home');
-                    } elseif ($user['tipe'] == "operator") { //jika tipenya operator
+                        redirect('admin');
+                    } elseif ($user['tipe'] == "") { //jika tipenya (2) surveyor
                         $data['user'] = $user;
                         $this->session->set_userdata($data);
-                        redirect('home');
+                        redirect('surveyor');
                     } else { // jika user diluar admin dan operator
                         $data['user'] = $user;
                         $this->session->set_userdata($data);
-                        redirect('home');
+                        redirect('dusun');
                     }
                 } else { //jika password salah
                     $this->session->set_flashdata('pesan', '

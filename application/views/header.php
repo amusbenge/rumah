@@ -19,6 +19,9 @@
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/') ?>css/sb-admin-2.min.css" rel="stylesheet">
 
+    <!-- css ex -->
+    <link href="<?= base_url('assets/'); ?>css/private.css" rel="stylesheet">
+
 </head>
 
 <body id="page-top">

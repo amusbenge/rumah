@@ -95,7 +95,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?= base_url('user/edit/') . $user['id'] ?>" method="POST" enctype="multipart/form-data">
+                <form action="<?= base_url('user/edit_profil/') . $user['id'] ?>" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="nama" class="col-form-label">Nama :</label>
                         <input type="text" class="form-control" id="nama" name="nama" value="<?= $user['nama']; ?>">
@@ -116,7 +116,7 @@
                         <label for="password2" class="col-form-label">Konfirmasi Password :</label>
                         <input type="password" class="form-control" id="password2" name="password2">
                     </div>
-                    <button type="button" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+                    <button type="button" class="btn btn-primary"><i class="fas fa-save"></i>Simpan</button>
                 </form>
             </div>
         </div>
@@ -140,8 +140,11 @@
 <script src="<?= base_url('assets/') ?>js/demo/chart-area-demo.js"></script>
 <script src="<?= base_url('assets/') ?>js/demo/chart-pie-demo.js"></script>
 
-<!-- Sweat alert -->
+<!-- Sweet alert -->
 <script src="<?= base_url('assets/dist/sweetalert.js') ?>"></script>
+
+<!-- javascript ex -->
+<script src="<?= base_url('assets/'); ?>js/private.js"></script>
 
 </body>
 
