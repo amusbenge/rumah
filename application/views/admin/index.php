@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h1 class="h3 mb-4 text-gray-900"><?= $title; ?></h1>
+  <h3 class="mb-2 text-gray-900"><?= $title; ?></h3>
 
   <!-- Isi Dalam bentuk Card -->
   <div class="card"> 

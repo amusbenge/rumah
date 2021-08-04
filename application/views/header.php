@@ -21,6 +21,7 @@
 
     <!-- css ex -->
     <link href="<?= base_url('assets/'); ?>css/private.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 
 </head>
 

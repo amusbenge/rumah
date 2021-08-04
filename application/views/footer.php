@@ -123,6 +123,7 @@
     </div>
 </div>
 
+
 <!-- Bootstrap core JavaScript-->
 <script src="<?= base_url('assets/') ?>vendor/jquery/jquery.min.js"></script>
 <script src="<?= base_url('assets/') ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -145,6 +146,13 @@
 
 <!-- javascript ex -->
 <script src="<?= base_url('assets/'); ?>js/private.js"></script>
+<script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready( function () {
+        $('#jtable').DataTable();
+    } );
+</script>
 
 </body>
 
