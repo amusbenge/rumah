@@ -105,16 +105,16 @@
                         <input type="text" class="form-control" id="username" name="username" value="<?= $user['username']; ?>" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="foto" class="col-form-label">Foto :</label>
-                        <input type="file" id="foto" name="foto">
-                    </div>
-                    <div class="form-group">
                         <label for="password1" class="col-form-label">Password :</label>
                         <input type="password" class="form-control" id="password1" name="password1">
                     </div>
                     <div class="form-group">
                         <label for="password2" class="col-form-label">Konfirmasi Password :</label>
                         <input type="password" class="form-control" id="password2" name="password2">
+                    </div>
+                    <div class="form-group">
+                        <label for="foto" class="col-form-label">Foto :</label>
+                        <input type="file" id="foto" name="foto">
                     </div>
                     <button type="button" class="btn btn-primary"><i class="fas fa-save"></i>Simpan</button>
                 </form>
