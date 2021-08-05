@@ -7,6 +7,7 @@
 
         <!-- Tombol Tambah User dengan MODAL -->
         <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#staticBackdrop">
+            <i class="fas fa-user-plus mr-1"></i>
             Tambah
         </button>
 

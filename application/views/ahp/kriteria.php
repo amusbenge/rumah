@@ -7,7 +7,8 @@
 
         <!-- Tombol Tambah Kriteria dengan MODAL -->
         <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#staticBackdrop">
-            Tambah
+          <i class="fas fa-plus-circle mr-1"></i>    
+          Tambah
         </button>
 
         <!-- Pesan SUKSES/TIDAK -->

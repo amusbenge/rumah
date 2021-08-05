@@ -99,4 +99,64 @@ class Admin extends CI_Controller
         redirect('admin/users');
     }
 
+    public function edit_user($id)
+    {
+        $data['title'] = 'Edit User';
+        $userdata = $this->session->userdata();
+        $username = $userdata['user']['username'];
+        $data['user'] = $this->ModelUser->getUser($username);
+        $data['users'] = $this->db->get_where('user', ['id' => $id])->row_array();
+
+        $this->load->view('header', $data);
+        $this->load->view('sidebar', $data);
+        $this->load->view('topbar', $data);
+        $this->load->view('admin/edit_user', $data);
+        $this->load->view('footer');
+    }
+
+    public function update_user($id)
+    {
+        $tipe = $this->input->post('tipe');
+
+        if ($tipe == "Admin") {
+            $role_id = 1;
+        } elseif ($tipe == "Surveyor") {
+            $role_id = 2;
+        } else {
+            $role_id = 3;
+        }
+
+        //jika ada gambar yang diupload
+        $upload_foto = $_FILES['foto'];
+
+        if ($upload_foto) {
+            $config['allowed_types'] = 'jpeg|gif|jpg|png';
+            $config['max_size']      = '3072';
+            $config['upload_path']   = './assets/img/auth/user/';
+
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('foto')) {
+                $new_foto = $this->upload->data('file_name');
+                $this->db->set('foto', $new_foto);
+            } else {
+                echo $this->upload->display_errors();
+            }
+        }
+
+        $data = [
+            'nama'      => htmlspecialchars($this->input->post('nama', true)),
+            'jk'        => $this->input->post('jk'),
+            'tipe'      => $tipe,
+            'aktif'     => "aktif",
+            'role_id'   => $role_id
+        ];
+
+        $this->db->where('id', $id);
+        $this->db->update('user', $data);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data user has been updated.</div>');
+        redirect('admin/users');
+    }
+
 }
