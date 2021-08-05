@@ -116,7 +116,7 @@
                         <label for="foto" class="col-form-label">Foto :</label>
                         <input type="file" id="foto" name="foto">
                     </div>
-                    <button type="button" class="btn btn-primary"><i class="fas fa-save"></i>Simpan</button>
+                    <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-save mr-2"></i>Simpan</button>
                 </form>
             </div>
         </div>
