@@ -98,26 +98,22 @@
                 <form action="<?= base_url('user/edit_profil/') . $user['id'] ?>" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="nama" class="col-form-label">Nama :</label>
-                        <input type="text" class="form-control" id="nama" name="nama" value="<?= $user['nama']; ?>">
+                        <input type="text" class="form-control" id="nama" name="nama" value="<?= $user['nama']; ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="username" class="col-form-label">Username :</label>
                         <input type="text" class="form-control" id="username" name="username" value="<?= $user['username']; ?>" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="password1" class="col-form-label">Password :</label>
-                        <input type="password" class="form-control" id="password1" name="password1">
-                    </div>
-                    <div class="form-group">
-                        <label for="password2" class="col-form-label">Konfirmasi Password :</label>
-                        <input type="password" class="form-control" id="password2" name="password2">
+                        <label for="password" class="col-form-label">Password Baru:</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
                     </div>
                     <div class="form-group">
                         <label for="foto" class="col-form-label">Foto :</label>
-                        <input type="file" id="foto" name="foto">
+                        <input type="file" id="foto" name="foto" required>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-save mr-2"></i>Simpan</button>
+                        <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-save mr-2"></i>Simpan</button>
                     </div>
                 </form>
             </div>
@@ -151,9 +147,32 @@
 <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
 <script>
-    $(document).ready( function () {
+    $(document).ready(function() {
         $('#jtable').DataTable();
-    } );
+    });
+</script>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
 </script>
 
 </body>

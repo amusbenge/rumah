@@ -8,37 +8,47 @@ class User extends CI_Controller
         parent::__construct();
     }
 
-    public function edit_profil ($id)
+    public function edit_profil($id)
     {
-
-        $this->form_validation->set_rules('nama', 'Nama', 'trim|required|min_length[3]|max_length[25]|');
-        $this->form_validation->set_rules('password1', 'Password', 'trim|required|min_length[5]|max_length[10]|matches[password2]');
-        $this->form_validation->set_rules('password2', 'Konfirmasi Password', 'trim|required|min_length[5]|max_length[10]|matches[password1]');
-
-        if($this->form_validation->run() == false){
-
-        }else {
-            
-        }
-
         $nama = $this->input->post('nama');
         $username = $this->input->post('username');
-        $password1 = $this->input->post('password1');
-        $password2 = $this->input->post('password2');
+        $password = $this->input->post('password');
 
-        $data = [
-            'nama' => $nama,
-            'username' => $username
-        ];
-
-        $upload = $_FILES['foto']['name'];
+        $upload = $_FILES['foto'];
 
         if ($upload) {
             $config['allowed_types'] = 'jpg|png';
             $config['max_size'] = '1000';
-            $config['upload_path'] = './assets/img/auth/user';
+            $config['upload_path'] = './assets/img/auth/user/';
 
             $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('foto')) {
+                $new_foto = $this->upload->data('file_name');
+                $this->db->set('foto', $new_foto);
+            } else {
+                echo $this->upload->display_errors();
+            }
         }
+
+        $data = [
+            'nama' => htmlspecialchars($nama),
+            'username' => $username,
+            'password' => password_hash($password, PASSWORD_DEFAULT)
+        ];
+
+        $this->db->where('id', $id);
+        $this->db->update('user', $data);
+
+        $this->session->unset_userdata();
+        $this->session->set_flashdata('pesan', '
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Berhasil!</strong> Data Berhasil di Update, Silahkan melakukan login kembali.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            ');
+        redirect('auth');
     }
 }

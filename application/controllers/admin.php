@@ -55,7 +55,7 @@ class Admin extends CI_Controller
             } else {
                 $role_id = 3;
             }
-            
+
             $foto   = $_FILES['foto'];
 
             if ($foto = '') {
@@ -158,5 +158,4 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data user has been updated.</div>');
         redirect('admin/users');
     }
-
 }
