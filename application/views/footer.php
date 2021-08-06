@@ -89,12 +89,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ubah Profil Anda</h5>
+                <h5 class="modal-title text-gray-900" id="exampleModalLabel">Ubah Profil Anda</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-gray-800">
                 <form action="<?= base_url('user/edit_profil/') . $user['id'] ?>" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="nama" class="col-form-label">Nama :</label>
@@ -116,7 +116,9 @@
                         <label for="foto" class="col-form-label">Foto :</label>
                         <input type="file" id="foto" name="foto">
                     </div>
-                    <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-save mr-2"></i>Simpan</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-save mr-2"></i>Simpan</button>
+                    </div>
                 </form>
             </div>
         </div>
