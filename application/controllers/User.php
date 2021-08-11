@@ -22,7 +22,7 @@ class User extends CI_Controller
 
         if ($upload) {
             $config['allowed_types'] = 'jpeg|jpg|png|gif';
-            $config['max_size'] = '1000';
+            $config['max_size'] = '3000';
             $config['upload_path'] = './assets/img/auth/user/';
 
             $this->load->library('upload', $config);
