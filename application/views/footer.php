@@ -61,16 +61,30 @@
                         <div class="row justify-content-between">
                             <div class="col-md">
                                 <?php if (!$user['foto']) : ?>
-                                    <img src="<?= base_url('assets/img/auth/user/profile.png') ?>" class="rounded-circle float-right" width="200px" height="200px" alt="">
+                                    <img src="<?= base_url('assets/img/auth/user/profile.png') ?>" class="rounded-circle float-left" width="200px" height="200px" alt="">
                                 <?php else : ?>
-                                    <img src="<?= base_url('assets/img/auth/user/') . $user['foto'] ?>" class="rounded-circle float-right" width="150px" height="150px" alt="">
+                                    <img src="<?= base_url('assets/img/auth/user/') . $user['foto'] ?>" class="rounded-circle float-left" width="150px" height="150px" alt="">
                                 <?php endif; ?>
                             </div>
                             <div class="col-md">
-                                <label for="">Nama : <?= $user['nama']; ?></label>
-                                <label for="">Username : <?= $user['username']; ?></label>
-                                <label for="">Tipe : <?= $user['tipe']; ?></label>
-                                <label for="">Status : <?= $user['aktif']; ?></label>
+                                <table>
+                                    <tr>
+                                        <td>Nama </td>
+                                        <td>: <?= $user['nama'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Username </td>
+                                        <td>: <?= $user['username']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tipe </td>
+                                        <td>: <?= $user['tipe']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status</td>
+                                        <td>: <?= $user['aktif']; ?></td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
