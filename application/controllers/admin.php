@@ -6,6 +6,8 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('ModelUser');
+        $this->load->model('ModelAHP');
         is_login();
     }
 
@@ -91,7 +93,7 @@ class Admin extends CI_Controller
         }
     }
 
-    public function hapus_user($id)
+    public function hapus_user($id) // Fungsi Hapus User
     {
         $this->ModelUser->hapusUser('user', $id);
 
@@ -99,7 +101,7 @@ class Admin extends CI_Controller
         redirect('admin/users');
     }
 
-    public function edit_user($id)
+    public function edit_user($id) //Fungsi Update User
     {
         $data['title'] = 'Edit User';
         $userdata = $this->session->userdata();
@@ -114,7 +116,7 @@ class Admin extends CI_Controller
         $this->load->view('footer');
     }
 
-    public function update_user($id)
+    public function update_user($id) //Fungsi Update User
     {
         $tipe = $this->input->post('tipe');
 
@@ -157,5 +159,57 @@ class Admin extends CI_Controller
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data user has been updated.</div>');
         redirect('admin/users');
+    }
+
+    public function kepkel() //Halaman Kepala Keluarga
+    {
+        $data['title'] = 'Kepala Keluarga';
+        $userdata = $this->session->userdata();
+        $username = $userdata['user']['username'];
+        $data['user'] = $this->ModelUser->getUser($username);
+        $data['kepkel'] = $this->ModelAHP->getAllKepalaKeluarga();
+        // var_dump($data['user']);
+        // die();
+
+        $this->load->view('header', $data);
+        $this->load->view('sidebar', $data);
+        $this->load->view('topbar', $data);
+        $this->load->view('admin/kepkel.php', $data);
+        $this->load->view('footer', $data);
+    }
+
+    public function edit_kepkel($no_kk)
+    {
+        $data['title'] = 'Edit';
+        $userdata = $this->session->userdata();
+        $username = $userdata['user']['username'];
+        $data['user'] = $this->ModelUser->getUser($username);
+        $data['kepkel'] = $this->ModelAHP->getKepalaKelByNoKK($no_kk);
+
+        $this->load->view('header', $data);
+        $this->load->view('sidebar', $data);
+        $this->load->view('topbar', $data);
+        $this->load->view('admin/edit_kepkel.php', $data);
+        $this->load->view('footer', $data);
+    }
+
+    public function update_kepkel($no_kk)
+    {
+        $data = [
+            'no_kk' => $this->input->post('no_kk'),
+            'nm_kpl_kel' => $this->input->post('nm_kpl_kel'),
+            'alamat' => $this->input->post('alamat'),
+            'rt' => $this->input->post('rt'),
+            'rw' => $this->input->post('rw'),
+            'desa' => $this->input->post('desa'),
+            'kec' => $this->input->post('kec'),
+            'kab' => $this->input->post('kab')
+        ];
+
+        $this->db->where('no_kk', $no_kk);
+        $this->db->update('kep_keluarga', $data);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Kepala Keluarga has been updated.</div>');
+        redirect('admin/kepkel');
     }
 }

@@ -73,16 +73,14 @@
                                         <td>: <?= $user['nama'] ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Username </td>
-                                        <td>: <?= $user['username']; ?></td>
-                                    </tr>
-                                    <tr>
                                         <td>Tipe </td>
                                         <td>: <?= $user['tipe']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Status</td>
-                                        <td>: <?= $user['aktif']; ?></td>
+                                        <?php if ($user['aktif'] == 'aktif') : ?>
+                                            <td>: Aktif</td>
+                                        <?php endif; ?>
                                     </tr>
                                 </table>
                             </div>
