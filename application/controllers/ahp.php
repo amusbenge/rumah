@@ -25,11 +25,11 @@ class AHP extends CI_Controller
         $this->load->view('ahp/kriteria', $data);
         $this->load->view('footer', $data);
     }
-
+    
     public function tmbh_kriteria() //FUNGSI UTK TAMBAH KRITERIA
     {
         $this->form_validation->set_rules('kriteria', 'Kriteria', 'is_unique[kriteria.kriteria]');
-
+        
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Kriteria sudah ada.</div>');
             redirect('ahp');
@@ -39,10 +39,39 @@ class AHP extends CI_Controller
             ];
 
             $this->ModelAHP->inputKriteria($data, 'kriteria');
-
+            
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil tambahkan kriteria.</div>');
             redirect('ahp');
         }
     }
-
+    
+    public function perhitungan() // FUNGSI UNTUK TAMPILKAN PERHITUNGAN
+    {
+        $data['title'] = 'Perhitungan';
+        
+        $userdata = $this->session->userdata();
+        $username = $userdata['user']['username'];
+        $data['user'] = $this->ModelUser->getUser($username);
+    
+        $this->load->view('header', $data);
+        $this->load->view('sidebar', $data);
+        $this->load->view('topbar', $data);
+        $this->load->view('ahp/perhitungan', $data);
+        $this->load->view('footer', $data);
+    }
+    
+    public function hasil() // FUNGSI UNTUK TAMPILKAN HASIL
+    {
+        $data['title'] = 'Hasil';
+        
+        $userdata = $this->session->userdata();
+        $username = $userdata['user']['username'];
+        $data['user'] = $this->ModelUser->getUser($username);
+    
+        $this->load->view('header', $data);
+        $this->load->view('sidebar', $data);
+        $this->load->view('topbar', $data);
+        $this->load->view('ahp/hasil', $data);
+        $this->load->view('footer', $data);
+    }
 }

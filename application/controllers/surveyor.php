@@ -22,5 +22,33 @@ class Surveyor extends CI_Controller
         $this->load->view('survey/index', $data);
         $this->load->view('footer', $data);
     }
+    
+    public function perbandingan()
+    {
+        $data['title'] = 'Perbandingan';
+        $userdata = $this->session->userdata();
+        $username = $userdata['user']['username'];
+        $data['user'] = $this->ModelUser->getUser($username);
+    
+        $this->load->view('header', $data);
+        $this->load->view('sidebar', $data);
+        $this->load->view('topbar', $data);
+        $this->load->view('survey/perbandingan', $data);
+        $this->load->view('footer', $data);
+    }
+
+    public function hasil()
+    {
+        $data['title'] = 'Hasil';
+        $userdata = $this->session->userdata();
+        $username = $userdata['user']['username'];
+        $data['user'] = $this->ModelUser->getUser($username);
+    
+        $this->load->view('header', $data);
+        $this->load->view('sidebar', $data);
+        $this->load->view('topbar', $data);
+        $this->load->view('survey/hasil', $data);
+        $this->load->view('footer', $data);
+    }
 
 }
