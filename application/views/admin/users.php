@@ -47,7 +47,7 @@
                         <!-- JIKA USER YANG SEDANG AKTIF, TOMBOL HAPUS TIDAK MUNCUL -->
                         <?php if ($user['username'] != $u['username']) : ?> 
                             <a href="<?= base_url('admin/hapus_user/') ?><?= $u['id']; ?>" class="btn btn-danger btn-circle btn-sm" data-toggle="tooltip" title="Hapus" onclick="return confirm('Yakin ingin menghapus User ini?')">
-                            <i class="fas fa-trash"></i>
+                            <i class="fas fa-trash fa-sm"></i>
                         </a>
                         <?php endif; ?>
                     </td>

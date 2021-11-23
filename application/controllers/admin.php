@@ -212,4 +212,40 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Kepala Keluarga has been updated.</div>');
         redirect('admin/kepkel');
     }
+
+    public function tmbh_kepkel()
+    {
+        $this->form_validation->set_rules('username', 'username', 'is_unique[user.username]');
+
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Username sudah ada. Coba dengan Username berbeda.</div>');
+            redirect('admin/users');
+        } else {
+            $data = [
+                'no_kk'         => htmlspecialchars($this->input->post('no_kk', true)),
+                'nm_kpl_kel'    => htmlspecialchars($this->input->post('nama', true)),
+                'alamat'        => htmlspecialchars($this->input->post('alamat', true)),
+                'rt'            => htmlspecialchars($this->input->post('rt', true)),
+                'rw'            => htmlspecialchars($this->input->post('rw', true)),
+                'desa'          => "Kabuna",
+                'kec'           => "Kakuluk Mesak",
+                'kab'           => "Belu",
+            ];
+
+            $this->db->insert('kep_keluarga', $data);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Kepala Keluarga berhasil ditambahkan.</div>');
+            redirect('admin/kepkel');
+        }
+    }
+
+    public function hapus_kepkel($no_kk)
+    {
+        $this->db->where('no_kk', $no_kk);
+        $this->db->delete('kep_keluarga');
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Kepala Keluarga berhasil dihapus.</div>');
+        redirect('admin/kepkel');
+    }
+
 }
