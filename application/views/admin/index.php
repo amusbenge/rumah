@@ -5,7 +5,7 @@
   <div class="card">
     <div class="card-body">
       <?= $this->session->flashdata('pesan'); ?>
-      BELUM TAHU ISI APA???
+      
 
     </div>
   </div>

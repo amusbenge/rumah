@@ -35,7 +35,7 @@
                         <th scope="col">Nama Kepala Keluarga</th>
                         <th scope="col">Alamat</th>
                         <th scope="col">RT/RW</th>
-                        <th scope="col">Desa/Kel</th>
+                        <th scope="col">Desa</th>
                         <th scope="col">Kecamatan</th>
                         <th scope="col">Kabupaten</th>
                         <th scope="col">Aksi</th>
@@ -62,7 +62,7 @@
                                 </a>
                                 <!-- JIKA USER YANG SEDANG AKTIF, TOMBOL HAPUS TIDAK MUNCUL -->
                                 <?php if ($user['username'] != 'admin') : ?>
-                                    <a href="<?= base_url('admin/hapus_user/') ?><?= $kk['no_kk']; ?>" class="btn btn-danger btn-circle btn-sm" data-toggle="tooltip" title="Hapus" onclick="return confirm('Yakin ingin menghapus User ini?')">
+                                    <a href="<?= base_url('admin/hapus_kepkel/') ?><?= $kk['no_kk']; ?>" class="btn btn-danger btn-circle btn-sm" data-toggle="tooltip" title="Hapus" onclick="return confirm('Yakin ingin menghapus User ini?')">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 <?php endif; ?>
@@ -84,7 +84,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-gray-900" id="staticBackdropLabel">Tambah User</h5>
+                <h5 class="modal-title text-gray-900" id="staticBackdropLabel">Tambah Kepala Keluarga</h5>
                 <button type="button" class="close btn-danger" data-dismiss="modal">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -92,40 +92,26 @@
             <div class="modal-body">
                 <div class="p-3">
                     <!-- FORM isian Data User -->
-                    <form action="<?= base_url('admin/tmbh_user/') ?>" method="POST" enctype="multipart/form-data">
+                    <form action="<?= base_url('admin/kepkel/') ?>" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                            <label for="no_kk">Nomor KK</label>
+                            <input type="text" class="form-control form-control-sm" id="no_kk" name="no_kk" required>
+                        </div>
                         <div class="form-group">
-                            <label for="nama">Nama</label>
+                            <label for="nama">Nama Kepala Keluarga</label>
                             <input type="text" class="form-control form-control-sm" id="nama" name="nama" required>
                         </div>
                         <div class="form-group">
-                            <label for="jk">Jenis Kelamin</label>
-                            <select class="custom-select form-control-sm" id="jk" name="jk" required>
-                                <option selected></option>
-                                <option value="Pria">Pria</option>
-                                <option value="Wanita">Wanita</option>
-                            </select>
+                            <label for="alamat">Alamat</label>
+                            <input type="text" class="form-control form-control-sm" id="alamat" name="alamat" required>
                         </div>
                         <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control form-control-sm" id="username" name="username" required>
+                            <label for="rt">RT</label>
+                            <input type="text" class="form-control form-control-sm" id="rt" name="rt" required>
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control form-control-sm" id="password" name="password" required>
-                            <span toggle="#password" class="fa fa-eye pass toggle-pass pt-2 pl-2" data-toggle="tooltip" data-placement="top" title="Lihat Password"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="tipe">Tipe</label>
-                            <select class="custom-select form-control-sm" id="tipe" name="tipe" required>
-                                <option selected></option>
-                                <option value="Admin">Admin</option>
-                                <option value="Surveyor">Surveyor</option>
-                                <option value="Kepala Dusun">Kepala Dusun</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="foto">Foto</label>
-                            <input type="file" class="form-control btn-sm" id="foto" name="foto" required>
+                            <label for="rw">RW</label>
+                            <input type="text" class="form-control form-control-sm" id="rw" name="rw" required>
                         </div>
                         <div class="modal-footer">
                             <button type="reset" class="btn btn-secondary btn-sm">Reset</button>
