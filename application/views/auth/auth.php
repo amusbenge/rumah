@@ -30,7 +30,7 @@
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
-            <div class="col-xl-6 col-lg-8 col-md-9">
+            <div class="col-xl-5 col-lg-8 col-md-9">
 
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
@@ -54,10 +54,10 @@
                                         <span toggle="#password" class="fa fa-fw fa-eye pass toggle-pass" data-toggle="tooltip" data-placement="top" title="Lihat Password"></span>
                                         <?= form_error('password', '<small class="text-warning ml-3">', '</small>') ?>
                                     </div>
+                                    <hr>
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Masuk
                                     </button>
-                                    <hr>
                                 </form>
                             </div>
                         </div>
