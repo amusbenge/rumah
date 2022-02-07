@@ -165,6 +165,36 @@
 </script>
 
 <script>
+    $(document).ready(function() {
+
+        // get Edit Product
+        $('.btn-edit').on('click', function() {
+            // get data from button edit
+            const id = $(this).data('id');
+            const dusun = $(this).data('dusun');
+            const iduser = $(this).data('iduser');
+            // Set data to Form Edit
+            $('.id').val(id);
+            $('.nama_dusun').val(dusun);
+            $('.id_user').val(iduser);
+            // Call Modal Edit
+            $('#updateDusun').modal('show');
+        });
+
+        // get Delete Product
+        // $('.btn-delete').on('click', function() {
+        //     // get data from button edit
+        //     const id = $(this).data('id');
+        //     // Set data to Form Edit
+        //     $('.productID').val(id);
+        //     // Call Modal Edit
+        //     $('#deleteModal').modal('show');
+        // });
+
+    });
+</script>
+
+<script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function() {
         'use strict'

@@ -248,4 +248,73 @@ class Admin extends CI_Controller
         redirect('admin/kepkel');
     }
 
+    public function dusun() //FUNGSI TAMPIL HALAMAN USERS
+    {
+        $data['title'] = 'Dusun';
+        $userdata = $this->session->userdata();
+        $username = $userdata['user']['username'];
+        $data['user'] = $this->ModelUser->getUser($username);
+        $data['kep_dusun'] = $this->ModelUser->getUserWhTypDusun();
+        // var_dump($data['kep_dusun']);
+        // die();
+        $data['dusun'] = $this->ModelUser->getAllDusun();
+
+        $this->load->view('header', $data);
+        $this->load->view('sidebar', $data);
+        $this->load->view('topbar', $data);
+        $this->load->view('admin/dusun', $data);
+        $this->load->view('footer', $data);
+    }
+
+    public function tambah_dusun() // FUNGSI TAMBAH DUSUN
+    {
+        $this->form_validation->set_rules('nama_dusun', 'Nama Dusun', 'is_unique[dusun.nama_dusun]');
+        $this->form_validation->set_rules('id_user', 'id_user', 'is_unique[dusun.id_user]');
+
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Dusun atau Kepala Dusun existed.</div>');
+            redirect('admin/dusun');
+        } else {
+            $nama_dusun = $this->input->post('nama_dusun');
+            $id_user = $this->input->post('id_user');
+
+            $data = [
+                'nama_dusun'      => htmlspecialchars($nama_dusun),
+                'id_user'        => $id_user
+            ];
+
+            $this->ModelUser->tmbhUser($data, 'dusun');
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Dusun berhasil ditambahkan.</div>');
+            redirect('admin/dusun');
+        }
+    }
+
+    public function update_dusun() // FUNGSI TAMBAH DUSUN
+    {
+        $this->form_validation->set_rules('id_user', 'id_user', 'is_unique[dusun.id_user]');
+
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Dusun atau Kepala Dusun existed.</div>');
+            redirect('admin/dusun');
+        } else {
+
+            $id = $this->input->post('id');
+            $nama_dusun = $this->input->post('nama_dusun');
+            $id_user = $this->input->post('id_user');
+
+            $data = [
+                'nama_dusun'      => htmlspecialchars($nama_dusun),
+                'id_user'        => $id_user
+            ];
+
+            // var_dump($data);
+            // die();
+
+            $this->ModelUser->updateDusun($data, $id);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Dusun berhasil diubah.</div>');
+            redirect('admin/dusun');
+        }
+    }
 }
