@@ -32,6 +32,7 @@ class Admin extends CI_Controller
         $username = $userdata['user']['username'];
         $data['user'] = $this->ModelUser->getUser($username);
         $data['users'] = $this->ModelUser->getAllUser();
+        $data['roles'] = $this->db->get_where('user_role', ['role <>' => 'Kepala Dusun'])->result_array();
 
         $this->load->view('header', $data);
         $this->load->view('sidebar', $data);
@@ -48,49 +49,53 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Username sudah ada. Coba dengan Username berbeda.</div>');
             redirect('admin/users');
         } else {
-            $tipe = $this->input->post('tipe');
-
-            if ($tipe == "Admin") {
-                $role_id = 1;
-            } elseif ($tipe == "Surveyor") {
-                $role_id = 2;
-            } else {
-                $role_id = 3;
-            }
-
-            $foto   = $_FILES['foto'];
-
-            if ($foto = '') {
-            } else {
-                $config['allowed_types']    = 'jpeg|gif|jpg|png';
-                $config['max_size']         = '2048';
-                $config['upload_path']      = './assets/img/auth/user/';
-
-                $this->load->library('upload', $config);
-
-                if ($this->upload->do_upload('foto')) {
-                    $foto = $this->upload->data('file_name');
-                } else {
-                    echo "Foto Gagal Di-Upload!";
-                }
-            }
-
-            $data = [
-                'nama'      => htmlspecialchars($this->input->post('nama', true)),
-                'jk'        => $this->input->post('jk'),
-                'username'  => htmlspecialchars($this->input->post('username', true)),
-                'foto'      => $foto,
-                'password'  => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-                'tipe'      => $tipe,
-                'aktif'     => "aktif",
-                'role_id'   => $role_id
-            ];
-
-            $this->ModelUser->tmbhUser($data, 'user');
-
+            $this->insert_user();
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User berhasil ditambahkan.</div>');
             redirect('admin/users');
         }
+    }
+    public function insert_user()
+    {
+        // $tipe = $this->input->post('tipe');
+        $role_id = $this->input->post('role_id');
+        // if ($tipe == "Admin") {
+        //     $role_id = 1;
+        // } elseif ($tipe == "Surveyor") {
+        //     $role_id = 2;
+        // } else {
+        //     $role_id = 3;
+        // }
+
+        $foto   = $_FILES['foto'];
+
+        if ($foto = '') {
+        } else {
+            $config['allowed_types']    = 'jpeg|gif|jpg|png';
+            $config['max_size']         = '2048';
+            $config['upload_path']      = './assets/img/auth/user/';
+
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('foto')) {
+                $foto = $this->upload->data('file_name');
+            } else {
+                echo "Foto Gagal Di-Upload!";
+            }
+        }
+
+        $data = [
+            'nama'      => htmlspecialchars($this->input->post('nama', true)),
+            'jk'        => $this->input->post('jk'),
+            'username'  => htmlspecialchars($this->input->post('username', true)),
+            'foto'      => $foto,
+            'password'  => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+            'jabatan'      => $this->input->post('jabatan'),
+            'aktif'     => "aktif",
+            'role_id'   => $role_id
+        ];
+
+        $this->ModelUser->tmbhUser($data, 'user');
+        return $this->db->insert_id();
     }
 
     public function hapus_user($id) // Fungsi Hapus User
@@ -108,6 +113,7 @@ class Admin extends CI_Controller
         $username = $userdata['user']['username'];
         $data['user'] = $this->ModelUser->getUser($username);
         $data['users'] = $this->db->get_where('user', ['id' => $id])->row_array();
+        $data['roles'] = $this->db->get_where('user_role', ['role <>' => 'Kepala Dusun'])->result_array();
 
         $this->load->view('header', $data);
         $this->load->view('sidebar', $data);
@@ -118,15 +124,15 @@ class Admin extends CI_Controller
 
     public function update_user($id) //Fungsi Update User
     {
-        $tipe = $this->input->post('tipe');
+        $role_id = $this->input->post('role_id');
 
-        if ($tipe == "Admin") {
-            $role_id = 1;
-        } elseif ($tipe == "Surveyor") {
-            $role_id = 2;
-        } else {
-            $role_id = 3;
-        }
+        // if ($tipe == "Admin") {
+        //     $role_id = 1;
+        // } elseif ($tipe == "Surveyor") {
+        //     $role_id = 2;
+        // } else {
+        //     $role_id = 3;
+        // }
 
         //jika ada gambar yang diupload
         $upload_foto = $_FILES['foto'];
@@ -149,7 +155,7 @@ class Admin extends CI_Controller
         $data = [
             'nama'      => htmlspecialchars($this->input->post('nama', true)),
             'jk'        => $this->input->post('jk'),
-            'tipe'      => $tipe,
+            // 'tipe'      => $tipe,
             'aktif'     => "aktif",
             'role_id'   => $role_id
         ];
@@ -254,7 +260,7 @@ class Admin extends CI_Controller
         $userdata = $this->session->userdata();
         $username = $userdata['user']['username'];
         $data['user'] = $this->ModelUser->getUser($username);
-        $data['kep_dusun'] = $this->ModelUser->getUserWhTypDusun();
+        // $data['kep_dusun'] = $this->ModelUser->getUserWhTypDusun();
         // var_dump($data['kep_dusun']);
         // die();
         $data['dusun'] = $this->ModelUser->getAllDusun();
@@ -269,18 +275,18 @@ class Admin extends CI_Controller
     public function tambah_dusun() // FUNGSI TAMBAH DUSUN
     {
         $this->form_validation->set_rules('nama_dusun', 'Nama Dusun', 'is_unique[dusun.nama_dusun]');
-        $this->form_validation->set_rules('id_user', 'id_user', 'is_unique[dusun.id_user]');
+        // $this->form_validation->set_rules('id_user', 'id_user', 'is_unique[dusun.id_user]');
 
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Dusun atau Kepala Dusun existed.</div>');
             redirect('admin/dusun');
         } else {
             $nama_dusun = $this->input->post('nama_dusun');
-            $id_user = $this->input->post('id_user');
+            // $id_user = $this->input->post('id_user');
 
             $data = [
                 'nama_dusun'      => htmlspecialchars($nama_dusun),
-                'id_user'        => $id_user
+                // 'id_user'        => $id_user
             ];
 
             $this->ModelUser->tmbhUser($data, 'dusun');
@@ -292,8 +298,8 @@ class Admin extends CI_Controller
 
     public function update_dusun() // FUNGSI TAMBAH DUSUN
     {
-        $this->form_validation->set_rules('id_user', 'id_user', 'is_unique[dusun.id_user]');
-
+        // $this->form_validation->set_rules('id_user', 'id_user', 'is_unique[dusun.id_user]');
+        // $this->;
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Dusun atau Kepala Dusun existed.</div>');
             redirect('admin/dusun');
@@ -305,7 +311,7 @@ class Admin extends CI_Controller
 
             $data = [
                 'nama_dusun'      => htmlspecialchars($nama_dusun),
-                'id_user'        => $id_user
+                // 'id_user'        => $id_user
             ];
 
             // var_dump($data);
@@ -316,5 +322,30 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Dusun berhasil diubah.</div>');
             redirect('admin/dusun');
         }
+    }
+
+    public function tmbh_kepala_dusun()
+    {
+        $this->form_validation->set_rules('username', 'username', 'is_unique[user.username]');
+        $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
+        $this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required');
+        $this->form_validation->set_rules('id_dusun', 'Dusun', 'required');
+        $this->form_validation->set_rules('role_id', 'Role', 'required');
+        if ($this->form_validation->run()) {
+            $dusun = $this->ModelUser->getAllDusun($this->input->post('id_dusun'));
+            // var_dump($dusun);
+            // die();
+            $id_user = $this->insert_user();
+            // echo $id_user;
+            // die();
+            $data['id_user'] = $id_user;
+            $this->ModelUser->updateDusun($data, $dusun['id']);
+            $this->ModelUser->hapusUser('user', $dusun['id_user']);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Kepala Dusun berhasil diubah.</div>');
+        } else {
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+            $this->session->set_flashdata('message', $this->form_validation->error_string());
+        }
+        redirect('admin/dusun');
     }
 }

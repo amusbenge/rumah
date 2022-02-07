@@ -20,25 +20,25 @@
                         <div class="col-sm-10">
                             <select type="text" id="jk" class="form-control" name="jk" value="<?= $users['jk'] ?>" required>
                                 <option></option>
-                                <option>Pria</option>
-                                <option>Wanita</option>
+                                <option value="Pria" <?= set_select('jk', 'Pria', (bool)($users['jk'] == 'Pria')) ?>>Pria</option>
+                                <option value="Wanita" <?= set_select('jk', 'Wanita', (bool)($users['jk'] == 'Wanita')) ?>>Wanita</option>
                             </select>
                         </div>
                     </div>
-                    <?php if ($user['id'] == $users['id']) : ?>
+                    <?php if ($user['id'] == $users['id'] && $users['role_id'] != '3') : ?>
                         <input type="hidden" name="tipe" value="Admin">
-                    <?php else: ?>
-                    <div class="form-group row">
-                        <label for="role_id" class="col-sm-2 col-form-label">Tipe</label>
-                        <div class="col-sm-10">
-                            <select name="tipe" id="tipe" class="form-control" required>
-                                <option value=""></option>
-                                <option value="Admin">Admin</option>
-                                <option value="Surveyor">Surveyor</option>
-                                <option value="Kepala Dusun">Kepala Dusun</option>
-                            </select>
+                    <?php else : ?>
+                        <div class="form-group row">
+                            <label for="role_id" class="col-sm-2 col-form-label">Tipe</label>
+                            <div class="col-sm-10">
+                                <select name="role_id" id="role_id" class="form-control" required>
+                                    <option value=""></option>
+                                    <?php foreach ($roles as $role) : ?>
+                                        <option value="<?= $role['id'] ?>" <?= set_select('role_id', $role['id'], (bool)($role['id'] == $users['role_id'])) ?>><?= $role['role'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
                         </div>
-                    </div>
                     <?php endif; ?>
                     <div class="form-group row">
                         <label for="foto" class="col-sm-2 col-form-label">Foto</label>

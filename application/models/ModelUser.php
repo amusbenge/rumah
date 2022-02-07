@@ -3,12 +3,20 @@ class ModelUser extends CI_Model
 {
     public function getUser($username) //AMBIL USER BERDASARKAN USERNAME
     {
-        return $this->db->get_where('user', ['username' => $username])->row_array();
+        $this->db->select('user.*, user_role.role');
+        $this->db->from('user');
+        $this->db->join('user_role', 'user_role.id = user.role_id');
+        $this->db->where('username', $username);
+        return $this->db->get()->row_array();
     }
 
     public function getAllUser() // AMBIL SEMUA USER
     {
-        return $this->db->get('user')->result_array();
+        $this->db->select('user.*, user_role.role, dusun.id as id_dusun, dusun.nama_dusun');
+        $this->db->from('user');
+        $this->db->join('user_role', 'user_role.id = user.role_id');
+        $this->db->join('dusun', 'dusun.id_user = user.id', 'left');
+        return $this->db->get()->result_array();
     }
 
     public function tmbhUser($data, $table) //TAMBAH USER
@@ -22,13 +30,24 @@ class ModelUser extends CI_Model
         $this->db->delete($table);
     }
 
-    public function getAllDusun()
+    public function getAllDusun($id_dusun = null)
     {
-        $this->db->select('*');
-        $this->db->from('dusun');
-        $this->db->join('user', 'user.id = dusun.id_user');
-        $query = $this->db->get()->result_array();
-        return $query;
+        if ($id_dusun == null) {
+            $this->db->select('dusun.*, user.id as id_user, user.nama, user.jabatan as jabatan');
+            $this->db->from('dusun');
+            $this->db->join('user', 'user.id = dusun.id_user', 'left');
+            $query = $this->db->get()->result_array();
+            return $query;
+        } else {
+            // echo $id_dusun;
+            // die();
+            $this->db->select('dusun.*, user.id as id_user, user.nama, user.jabatan as jabatan');
+            $this->db->from('dusun');
+            $this->db->join('user', 'user.id = dusun.id_user', 'left');
+            $this->db->where('dusun.id', $id_dusun);
+            $query = $this->db->get()->row_array();
+            return $query;
+        }
     }
 
     public function getUserWhTypDusun()
@@ -43,6 +62,8 @@ class ModelUser extends CI_Model
 
     public function updateDusun($data, $id)
     {
+        // var_dump($id);
+        // die();
         $this->db->where('id', $id);
         $this->db->update('dusun', $data);
     }
