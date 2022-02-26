@@ -116,6 +116,15 @@
                             <label for="rw">RW</label>
                             <input type="text" class="form-control form-control-sm" id="rw" name="rw" required>
                         </div>
+                        <div class="form-group">
+                            <label for="id_dusun">Dusun</label>
+                            <select name="id_dusun" id="id_dusun" class="custom-select" required>
+                                <option value="">Pilih Dusun</option>
+                                <?php foreach ($data_dusun as $dusun) : ?>
+                                    <option value="<?= $dusun['id'] ?>"><?= $dusun['nama_dusun'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                         <div class="modal-footer">
                             <button type="reset" class="btn btn-secondary btn-sm">Reset</button>
                             <button type="submit" class="btn btn-primary btn-sm">Simpan</button>

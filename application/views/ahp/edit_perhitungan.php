@@ -17,7 +17,7 @@
               <div class="col-3">
                 <div class="form-check">
                   <input type="hidden" name="alt_<?= $alt['id']  ?>_<?= $banding['id_alternatif'] ?>" value="<?= $alt['id_alternatif'] ?>">
-                  <input class="form-check-input" type="radio" name="cek_<?= $alt['id']  ?>_<?= $banding['id_alternatif'] ?>" id="exampleRadios1" value="alt">
+                  <input class="form-check-input" type="radio" name="cek_<?= $alt['id']  ?>_<?= $banding['id_alternatif'] ?>" id="exampleRadios1" value="alt" checked>
                   <b><?= $alt['nm_kpl_kel'] ?></b>
                   <p class=""><?= $alt['deskripsi'] ?></p>
                 </div>
@@ -36,7 +36,7 @@
                 <select name="skala_<?= $alt['id']  ?>_<?= $banding['id_alternatif'] ?>" id="" class="custom-select" required>
                   <option value="">Pilih Skala Kepentingan</option>
                   <?php foreach ($skala as $s) : ?>
-                    <option value="<?= $s['id'] ?>"><?= $s['nama_skala'] ?></option>
+                    <option value="<?= $s['id'] ?>" <?= ($s['id'] == $banding['id_skala']) ? 'selected' : '' ?>><?= $s['nama_skala'] ?></option>
                   <?php endforeach; ?>
                 </select>
               </div>

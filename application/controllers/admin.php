@@ -174,6 +174,7 @@ class Admin extends CI_Controller
         $username = $userdata['user']['username'];
         $data['user'] = $this->ModelUser->getUser($username);
         $data['kepkel'] = $this->ModelAHP->getAllKepalaKeluarga();
+        $data['data_dusun'] = $this->ModelAHP->getDusun();
         // var_dump($data['user']);
         // die();
 
@@ -236,6 +237,7 @@ class Admin extends CI_Controller
                 'desa'          => "Kabuna",
                 'kec'           => "Kakuluk Mesak",
                 'kab'           => "Belu",
+                'id_dusun'      => htmlspecialchars($this->input->post('id_dusun'))
             ];
 
             $this->db->insert('kep_keluarga', $data);
