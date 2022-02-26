@@ -5,7 +5,7 @@
   <!-- Isi Dalam bentuk Card -->
   <div class="row">
     <?php foreach ($data_kriteria as $kriteria) : ?>
-      <div class="col-md-3 mb-5">
+      <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6  mb-5">
         <div class="card h-100 card-primary">
           <div class="card-body text-center">
             <?php if ($kriteria['jumlah_perbandingan'] > 0) : ?>
@@ -15,8 +15,9 @@
             <?php endif ?>
             <h3 class="text-dark"><?= $kriteria['kriteria'] ?></h3>
           </div>
-          <div class="card-header text-center">
+          <div class="card-header text-center <?= ($kriteria['jumlah_perbandingan'] > 0) ? 'border-bottom-success' : 'border-bottom-warning' ?>">
             <?php if ($kriteria['jumlah_perbandingan'] > 0) : ?>
+              <a href="<?= base_url('ahp/perhitungan/' . $dusun['id'] . '/' . $kriteria['id']) ?>" class="btn btn-circle btn-sm btn-primary"><i class="fas fa-edit"></i></a>
             <?php else :  ?>
               <a href="<?= base_url('ahp/perhitungan/' . $dusun['id'] . '/' . $kriteria['id']) ?>" class="btn btn-circle btn-sm btn-secondary"><i class="fas fa-cog"></i></a>
             <?php endif ?>

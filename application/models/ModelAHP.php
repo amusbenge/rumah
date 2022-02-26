@@ -10,6 +10,14 @@ class ModelAHP extends CI_Model
     {
         return $this->db->get_where('kriteria', ['id' => $id])->row_array();
     }
+    public function getDusun($id = null)
+    {
+        if ($id == null) {
+            return $this->db->get('dusun')->result_array();
+        } else {
+            return $this->db->get_where('dusun', ['id' => $id])->row_array();
+        }
+    }
 
     public function inputData($data, $table) //TAMBAH SEMUA DATA BERHUBUNGAN DENGAN AHP
     {
