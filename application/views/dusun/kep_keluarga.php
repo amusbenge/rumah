@@ -18,6 +18,10 @@
                 <i class="fas fa-file mr-1"></i>
                 Laporan
             </button>
+            <button type="button" class="btn btn-success btn-sm mb-3" id="btn-ajukan">
+                <i class="fas fa-file mr-1"></i>
+                Ajukan
+            </button>
 
             <!-- Pesan SUKSES/TIDAK -->
             <div class="row">
@@ -30,6 +34,7 @@
             <table class="table table-bordered text-center display compact nowrap" id="jtable">
                 <thead class="thead-dark">
                     <tr>
+                        <th><input type="checkbox" id="check-all"></th>
                         <th scope="col">No.</th>
                         <th scope="col">No. KK</th>
                         <th scope="col">Nama Kepala Keluarga</th>
@@ -48,6 +53,7 @@
                     $no = 1;
                     foreach ($kepkel as $kk) : ?>
                         <tr>
+                            <td><input type='checkbox' class='check-item' name='no_kk[]' value='<?= $kk['no_kk']; ?>'></td>
                             <td><?= $no++ ?></td>
                             <td><?= $kk['no_kk'] ?></td>
                             <td><?= $kk['nm_kpl_kel'] ?></td>
