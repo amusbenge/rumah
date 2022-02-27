@@ -25,19 +25,9 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="container-fluid">
-                    <div class="row justify-content-start">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-md-auto">
-                            <img class="mt-2" src="<?= base_url('assets/img/auth/see-you-soon.png') ?>" width="100px" height="100px" alt="">
-                            <img class="mt-2" src="<?= base_url('assets/img/auth/pesan-bye.png') ?>" width="100px" height="100px" alt="">
-                        </div>
-                    </div>
-                    <div class="row justify-content-end mt-4">
-                        <a class="btn btn-outline-warning" href="<?= base_url('auth/logout') ?>"><img src="<?= base_url('assets/img/icon/logout.png') ?>" alt=""></a>
+                    Yakin Keluar?
+                    <div class="row justify-content-end">
+                        <a class="btn btn-outline-warning" href="<?= base_url('auth/logout') ?>">Keluar</a>
                     </div>
                 </div>
             </div>
@@ -58,32 +48,30 @@
             <div class="modal-body">
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <div class="row justify-content-between">
-                            <div class="col-md">
-                                <?php if (!$user['foto']) : ?>
-                                    <img src="<?= base_url('assets/img/auth/user/profile.png') ?>" class="rounded-circle float-left" width="200px" height="200px" alt="">
+                        <div class="d-flex justify-content-center">
+                            <?php if (!$user['foto']) : ?>
+                                <img src="<?= base_url('assets/img/auth/user/profile.png') ?>" class="rounded-circle float-left" width="200px" height="200px" alt="">
+                            <?php else : ?>
+                                <img src="<?= base_url('assets/img/auth/user/') . $user['foto'] ?>" class="rounded-circle float-left" width="150px" height="150px" alt="">
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-2">
+                            <label for="">Nama </label>
+                            <label for="">Jabatan </label>
+                            <label for="">Status </label>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="">: <?= $user['nama']; ?></label>
+                            <label for="">: <?= $user['jabatan']; ?></label>
+                            <label for="">
+                                <?php if ($user['aktif'] == 'aktif') : ?>
+                                    : Aktif
                                 <?php else : ?>
-                                    <img src="<?= base_url('assets/img/auth/user/') . $user['foto'] ?>" class="rounded-circle float-left" width="150px" height="150px" alt="">
+                                    : Tidak Aktif
                                 <?php endif; ?>
-                            </div>
-                            <div class="col-md">
-                                <table>
-                                    <tr>
-                                        <td>Nama </td>
-                                        <td>: <?= $user['nama'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tipe </td>
-                                        <td>: <?= $user['tipe']; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Status</td>
-                                        <?php if ($user['aktif'] == 'aktif') : ?>
-                                            <td>: Aktif</td>
-                                        <?php endif; ?>
-                                    </tr>
-                                </table>
-                            </div>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -161,6 +149,24 @@
 <script>
     $(document).ready(function() {
         $('#jtable').DataTable();
+    });
+</script>
+
+<script>
+    $(document).ready(function() { // Ketika halaman sudah siap (sudah selesai di load)
+        $("#check-all").click(function() { // Ketika user men-cek checkbox all
+            if ($(this).is(":checked")) // Jika checkbox all diceklis
+                $(".check-item").prop("checked", true); // ceklis semua checkbox siswa dengan class "check-item"
+            else // Jika checkbox all tidak diceklis
+                $(".check-item").prop("checked", false); // un-ceklis semua checkbox siswa dengan class "check-item"
+        });
+
+        $("#btn-delete").click(function() { // Ketika user mengklik tombol delete
+            var confirm = window.confirm("Apakah Anda yakin ingin menghapus data-data ini?"); // Buat sebuah alert konfirmasi
+
+            if (confirm) // Jika user mengklik tombol "Ok"
+                $("#form-delete").submit(); // Submit form
+        });
     });
 </script>
 

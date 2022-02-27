@@ -10,7 +10,7 @@ class Dusun extends CI_Controller
         is_login();
     }
 
-    public function index()// TAMPIL HALAMAN HOME KEPALA DUSUN
+    public function index() // TAMPIL HALAMAN HOME KEPALA DUSUN
     {
         $data['title'] = 'Home';
         $userdata = $this->session->userdata();
@@ -24,7 +24,7 @@ class Dusun extends CI_Controller
         $this->load->view('footer', $data);
     }
 
-    public function kep_keluarga()// TAMPIL HALAMAN HOME KEPALA DUSUN
+    public function kep_keluarga() // TAMPIL HALAMAN HOME KEPALA DUSUN
     {
         $data['title'] = 'Kepala Keluarga';
 
@@ -39,5 +39,4 @@ class Dusun extends CI_Controller
         $this->load->view('dusun/kep_keluarga', $data);
         $this->load->view('footer', $data);
     }
-
 }

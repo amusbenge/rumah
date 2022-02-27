@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2022 at 05:42 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.2.34
+-- Generation Time: Feb 27, 2022 at 01:52 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.2.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -273,11 +274,11 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `nama`, `jabatan`, `jk`, `username`, `foto`, `password`, `aktif`, `role_id`) VALUES
 (1, 'Amos Benge', 'Admin Desa', 'Pria', 'admin', 'daniel.jpg', '$2y$10$PVtdLfTUY595pq0jkoekgOoWysq3VSfbXt2PIdsJ0C/Scgfz4FBMi', 'aktif', '1'),
-(7, 'Ricky Lalo', 'Pegawai', 'Pria', 'survey', 'profile2.png', '$2y$10$SkZRGGfhoai.nx3.Dzfydu32etxx7qBcP5B.O9ONqRgjXsodpG6GS', 'aktif', '2'),
-(9, 'Maria Badj', 'Kepala Dusun', 'Wanita', 'dusun', 'daniel2111.jpg', '$2y$10$JGCtHBE2cLo0xx1iq4UDSOwq8ZisLuNuopTy/ogqDUlMBnLGAke8e', 'aktif', '3'),
-(10, 'Amos', 'Kepala Dusun', 'Pria', 'dusun', 'daniel2111.jpg', '$2y$10$JGCtHBE2cLo0xx1iq4UDSOwq8ZisLuNuopTy/ogqDUlMBnLGAke8e', 'aktif', '3'),
-(11, 'Kevin Bhato', 'Kepala Dusun', 'Pria', 'dusun', 'daniel2111.jpg', '$2y$10$JGCtHBE2cLo0xx1iq4UDSOwq8ZisLuNuopTy/ogqDUlMBnLGAke8e', 'aktif', '3'),
-(12, 'Ronny Dae', 'Kepala Dusun', 'Pria', 'dusun', 'daniel2111.jpg', '$2y$10$JGCtHBE2cLo0xx1iq4UDSOwq8ZisLuNuopTy/ogqDUlMBnLGAke8e', 'aktif', '3');
+(7, 'Ricky Lalo', 'Pegawai/Surveyor', 'Pria', 'survey', 'profile2.png', '$2y$10$SkZRGGfhoai.nx3.Dzfydu32etxx7qBcP5B.O9ONqRgjXsodpG6GS', 'aktif', '2'),
+(9, 'Maria Bajingan', 'Kepala Dusun 01', 'Wanita', 'dusun1', 'daniel2111.jpg', '$2y$10$JyQSPyjeJ.9sfovlnTRAvO6QBNuhj2N5fViEFd1KEzfoWPoKLGrWq', 'aktif', '3'),
+(10, 'Amos', 'Kepala Dusun 02', 'Pria', 'dusun2', 'daniel2111.jpg', '$2y$10$JGCtHBE2cLo0xx1iq4UDSOwq8ZisLuNuopTy/ogqDUlMBnLGAke8e', 'aktif', '3'),
+(11, 'Kevin Bhato', 'Kepala Dusun 03', 'Pria', 'dusun3', 'daniel2111.jpg', '$2y$10$JGCtHBE2cLo0xx1iq4UDSOwq8ZisLuNuopTy/ogqDUlMBnLGAke8e', 'aktif', '3'),
+(12, 'Ronny Dae', 'Kepala Dusun 04', 'Pria', 'dusun4', 'daniel2111.jpg', '$2y$10$JGCtHBE2cLo0xx1iq4UDSOwq8ZisLuNuopTy/ogqDUlMBnLGAke8e', 'aktif', '3');
 
 -- --------------------------------------------------------
 
@@ -375,7 +376,8 @@ INSERT INTO `user_sub_menu` (`id`, `id_menu`, `title`, `url`, `icon`, `is_active
 (8, 4, 'Perbandingan', 'surveyor/perbandingan', 'fas fa-fw fa-list', 1),
 (9, 4, 'Hasil', 'surveyor/hasil', 'fas fa-fw fa-file', 1),
 (10, 5, 'Kepala Keluarga', 'dusun/kep_keluarga', 'fas fa-fw fa-users', 1),
-(11, 2, 'Dusun', 'admin/dusun', 'fas fa-fw fa-users', 1);
+(11, 2, 'Dusun', 'admin/dusun', 'fas fa-fw fa-users', 1),
+(12, 4, 'Survey Calon', 'surveyor/survey_calon', 'fas fa-fw fa-file', 1);
 
 -- --------------------------------------------------------
 
@@ -400,7 +402,7 @@ CREATE TABLE `v_perbandingan_alt` (
 --
 DROP TABLE IF EXISTS `v_perbandingan_alt`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_perbandingan_alt`  AS SELECT `perbandingan_alternatif`.`id` AS `id`, `perbandingan_alternatif`.`id_kriteria_alternatif` AS `id_kriteria_alternatif`, `perbandingan_alternatif`.`id_alternatif` AS `id_alternatif`, `perbandingan_alternatif`.`id_skala` AS `id_skala`, `perbandingan_alternatif`.`normalisasi` AS `normalisasi`, `perbandingan_alternatif`.`skala_inverse` AS `skala_inverse`, if(`perbandingan_alternatif`.`skala_inverse` = 1,1 / `skala`.`bobot`,`skala`.`bobot`) AS `bobot` FROM (`perbandingan_alternatif` join `skala` on(`skala`.`id` = `perbandingan_alternatif`.`id_skala`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_perbandingan_alt`  AS  select `perbandingan_alternatif`.`id` AS `id`,`perbandingan_alternatif`.`id_kriteria_alternatif` AS `id_kriteria_alternatif`,`perbandingan_alternatif`.`id_alternatif` AS `id_alternatif`,`perbandingan_alternatif`.`id_skala` AS `id_skala`,`perbandingan_alternatif`.`normalisasi` AS `normalisasi`,`perbandingan_alternatif`.`skala_inverse` AS `skala_inverse`,if(`perbandingan_alternatif`.`skala_inverse` = 1,1 / `skala`.`bobot`,`skala`.`bobot`) AS `bobot` from (`perbandingan_alternatif` join `skala` on(`skala`.`id` = `perbandingan_alternatif`.`id_skala`)) ;
 
 --
 -- Indexes for dumped tables
@@ -570,7 +572,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

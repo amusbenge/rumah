@@ -10,6 +10,11 @@ class ModelAHP extends CI_Model
     {
         return $this->db->get_where('kriteria', ['id' => $id])->row_array();
     }
+
+    public function getAllAlternatif()
+    {
+        return $this->db->get('alternatif')->result_array();
+    }
     public function getDusun($id = null)
     {
         if ($id == null) {
