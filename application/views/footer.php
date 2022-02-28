@@ -161,11 +161,11 @@
                 $(".check-item").prop("checked", false); // un-ceklis semua checkbox siswa dengan class "check-item"
         });
 
-        $("#btn-delete").click(function() { // Ketika user mengklik tombol delete
-            var confirm = window.confirm("Apakah Anda yakin ingin menghapus data-data ini?"); // Buat sebuah alert konfirmasi
+        $("#btn-ajukan").click(function() { // Ketika user mengklik tombol delete
+            var confirm = window.confirm("Apakah anda yakin untuk mengajukan data-data kepala keluarga tsb ?"); // Buat sebuah alert konfirmasi
 
             if (confirm) // Jika user mengklik tombol "Ok"
-                $("#form-delete").submit(); // Submit form
+                $("#form-ajukan").submit(); // Submit form
         });
     });
 </script>

@@ -31,54 +31,55 @@
             </div>
 
             <!-- Tampil Tabel Data Users -->
-            <table class="table table-bordered text-center display compact nowrap" id="jtable">
-                <thead class="thead-dark">
-                    <tr>
-                        <th><input type="checkbox" id="check-all"></th>
-                        <th scope="col">No.</th>
-                        <th scope="col">No. KK</th>
-                        <th scope="col">Nama Kepala Keluarga</th>
-                        <th scope="col">Alamat</th>
-                        <th scope="col">RT/RW</th>
-                        <th scope="col">Desa</th>
-                        <th scope="col">Kecamatan</th>
-                        <th scope="col">Kabupaten</th>
-                        <th scope="col">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="text-gray-900">
-
-                    <!-- LOOPING tampil isi tabel users -->
-                    <?php
-                    $no = 1;
-                    foreach ($kepkel as $kk) : ?>
+            <form method="post" action="<?php echo base_url('dusun/pengajuan') ?>" id="form-ajukan">
+                <table class="table table-bordered text-center display compact nowrap" id="jtable">
+                    <thead class="thead-dark">
                         <tr>
-                            <td><input type='checkbox' class='check-item' name='no_kk[]' value='<?= $kk['no_kk']; ?>'></td>
-                            <td><?= $no++ ?></td>
-                            <td><?= $kk['no_kk'] ?></td>
-                            <td><?= $kk['nm_kpl_kel'] ?></td>
-                            <td><?= $kk['alamat'] ?></td>
-                            <td><?= $kk['rt'] ?>/<?= $kk['rw'] ?></td>
-                            <td><?= $kk['desa'] ?></td>
-                            <td><?= $kk['kec'] ?></td>
-                            <td><?= $kk['kab'] ?></td>
-                            <td>
-                                <a class="btn btn-warning btn-circle btn-sm" href="<?= base_url('admin/edit_kepkel/') ?><?= $kk['no_kk']; ?>" data-toggle="tooltip" title="Edit">
-                                    <i class="fas fa-edit fa-sm"></i>
-                                </a>
-                                <!-- JIKA USER YANG SEDANG AKTIF, TOMBOL HAPUS TIDAK MUNCUL -->
-                                <?php if ($user['username'] != 'admin') : ?>
-                                    <a href="<?= base_url('admin/hapus_kepkel/') ?><?= $kk['no_kk']; ?>" class="btn btn-danger btn-circle btn-sm" data-toggle="tooltip" title="Hapus" onclick="return confirm('Yakin ingin menghapus User ini?')">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                <?php endif; ?>
-                            </td>
+                            <th><input type="checkbox" id="check-all"></th>
+                            <th scope="col">No.</th>
+                            <th scope="col">No. KK</th>
+                            <th scope="col">Nama Kepala Keluarga</th>
+                            <th scope="col">Alamat</th>
+                            <th scope="col">RT/RW</th>
+                            <th scope="col">Desa</th>
+                            <th scope="col">Kecamatan</th>
+                            <th scope="col">Kabupaten</th>
+                            <th scope="col">Aksi</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-            <!-- Akhir TABEL -->
+                    </thead>
+                    <tbody class="text-gray-900">
 
+                        <!-- LOOPING tampil isi tabel users -->
+                        <?php
+                        $no = 1;
+                        foreach ($kepkel as $kk) : ?>
+                            <tr>
+                                <td><input type='checkbox' class='check-item' name='no_kk[]' value='<?= $kk['no_kk']; ?>'></td>
+                                <td><?= $no++ ?></td>
+                                <td><?= $kk['no_kk'] ?></td>
+                                <td><?= $kk['nm_kpl_kel'] ?></td>
+                                <td><?= $kk['alamat'] ?></td>
+                                <td><?= $kk['rt'] ?>/<?= $kk['rw'] ?></td>
+                                <td><?= $kk['desa'] ?></td>
+                                <td><?= $kk['kec'] ?></td>
+                                <td><?= $kk['kab'] ?></td>
+                                <td>
+                                    <a class="btn btn-warning btn-circle btn-sm" href="<?= base_url('admin/edit_kepkel/') ?><?= $kk['no_kk']; ?>" data-toggle="tooltip" title="Edit">
+                                        <i class="fas fa-edit fa-sm"></i>
+                                    </a>
+                                    <!-- JIKA USER YANG SEDANG AKTIF, TOMBOL HAPUS TIDAK MUNCUL -->
+                                    <?php if ($user['username'] != 'admin') : ?>
+                                        <a href="<?= base_url('admin/hapus_kepkel/') ?><?= $kk['no_kk']; ?>" class="btn btn-danger btn-circle btn-sm" data-toggle="tooltip" title="Hapus" onclick="return confirm('Yakin ingin menghapus User ini?')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <!-- Akhir TABEL -->
+            </form>
         </div>
     </div>
 
