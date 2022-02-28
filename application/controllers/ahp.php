@@ -222,7 +222,6 @@ class AHP extends CI_Controller
         //Panggil ARRAY Perbandingan
         // echo 'here';
         $perbandingan = $this->ModelAHP->getPerbandingan($id_dusun, $id_kriteria);
-        $sum_norm = [];
         foreach ($perbandingan as $i => $banding) {
             $perbandingan[$i]['sum_norm'] = 0;
             foreach ($banding['banding'] as $j => $pembanding) {
@@ -238,6 +237,24 @@ class AHP extends CI_Controller
 
             $this->ModelAHP->updateData($where, $data, 'kriteria_alternatif');
         }
+        redirect('ahp/perhitungan/' . $id_dusun);
+    }
+    public function hitung_hasil_akhir()
+    {
+        $id_dusun = $this->input->post('id_dusun');
+        $periode = $this->ModelAHP->getPeriode(['status' => 1]);
+        $data_hasil = $this->ModelAHP->getHasilPerKriteria($id_dusun, $periode['id']);
+
+        foreach ($data_hasil as $hasil) {
+            $total = 0;
+            foreach ($hasil['kriteria'] as $kriteria) {
+                $total += $kriteria['eigen'] * $kriteria['bobot'];
+            }
+            $where['id'] = $hasil['id'];
+            $data['hasil'] = $total;
+            $this->ModelAHP->updateData($where, $data, 'alternatif');
+        }
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil dihitung!</div>');
         redirect('ahp/perhitungan/' . $id_dusun);
     }
     public function hasil() // FUNGSI UNTUK TAMPILKAN HASIL

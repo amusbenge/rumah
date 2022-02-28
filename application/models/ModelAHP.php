@@ -218,4 +218,46 @@ class ModelAHP extends CI_Model
         }
         return $perbandingan;
     }
+    public function getHasilPerKriteria($id_dusun, $id_periode)
+    {
+        $this->db->select('alternatif.*');
+        $this->db->from('alternatif');
+        $this->db->join('kep_keluarga', 'kep_keluarga.no_kk = alternatif.no_kk');
+        $this->db->where('kep_keluarga.id_dusun', $id_dusun);
+        $this->db->where('alternatif.id_periode', $id_periode);
+        $data_hasil = $this->db->get()->result_array();
+        foreach ($data_hasil as $key => $hasil) {
+            $this->db->select('kriteria_alternatif.eigen, kriteria.bobot');
+            $this->db->from('kriteria_alternatif');
+            $this->db->join('kriteria', 'kriteria.id = kriteria_alternatif.id_kriteria');
+            $this->db->where('kriteria_alternatif.id_alternatif', $hasil['id']);
+            $kriteria = $this->db->get()->result_array();
+            $data_hasil[$key]['kriteria'] = $kriteria;
+        }
+        return $data_hasil;
+    }
+
+    public function getHasilAkhirPerDusun($id_dusun, $periode)
+    {
+        $this->db->from('alternatif');
+        $this->db->join('kep_keluarga', 'kep_keluarga.no_kk = alternatif.no_kk');
+        $this->db->where('alternatif.id_periode', $periode);
+        $this->db->where('alternatif.hasil !=', 0);
+        return $this->db->get()->result_array();
+    }
+    public function getHasilAkhir($id_periode)
+    {
+        $this->db->distinct('dusun.*');
+        $this->db->from('dusun');
+        $this->db->join('kep_keluarga', 'kep_keluarga.id_dusun = dusun.id');
+        $this->db->join('alternatif', 'alternatif.no_kk = kep_keluarga.no_kk');
+        $this->db->where('alternatif.id_periode', $id_periode);
+        $this->db->where('alternatif.hasil !=', 0);
+        $this->db->group_by('dusun.id');
+        $data_dusun = $this->db->get()->result_array();
+        foreach ($data_dusun as $i => $dusun) {
+            $data_dusun[$i]['hasil'] = $this->getHasilAkhirPerDusun($dusun['id'], $id_periode);
+        }
+        return $data_dusun;
+    }
 }
