@@ -39,4 +39,20 @@ class Dusun extends CI_Controller
         $this->load->view('dusun/kep_keluarga', $data);
         $this->load->view('footer', $data);
     }
+
+    public function pengajuan()
+    {
+        $kk = $this->input->post('no_kk');
+        $priode = $this->ModelAHP->getPeriode(['status' => 1])['id'];
+
+        foreach ($kk as $k) {
+            $data = [
+                'no_kk' => $k,
+                'id_periode' => $priode
+            ];
+            $this->db->insert('alternatif', $data);
+        }
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Kepala Keluarga Berhasil di ajukan.</div>');
+        redirect('dusun/kep_keluarga');
+    }
 }
