@@ -18,7 +18,7 @@
           <tr>
             <th scope="col">No</th>
             <th scope="col">Dusun</th>
-            <th scope="col">Presentase Survey</th>
+            <!-- <th scope="col">Presentase Survey</th> -->
             <th scope="col">Aksi</th>
           </tr>
         </thead>
@@ -31,18 +31,22 @@
               <td><?= $no++ ?></td>
               <td><?= $dusun['nama_dusun'] ?></td>
               <?php if ($dusun['jumlah_alternatif'] > 0) : ?>
-                <?php $presentase = $dusun['jumlah_ada'] / ($dusun['jumlah_alternatif'] * 9) * 100; ?>
-                <td><?= $presentase ?>%</td>
-                <?php if ($presentase == 100) : ?>
-                  <td>
-                    <a href="<?= base_url('surveyor/perbandingan/' . $dusun['id']) ?>" class="btn btn-primary btn-sm">Hitung</a>
-                  </td>
-                <?php else : ?>
-                <?php endif; ?>
-              <?php else : ?>
-                <td>Belum ada data rekomendasi</td>
-                <td></td>
+                <?php $presentase = $dusun['jumlah_hitung'] / ($dusun['jumlah_alternatif'] * 9) * 100; ?>
+                <?php $presentase_akhir = $dusun['jumlah_hitung_alternatif'] / ($dusun['jumlah_alternatif'] * 9) * 100; ?>
+                <!-- <td><?= $presentase ?>%</td> -->
+                <td>
+                  <?php if ($presentase == 100 && $presentase_akhir != 100) : ?>
+                    <form action="<?= base_url('ahp/hitung_hasil_akhir') ?>" method="post">
+                      <input type="hidden" name="id_dusun" value="<?= $dusun['id'] ?>">
+                      <button type="submit" class="btn btn-primary btn-sm">Hitung</button>
+                    </form>
+                  <?php else : ?>
+                </td>
               <?php endif; ?>
+            <?php else : ?>
+              <!-- <td>Belum ada data rekomendasi</td> -->
+              <td></td>
+            <?php endif; ?>
             </tr>
           <?php endforeach; ?>
           <!-- akhir LOOPING -->

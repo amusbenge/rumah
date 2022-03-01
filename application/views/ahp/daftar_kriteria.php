@@ -17,9 +17,9 @@
           </div>
           <div class="card-header text-center <?= ($kriteria['jumlah_perbandingan'] > 0) ? 'border-bottom-success' : 'border-bottom-warning' ?>">
             <?php if ($kriteria['jumlah_perbandingan'] > 0) : ?>
-              <a href="<?= base_url('ahp/perhitungan/' . $dusun['id'] . '/' . $kriteria['id']) ?>" class="btn btn-circle btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+              <!-- <a href="<?= base_url('surveyor/perbandingan/' . $dusun['id'] . '/' . $kriteria['id']) ?>" class="btn btn-circle btn-sm btn-primary"><i class="fas fa-edit"></i></a> -->
             <?php else :  ?>
-              <a href="<?= base_url('ahp/perhitungan/' . $dusun['id'] . '/' . $kriteria['id']) ?>" class="btn btn-circle btn-sm btn-secondary"><i class="fas fa-cog"></i></a>
+              <a href="<?= base_url('surveyor/perbandingan/' . $dusun['id'] . '/' . $kriteria['id']) ?>" class="btn btn-circle btn-sm btn-secondary"><i class="fas fa-cog"></i></a>
             <?php endif ?>
           </div>
         </div>

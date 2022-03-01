@@ -5,7 +5,7 @@
   <div class="card">
     <div class="card-body">
       <?= $this->session->flashdata('pesan'); ?>
-      <form action="<?= base_url('ahp/insert_perhitungan') ?>" method="post">
+      <form action="<?= base_url('surveyor/insert_perhitungan') ?>" method="post">
         <input type="hidden" name="id_kriteria" value="<?= $kriteria['id'] ?>">
         <input type="hidden" name="id_dusun" value="<?= $dusun['id'] ?>">
         <?php foreach ($alternatif as $alt) : ?>

@@ -60,6 +60,11 @@ class ModelAHP extends CI_Model
             return $this->db->query($sql)->result_array();
         }
     }
+    public function getHitungDusun($id_periode)
+    {
+        $sql = "SELECT dusun.*, (SELECT COUNT(*) FROM kriteria_alternatif join alternatif on alternatif.id = kriteria_alternatif.id_alternatif JOIN kep_keluarga ON kep_keluarga.no_kk = alternatif.no_kk WHERE kep_keluarga.id_dusun = dusun.id AND alternatif.id_periode = '$id_periode') as jumlah_seluruh, (SELECT COUNT(*) FROM kriteria_alternatif join alternatif on alternatif.id = kriteria_alternatif.id_alternatif JOIN kep_keluarga ON kep_keluarga.no_kk = alternatif.no_kk WHERE kep_keluarga.id_dusun = dusun.id AND alternatif.id_periode = '$id_periode' AND kriteria_alternatif.eigen > 0) as jumlah_hitung, (SELECT COUNT(*) FROM alternatif JOIN kep_keluarga on kep_keluarga.no_kk = alternatif.no_kk WHERE kep_keluarga.id_dusun = dusun.id AND alternatif.id_periode = '$id_periode') as jumlah_alternatif, (SELECT COUNT(*) FROM alternatif JOIN kep_keluarga on kep_keluarga.no_kk = alternatif.no_kk WHERE kep_keluarga.id_dusun = dusun.id AND alternatif.id_periode = '$id_periode' AND alternatif.hasil > 0) as jumlah_hitung_alternatif FROM dusun";
+        return $this->db->query($sql)->result_array();
+    }
 
     public function getCountPerbandingan($id_dusun, $id_kriteria, $id_periode)
     {
@@ -196,6 +201,7 @@ class ModelAHP extends CI_Model
         $this->db->from('v_perbandingan_alt');
         $this->db->where_in('id_kriteria_alternatif', $id_kriteria_alternatif);
         $this->db->group_by('id_alternatif');
+        $this->db->order_by('id_alternatif');
         // var_dump($this->db->get()->result_array());
         // die();
         return $this->db->get()->result_array();
@@ -211,9 +217,13 @@ class ModelAHP extends CI_Model
         $this->db->where('id_kriteria', $id_kriteria);
         $this->db->where('kep_keluarga.id_dusun', $id_dusun);
         $this->db->where('alternatif.id_periode', $periode);
+        $this->db->order_by('kriteria_alternatif.id_alternatif');
         $perbandingan = $this->db->get()->result_array();
         foreach ($perbandingan as $key => $banding) {
-            $pembanding = $this->db->get_where('v_perbandingan_alt', ['id_kriteria_alternatif' => $banding['id']])->result_array();
+            $this->db->from('v_perbandingan_alt');
+            $this->db->where('id_kriteria_alternatif', $banding['id']);
+            $this->db->order_by('id_kriteria_alternatif');
+            $pembanding = $this->db->get()->result_array();
             $perbandingan[$key]['banding'] = $pembanding;
         }
         return $perbandingan;
@@ -243,6 +253,7 @@ class ModelAHP extends CI_Model
         $this->db->join('kep_keluarga', 'kep_keluarga.no_kk = alternatif.no_kk');
         $this->db->where('alternatif.id_periode', $periode);
         $this->db->where('alternatif.hasil !=', 0);
+        $this->db->order_by('hasil', 'desc');
         return $this->db->get()->result_array();
     }
     public function getHasilAkhir($id_periode)
