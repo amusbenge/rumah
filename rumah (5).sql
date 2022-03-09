@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2022 at 01:52 PM
+-- Generation Time: Mar 09, 2022 at 08:01 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.27
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `rumah`
 --
+CREATE DATABASE IF NOT EXISTS `rumah` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `rumah`;
 
 -- --------------------------------------------------------
 
@@ -31,17 +33,24 @@ SET time_zone = "+00:00";
 CREATE TABLE `alternatif` (
   `id` int(11) NOT NULL,
   `no_kk` varchar(16) NOT NULL,
-  `id_periode` int(11) NOT NULL
+  `id_periode` int(11) NOT NULL,
+  `hasil` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `alternatif`
 --
 
-INSERT INTO `alternatif` (`id`, `no_kk`, `id_periode`) VALUES
-(1, '5301192905980002', 1),
-(2, '5371041304980001', 1),
-(3, '5371041906960002', 1);
+INSERT INTO `alternatif` (`id`, `no_kk`, `id_periode`, `hasil`) VALUES
+(1, '5301192905980002', 1, 0),
+(2, '5371041304980001', 1, 0),
+(3, '5371041906960002', 1, 0),
+(9, '5301192905980002', 1, 0),
+(10, '5371041304980001', 1, 0),
+(11, '5371041906960002', 1, 0),
+(12, '5301192905980002', 1, 0),
+(13, '5371041304980001', 1, 0),
+(14, '5371041906960002', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -506,7 +515,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `alternatif`
 --
 ALTER TABLE `alternatif`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `dusun`
@@ -536,7 +545,7 @@ ALTER TABLE `perbandingan_alternatif`
 -- AUTO_INCREMENT for table `periode`
 --
 ALTER TABLE `periode`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `skala`
@@ -572,7 +581,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
