@@ -14,11 +14,12 @@
                 <i class="fas fa-file-import mr-1"></i>
                 Import
             </button>
-            <button type="button" class="btn btn-warning btn-sm mb-3">
-                <i class="fas fa-file mr-1"></i>
-                Laporan
-            </button>
-
+            <a href="<?= base_url('admin/cetak_kepkel') ?>" target="_blank">
+                <button type="button" class="btn btn-warning btn-sm mb-3">
+                    <i class="fas fa-file mr-1"></i>
+                    Laporan
+                </button>
+            </a>
             <!-- Pesan SUKSES/TIDAK -->
             <div class="row">
                 <div class="col-lg-6">

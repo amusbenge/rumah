@@ -176,14 +176,25 @@ class Admin extends CI_Controller
         $data['user'] = $this->ModelUser->getUser($username);
         $data['kepkel'] = $this->ModelAHP->getAllKepalaKeluarga();
         $data['data_dusun'] = $this->ModelAHP->getDusun();
-        // var_dump($data['user']);
-        // die();
 
         $this->load->view('header', $data);
         $this->load->view('sidebar', $data);
         $this->load->view('topbar', $data);
         $this->load->view('admin/kepkel.php', $data);
         $this->load->view('footer', $data);
+    }
+
+    public function cetak_kepkel()
+    {
+        // echo "<pre>";
+        // var_dump($data['kepkel']);
+        // echo "</pre>";
+        // die();
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+        $data['kepkel'] = $this->ModelUser->getKepkel();
+        $html = $this->load->view('laporan/cetakKepkel', ['data' => $data], TRUE);
+        $mpdf->WriteHTML($html);
+        $mpdf->Output('Daftar Kepala Keluarga ' . '.pdf', 'I');
     }
 
     public function edit_kepkel($no_kk)

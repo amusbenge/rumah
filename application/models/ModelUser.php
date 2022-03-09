@@ -74,4 +74,13 @@ class ModelUser extends CI_Model
         $query = $this->db->get('periode');
         return $query->result_array();
     }
+
+    public function getKepkel()
+    {
+        $query = $this->db->select('kep_keluarga.*, dusun.nama_dusun')
+            ->from('kep_keluarga, dusun')
+            ->where('kep_keluarga.id_dusun = dusun.id')
+            ->order_by('dusun.nama_dusun', 'ASC');
+        return $query = $this->db->get()->result_array();
+    }
 }
