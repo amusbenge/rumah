@@ -67,4 +67,11 @@ class ModelUser extends CI_Model
         $this->db->where('id', $id);
         $this->db->update('dusun', $data);
     }
+
+    public function getPeriode()
+    {
+        $this->db->order_by('periode', 'DESC');
+        $query = $this->db->get('periode');
+        return $query->result_array();
+    }
 }

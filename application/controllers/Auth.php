@@ -33,11 +33,11 @@ class Auth extends CI_Controller
         if ($user) { //jika user ada
             if ($user['aktif'] == "aktif") { //jika user aktif
                 if (password_verify($password, $user['password'])) { //jika password benar
-                    if ($user['role'] == "Admin") { //jika role nya (1) admin
+                    if ($user['role_id'] == 1) { //jika role nya (1) admin
                         $data['user'] = $user;
                         $this->session->set_userdata($data);
                         redirect('admin');
-                    } elseif ($user['role'] == "Surveyor") { //jika rolenya (2) surveyor
+                    } elseif ($user['role_id'] == 2) { //jika rolenya (2) surveyor
                         $data['user'] = $user;
                         $this->session->set_userdata($data);
                         redirect('surveyor');

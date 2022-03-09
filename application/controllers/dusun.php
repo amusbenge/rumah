@@ -12,10 +12,11 @@ class Dusun extends CI_Controller
 
     public function index() // TAMPIL HALAMAN HOME KEPALA DUSUN
     {
-        $data['title'] = 'Home';
+        $data['title'] = 'Beranda';
         $userdata = $this->session->userdata();
         $username = $userdata['user']['username'];
         $data['user'] = $this->ModelUser->getUser($username);
+        $data['periode'] = $this->ModelUser->getPeriode();
 
         $this->load->view('header', $data);
         $this->load->view('sidebar', $data);

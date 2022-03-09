@@ -16,6 +16,7 @@ class Surveyor extends CI_Controller
         $userdata = $this->session->userdata();
         $username = $userdata['user']['username'];
         $data['user'] = $this->ModelUser->getUser($username);
+        $data['periode'] = $this->ModelUser->getPeriode();
 
         $this->load->view('header', $data);
         $this->load->view('sidebar', $data);

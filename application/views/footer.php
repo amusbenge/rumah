@@ -121,6 +121,41 @@
     </div>
 </div>
 
+<!-- Edit Tambah Periode -->
+<div class="modal fade" id="tambahPeriode" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-gray-900" id="exampleModalLabel">Tambah Periode</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-gray-800">
+                <form action="<?= base_url('admin/tambah_periode') ?>" method="POST">
+                    <div class="form-group">
+                        <label for="periode" class="col-form-label">Periode :</label>
+                        <input type="text" class="form-control" id="periode" name="periode" placeholder="Masukkan Tahun Sekarang">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="status" name="status">Status</label>
+                        </div>
+                        <select class="custom-select" id="status" name="status">
+                            <option selected>Pilih</option>
+                            <option value="1">Aktif</option>
+                            <option value="0">Tidak Aktif</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-save mr-2"></i>Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- Bootstrap core JavaScript-->
 <script src="<?= base_url('assets/') ?>vendor/jquery/jquery.min.js"></script>

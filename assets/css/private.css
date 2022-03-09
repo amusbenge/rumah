@@ -1,13 +1,13 @@
 .container .img-auth {
-    background-position: center;
-    height: 100px;
-    width: 100px;
+	background-position: center;
+	height: 100px;
+	width: 100px;
 }
 
 .pass {
-    float: right;
-    margin-top: -33px;
-    margin-right: 10px;
-    position: relative;
-    z-index: 2;
+	float: right;
+	margin-top: -33px;
+	margin-right: 10px;
+	position: relative;
+	z-index: 2;
 }

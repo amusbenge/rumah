@@ -13,10 +13,11 @@ class Admin extends CI_Controller
 
     public function index() //FUNGSI TAMPIL HALAMAN HOME
     {
-        $data['title'] = 'Home';
+        $data['title'] = 'Beranda';
         $userdata = $this->session->userdata();
         $username = $userdata['user']['username'];
         $data['user'] = $this->ModelUser->getUser($username);
+        $data['periode'] = $this->ModelUser->getPeriode();
 
         $this->load->view('header', $data);
         $this->load->view('sidebar', $data);
@@ -335,11 +336,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('role_id', 'Role', 'required');
         if ($this->form_validation->run()) {
             $dusun = $this->ModelUser->getAllDusun($this->input->post('id_dusun'));
-            // var_dump($dusun);
-            // die();
             $id_user = $this->insert_user();
-            // echo $id_user;
-            // die();
             $data['id_user'] = $id_user;
             $this->ModelUser->updateDusun($data, $dusun['id']);
             $this->ModelUser->hapusUser('user', $dusun['id_user']);
@@ -349,5 +346,21 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('message', $this->form_validation->error_string());
         }
         redirect('admin/dusun');
+    }
+
+    public function tambah_periode()
+    {
+        $periode = $this->input->post('periode');
+        $status = $this->input->post('status');
+
+        $data = [
+            'periode' => $periode,
+            'status' => $status
+        ];
+
+        $this->db->insert('periode', $data);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Periode pendaftaran calon penerimaan bantuan rumah, Telah di buka!!!</div>');
+
+        redirect('admin');
     }
 }
