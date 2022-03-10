@@ -83,4 +83,14 @@ class ModelUser extends CI_Model
             ->order_by('dusun.nama_dusun', 'ASC');
         return $query = $this->db->get()->result_array();
     }
+
+    public function getKepkelByUser($id_user)
+    {
+        $query = $this->db->select('kep_keluarga.*, dusun.nama_dusun, user.jabatan, user.nama')
+            ->from('kep_keluarga')
+            ->join('dusun', 'dusun.id = kep_keluarga.id_dusun', 'LEFT')
+            ->join('user', 'user.id = dusun.id_user', 'LEFT')
+            ->where('user.id = ' . $id_user);
+        return $query = $this->db->get()->result_array();
+    }
 }

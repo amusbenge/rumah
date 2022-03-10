@@ -362,11 +362,13 @@ class Admin extends CI_Controller
     public function tambah_periode()
     {
         $periode = $this->input->post('periode');
-        $status = $this->input->post('status');
+
+        $this->db->set('status', '0');
+        $this->db->update('periode');
 
         $data = [
             'periode' => $periode,
-            'status' => $status
+            'status' => '1'
         ];
 
         $this->db->insert('periode', $data);

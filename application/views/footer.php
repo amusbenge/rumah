@@ -137,16 +137,6 @@
                         <label for="periode" class="col-form-label">Periode :</label>
                         <input type="text" class="form-control" id="periode" name="periode" placeholder="Masukkan Tahun Sekarang">
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="status" name="status">Status</label>
-                        </div>
-                        <select class="custom-select" id="status" name="status">
-                            <option selected>Pilih</option>
-                            <option value="1">Aktif</option>
-                            <option value="0">Tidak Aktif</option>
-                        </select>
-                    </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-save mr-2"></i>Simpan</button>
                     </div>
