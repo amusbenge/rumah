@@ -51,7 +51,10 @@ class Dusun extends CI_Controller
                 'no_kk' => $k,
                 'id_periode' => $priode
             ];
-            $this->db->insert('alternatif', $data);
+            //Cek Data Kalau Belum Ada, Insert
+            if (!$this->ModelAHP->dataExists($data, 'alternatif')) {
+                $this->db->insert('alternatif', $data);
+            }
         }
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Kepala Keluarga Berhasil di ajukan.</div>');
         redirect('dusun/kep_keluarga');

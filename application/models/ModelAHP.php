@@ -145,12 +145,14 @@ class ModelAHP extends CI_Model
 
     public function getAlternatif($id_periode, $id = null)
     {
+        // $this->db->distinct('alternatif.id');
         $this->db->select('kep_keluarga.*, alternatif.id as id_alternatif, periode.periode, periode.status, dusun.nama_dusun');
         $this->db->from('alternatif');
         $this->db->join('kep_keluarga', 'kep_keluarga.no_kk = alternatif.no_kk');
         $this->db->join('periode', 'periode.id = alternatif.id_periode');
         $this->db->join('dusun', 'dusun.id = kep_keluarga.id_dusun');
         $this->db->where('alternatif.id_periode', $id_periode);
+        // $this->db->;
         if ($id != null) {
             $this->db->where('alternatif.id', $id);
             return $this->db->get()->row_array();
