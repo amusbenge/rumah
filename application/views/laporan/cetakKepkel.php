@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Desain Tabel Menggunakan CSS</title>
+    <title>Laporan</title>
     <style>
         .tabel1 {
             font-family: sans-serif;
@@ -36,7 +36,7 @@
 </head>
 
 <body>
-    <h1>lebakcyber.net</h1>
+    <h1>Laporan Daftar Kepala Keluarga</h1>
     <table class="tabel1">
         <tr>
             <th width="5%">No</th>
