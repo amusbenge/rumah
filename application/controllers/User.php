@@ -49,7 +49,7 @@ class User extends CI_Controller
         $this->db->where('id', $id);
         $this->db->update('user', $data);
 
-        $this->session->set_flashdata('pesan', '
+        $this->session->set_flashdata('message', '
             <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Berhasil!</strong> Data Anda Berhasil Dirubah.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
