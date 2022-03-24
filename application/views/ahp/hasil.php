@@ -24,7 +24,7 @@
               <td><?= $no++ ?></td>
               <td><?= $alt['no_kk'] ?></td>
               <td><?= $alt['nm_kpl_kel'] ?></td>
-              <td><?= $alt['hasil'] ?></td>
+              <td><?= number_format($alt['hasil'], 3) ?></td>
             </tr>
           <?php endforeach; ?>
           <!-- akhir LOOPING -->
