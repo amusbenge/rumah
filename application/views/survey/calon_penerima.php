@@ -22,7 +22,13 @@
               <td><?= $kk['nm_kpl_kel'] ?></td>
               <td><?= $kk['rt'] ?>/<?= $kk['rw'] ?></td>
               <td><?= $kk['nama_dusun'] ?></td>
-              <td><a href="<?= base_url('surveyor/survey_calon/' . $kk['id_alternatif']) ?>" class="btn btn-sm btn-primary">Survey</a></td>
+              <td>
+                <?php if ($kk['jumlah_survey'] < 9) : ?>
+                  <a href="<?= base_url('surveyor/survey_calon/' . $kk['id_alternatif']) ?>" class="btn btn-sm btn-primary">Survey</a>
+                <?php else : ?>
+                  <a href="<?= base_url('surveyor/detail_survey/' . $kk['id_alternatif']) ?>" class="btn btn-sm btn-success">Detail</a>
+                <?php endif; ?>
+              </td>
             </tr>
           <?php endforeach; ?>
         </tbody>

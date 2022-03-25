@@ -90,6 +90,23 @@ class Surveyor extends CI_Controller
             echo 'Belum ada data periode yang aktif';
         }
     }
+    public function detail_survey($id_alternatif)
+    {
+        $userdata = $this->session->userdata();
+        $username = $userdata['user']['username'];
+        $alternatif = $this->ModelAHP->getAnyAlternatif($id_alternatif);
+        $data = [
+            'title' => 'Hasil Survey',
+            'kk' => $alternatif,
+            'data_survey' => $this->ModelAHP->getSurvey($id_alternatif)
+        ];
+        $data['user'] = $this->ModelUser->getUser($username);
+        $this->load->view('header', $data);
+        $this->load->view('sidebar');
+        $this->load->view('topbar');
+        $this->load->view('survey/detail_survey');
+        $this->load->view('footer');
+    }
     public function insert_survey()
     {
         $id_kriteria = $this->input->post('id_kriteria');

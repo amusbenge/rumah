@@ -146,7 +146,7 @@ class ModelAHP extends CI_Model
     public function getAlternatif($id_periode, $id = null)
     {
         // $this->db->distinct('alternatif.id');
-        $this->db->select('kep_keluarga.*, alternatif.id as id_alternatif, periode.periode, periode.status, dusun.nama_dusun');
+        $this->db->select('kep_keluarga.*, alternatif.id as id_alternatif, periode.periode, periode.status, dusun.nama_dusun, (SELECT distinct COUNT(kriteria_alternatif.id) FROM kriteria_alternatif, alternatif WHERE alternatif.id = kriteria_alternatif.id_alternatif group by alternatif.id) as jumlah_survey');
         $this->db->from('alternatif');
         $this->db->join('kep_keluarga', 'kep_keluarga.no_kk = alternatif.no_kk');
         $this->db->join('periode', 'periode.id = alternatif.id_periode');
@@ -159,6 +159,27 @@ class ModelAHP extends CI_Model
         } else {
             return $this->db->get()->result_array();
         }
+    }
+
+    public function getAnyAlternatif($id) //Fungsi ini untuk mengambil data alternatif single tanpa memperhatikan periode
+    {
+        $this->db->select('kep_keluarga.*, alternatif.id as id_alternatif, periode.periode, periode.status, dusun.nama_dusun');
+        $this->db->from('alternatif');
+        $this->db->join('kep_keluarga', 'kep_keluarga.no_kk = alternatif.no_kk');
+        $this->db->join('periode', 'periode.id = alternatif.id_periode');
+        $this->db->join('dusun', 'dusun.id = kep_keluarga.id_dusun');
+        // $this->db->;
+        $this->db->where('alternatif.id', $id);
+        return $this->db->get()->row_array();
+    }
+
+    public function getSurvey($id_alternatif)
+    {
+        $this->db->from('kriteria_alternatif');
+        $this->db->join('kriteria', 'kriteria.id = kriteria_alternatif.id_kriteria');
+        $this->db->join('alternatif', 'alternatif.id = kriteria_alternatif.id_alternatif');
+        $this->db->where('id_alternatif', $id_alternatif);
+        return $this->db->get()->result_array();
     }
 
     public function getSkala($id = null) // Ambil Semua Skala atau satu skala saja
