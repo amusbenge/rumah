@@ -4,7 +4,7 @@
     <i class="fas fa-plus mr-1"></i>Tambah Periode</button>
 
   <div class="col-lg-6 col-md-6">
-    <?= $this->session->set_flashdata('message'); ?>
+    <?= $this->session->flashdata('message'); ?>
   </div>
   <!-- Isi Dalam bentuk Card -->
   <div class="row">
