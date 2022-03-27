@@ -101,7 +101,7 @@
             <div class="modal-body">
                 <div class="p-3">
                     <!-- FORM isian Data User -->
-                    <form action="<?= base_url('admin/kepkel/') ?>" method="POST" enctype="multipart/form-data">
+                    <form action="<?= base_url('dusun/tambah_kepkel/') ?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="no_kk">Nomor KK</label>
                             <input type="text" class="form-control form-control-sm" id="no_kk" name="no_kk" required>

@@ -162,7 +162,7 @@ class Admin extends CI_Controller
         $this->load->view('header', $data);
         $this->load->view('sidebar', $data);
         $this->load->view('topbar', $data);
-        $this->load->view('admin/kepkel.php', $data);
+        $this->load->view('admin/kepkel', $data);
         $this->load->view('footer', $data);
     }
 

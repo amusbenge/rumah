@@ -47,6 +47,26 @@ class Dusun extends CI_Controller
         $this->load->view('footer', $data);
     }
 
+    public function tambah_kepkel()
+    {
+        $data = [
+            'no_kk'         => htmlspecialchars($this->input->post('no_kk', true)),
+            'nm_kpl_kel'    => htmlspecialchars($this->input->post('nama', true)),
+            'alamat'        => htmlspecialchars($this->input->post('alamat', true)),
+            'rt'            => htmlspecialchars($this->input->post('rt', true)),
+            'rw'            => htmlspecialchars($this->input->post('rw', true)),
+            'desa'          => "Kabuna",
+            'kec'           => "Kakuluk Mesak",
+            'kab'           => "Belu",
+            'id_dusun'      => htmlspecialchars($this->session->userdata('dusun')['id'])
+        ];
+
+        $this->db->insert('kep_keluarga', $data);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Kepala Keluarga berhasil ditambahkan.</div>');
+        redirect('dusun/kep_keluarga');
+    }
+
     public function pengajuan()
     {
         $kk = $this->input->post('no_kk');

@@ -130,4 +130,23 @@ class AHP extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil dihitung!</div>');
         redirect('ahp/hasil/' . $id_dusun);
     }
+    public function riwayat_hitung($id_periode = null, $id_dusun = null)
+    {
+        if ($id_periode == null && $id_dusun == null) {
+            $userdata = $this->session->userdata();
+            $username = $userdata['user']['username'];
+            $user = $this->ModelUser->getUser($username);
+            $periode = $this->ModelAHP->getPeriodeSelesai();
+            $data = [
+                'title' => 'Riwayat Periode',
+                'user' => $user,
+                'periode' => $periode,
+            ];
+            $this->load->view('header', $data);
+            $this->load->view('sidebar');
+            $this->load->view('topbar');
+            $this->load->view('ahp/riwayat_periode');
+            $this->load->view('footer');
+        }
+    }
 }

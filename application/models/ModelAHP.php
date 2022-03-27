@@ -24,6 +24,7 @@ class ModelAHP extends CI_Model
         }
     }
 
+
     public function inputData($data, $table) //TAMBAH SEMUA DATA BERHUBUNGAN DENGAN AHP
     {
         $this->db->insert($table, $data);
@@ -197,6 +198,11 @@ class ModelAHP extends CI_Model
         } else {
             return $this->db->get_where('periode', $where)->row_array();
         }
+    }
+
+    public function getPeriodeSelesai()
+    {
+        return $this->db->get_where('periode', ['status' => 0])->result_array();
     }
 
     public function dataExists($where, $table) //Cek apakah data sudah ada

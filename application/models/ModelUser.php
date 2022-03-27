@@ -50,6 +50,11 @@ class ModelUser extends CI_Model
         }
     }
 
+    public function getDusunWhere($where)
+    {
+        return $this->db->get_where('dusun', $where)->row_array();
+    }
+
     public function getUserWhTypDusun()
     {
         return $this->db->get_where('user', array('tipe' => "Kepala Dusun"))->result_array();

@@ -43,6 +43,7 @@ class Auth extends CI_Controller
                         redirect('surveyor');
                     } else { // jika user diluar admin dan operator
                         $data['user'] = $user;
+                        $data['dusun'] = $this->ModelUser->getDusunWhere(['id_user' => $user['id']]);
                         $this->session->set_userdata($data);
                         redirect('dusun');
                     }
