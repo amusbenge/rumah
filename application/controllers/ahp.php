@@ -130,12 +130,12 @@ class AHP extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil dihitung!</div>');
         redirect('ahp/hasil/' . $id_dusun);
     }
-    public function riwayat_hitung($id_periode = null, $id_dusun = null)
+    public function riwayat_hitung($id_periode = null)
     {
-        if ($id_periode == null && $id_dusun == null) {
-            $userdata = $this->session->userdata();
-            $username = $userdata['user']['username'];
-            $user = $this->ModelUser->getUser($username);
+        $userdata = $this->session->userdata();
+        $username = $userdata['user']['username'];
+        $user = $this->ModelUser->getUser($username);
+        if ($id_periode == null) {
             $periode = $this->ModelAHP->getPeriodeSelesai();
             $data = [
                 'title' => 'Riwayat Periode',
@@ -146,6 +146,20 @@ class AHP extends CI_Controller
             $this->load->view('sidebar');
             $this->load->view('topbar');
             $this->load->view('ahp/riwayat_periode');
+            $this->load->view('footer');
+        } else {
+            $dusun = $this->ModelAHP->getHasilAkhir($id_periode);
+            $periode = $this->ModelAHP->getPeriode(['id' => $id_periode]);
+            $data = [
+                'title' => 'Riwayat Perankingan Periode ' . $periode['periode'],
+                'user' => $user,
+                'periode' => $periode,
+                'dusun' => $dusun
+            ];
+            $this->load->view('header', $data);
+            $this->load->view('sidebar');
+            $this->load->view('topbar');
+            $this->load->view('ahp/riwayat_hasil');
             $this->load->view('footer');
         }
     }
