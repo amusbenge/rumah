@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2022 at 03:14 PM
+-- Generation Time: Apr 05, 2022 at 05:15 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.2.34
 
@@ -88,6 +88,7 @@ CREATE TABLE `kep_keluarga` (
 INSERT INTO `kep_keluarga` (`no_kk`, `nm_kpl_kel`, `alamat`, `rt`, `rw`, `desa`, `kec`, `kab`, `id_dusun`) VALUES
 ('5301192905980002', 'Maximilianus Benge', 'Jl. Kelimutu', '004', '003', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
 ('5371041304980001', 'Kristian Paulino', 'Jl. Perintis', '003', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5371041304980007', 'contoh', 'Kayu Putih, Kota Kupang', '003', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 7),
 ('5371041906960002', 'Adrian Siribein', 'Jl. Keramat Jati', '003', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5);
 
 -- --------------------------------------------------------
@@ -100,23 +101,24 @@ CREATE TABLE `kriteria` (
   `id` int(11) NOT NULL,
   `kriteria` varchar(25) NOT NULL,
   `jumlah` float NOT NULL,
-  `bobot` float NOT NULL
+  `bobot` float NOT NULL,
+  `punya_sub` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `kriteria`
 --
 
-INSERT INTO `kriteria` (`id`, `kriteria`, `jumlah`, `bobot`) VALUES
-(1, 'Pekerjaan', 14.33, 0.082),
-(2, 'Penghasilan', 11.417, 0.115),
-(3, 'Tanggungan Keluarga', 9.167, 0.127),
-(4, 'Status Rumah dan Tanah', 2.833, 0.314),
-(5, 'Kondisi Atap Rumah', 29, 0.034),
-(6, 'Kondisi Dinding Rumah', 30.5, 0.032),
-(7, 'Kondisi Lantai Rumah', 31, 0.026),
-(8, 'Kondisi MCK', 23.5, 0.048),
-(9, 'Status Menerima Bantuan', 5.629, 0.223);
+INSERT INTO `kriteria` (`id`, `kriteria`, `jumlah`, `bobot`, `punya_sub`) VALUES
+(1, 'Pekerjaan', 14.33, 0.082, 1),
+(2, 'Penghasilan', 11.417, 0.115, 0),
+(3, 'Tanggungan Keluarga', 9.167, 0.127, 0),
+(4, 'Status Rumah dan Tanah', 2.833, 0.314, 0),
+(5, 'Kondisi Atap Rumah', 29, 0.034, 0),
+(6, 'Kondisi Dinding Rumah', 30.5, 0.032, 0),
+(7, 'Kondisi Lantai Rumah', 31, 0.026, 0),
+(8, 'Kondisi MCK', 23.5, 0.048, 0),
+(9, 'Status Menerima Bantuan', 5.629, 0.223, 0);
 
 -- --------------------------------------------------------
 
@@ -285,8 +287,8 @@ CREATE TABLE `periode` (
 --
 
 INSERT INTO `periode` (`id`, `periode`, `status`) VALUES
-(1, 2022, 1),
-(12, 2023, 0);
+(1, 2022, 0),
+(13, 2023, 1);
 
 -- --------------------------------------------------------
 
@@ -318,6 +320,25 @@ INSERT INTO `skala` (`id`, `nama_skala`, `bobot`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sub_kriteria`
+--
+
+CREATE TABLE `sub_kriteria` (
+  `id` int(11) NOT NULL,
+  `id_kriteria` int(11) NOT NULL,
+  `nama_sub` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sub_kriteria`
+--
+
+INSERT INTO `sub_kriteria` (`id`, `id_kriteria`, `nama_sub`) VALUES
+(1, 1, 'Tukang');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -340,10 +361,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `nama`, `jabatan`, `jk`, `username`, `foto`, `password`, `aktif`, `role_id`) VALUES
 (1, 'Amos Benge', 'Admin Desa', 'Pria', 'admin', 'daniel.jpg', '$2y$10$PVtdLfTUY595pq0jkoekgOoWysq3VSfbXt2PIdsJ0C/Scgfz4FBMi', 'aktif', '1'),
 (7, 'Ricky Lalo', 'Pegawai/Surveyor', 'Pria', 'survey', 'profile2.png', '$2y$10$SkZRGGfhoai.nx3.Dzfydu32etxx7qBcP5B.O9ONqRgjXsodpG6GS', 'aktif', '2'),
-(9, 'Maria Bajingan', 'Kepala Dusun 01', 'Wanita', 'dusun1', 'daniel2111.jpg', '$2y$10$JyQSPyjeJ.9sfovlnTRAvO6QBNuhj2N5fViEFd1KEzfoWPoKLGrWq', 'aktif', '3'),
-(10, 'Amos', 'Kepala Dusun 02', 'Pria', 'dusun2', 'daniel2111.jpg', '$2y$10$JGCtHBE2cLo0xx1iq4UDSOwq8ZisLuNuopTy/ogqDUlMBnLGAke8e', 'aktif', '3'),
-(11, 'Kevin Bhato', 'Kepala Dusun 03', 'Pria', 'dusun3', 'daniel2111.jpg', '$2y$10$JGCtHBE2cLo0xx1iq4UDSOwq8ZisLuNuopTy/ogqDUlMBnLGAke8e', 'aktif', '3'),
-(12, 'Ronny Dae', 'Kepala Dusun 04', 'Pria', 'dusun4', 'daniel2111.jpg', '$2y$10$JGCtHBE2cLo0xx1iq4UDSOwq8ZisLuNuopTy/ogqDUlMBnLGAke8e', 'aktif', '3');
+(10, 'Amos', 'Kepala Dusun 02', 'Pria', 'dusun1', 'daniel2111.jpg', '$2y$10$JGCtHBE2cLo0xx1iq4UDSOwq8ZisLuNuopTy/ogqDUlMBnLGAke8e', 'aktif', '3'),
+(11, 'Kevin Bhato', 'Kepala Dusun 03', 'Pria', 'dusun2', 'daniel2111.jpg', '$2y$10$JGCtHBE2cLo0xx1iq4UDSOwq8ZisLuNuopTy/ogqDUlMBnLGAke8e', 'aktif', '3');
 
 -- --------------------------------------------------------
 
@@ -530,6 +549,13 @@ ALTER TABLE `skala`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sub_kriteria`
+--
+ALTER TABLE `sub_kriteria`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_kriteria` (`id_kriteria`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -601,13 +627,19 @@ ALTER TABLE `perbandingan_alternatif`
 -- AUTO_INCREMENT for table `periode`
 --
 ALTER TABLE `periode`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `skala`
 --
 ALTER TABLE `skala`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `sub_kriteria`
+--
+ALTER TABLE `sub_kriteria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
