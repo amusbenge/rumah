@@ -44,8 +44,6 @@
                             <th scope="col">Alamat</th>
                             <th scope="col">RT/RW</th>
                             <th scope="col">Desa</th>
-                            <th scope="col">Kecamatan</th>
-                            <th scope="col">Kabupaten</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
@@ -63,8 +61,6 @@
                                 <td><?= $kk['alamat'] ?></td>
                                 <td><?= $kk['rt'] ?>/<?= $kk['rw'] ?></td>
                                 <td><?= $kk['desa'] ?></td>
-                                <td><?= $kk['kec'] ?></td>
-                                <td><?= $kk['kab'] ?></td>
                                 <td>
                                     <a class="btn btn-warning btn-circle btn-sm" href="<?= base_url('admin/edit_kepkel/') ?><?= $kk['no_kk']; ?>" data-toggle="tooltip" title="Edit">
                                         <i class="fas fa-edit fa-sm"></i>
