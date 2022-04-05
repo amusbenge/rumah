@@ -14,7 +14,7 @@
             <label for="deskripsi_<?= $kriteria['id'] ?>" class="col-sm-4"><?= $kriteria['kriteria'] ?></label>
 
             <div class="col-sm-8">
-              <?php if ($k['punya_sub'] == 1) : ?>
+              <?php if ($kriteria['punya_sub'] == 1) : ?>
                 <select name="deskripsi_<?= $kriteria['id'] ?>" id="" class="custom-select" required>
                   <option value="">Pilih Salah Satu</option>
                   <?php foreach ($k['sub_kriteria'] as $sub) : ?>
