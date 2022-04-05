@@ -306,7 +306,6 @@ class Admin extends CI_Controller
 
     public function tmbh_kepala_dusun()
     {
-        $this->form_validation->set_rules('username', 'username', 'is_unique[user.username]');
         $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
         $this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required');
         $this->form_validation->set_rules('id_dusun', 'Dusun', 'required');
@@ -314,10 +313,16 @@ class Admin extends CI_Controller
         if ($this->form_validation->run()) {
             $dusun = $this->ModelUser->getAllDusun($this->input->post('id_dusun'));
             $this->ModelUser->hapusUser('user', $dusun['id_user']);
-            $id_user = $this->insert_user();
-            $data['id_user'] = $id_user;
-            $this->ModelUser->updateDusun($data, $dusun['id']);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Kepala Dusun berhasil diubah.</div>');
+            $this->form_validation->set_rules('username', 'username', 'is_unique[user.username]');
+            if ($this->form_validation->run()) {
+                $id_user = $this->insert_user();
+                $data['id_user'] = $id_user;
+                $this->ModelUser->updateDusun($data, $dusun['id']);
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Kepala Dusun berhasil diubah.</div>');
+            } else {
+                $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+                $this->session->set_flashdata('message', $this->form_validation->error_string());
+            }
         } else {
             $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
             $this->session->set_flashdata('message', $this->form_validation->error_string());
