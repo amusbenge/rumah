@@ -7,7 +7,7 @@
         <div class="card-header"></div>
         <div class="card-body">
           <h5 class="card-title">Informasi Daftar Penerimaan Bantuan Rumah</h5>
-          <p class="card-text" style="text-align: justify;">Untuk <i class="fas fa-fw fa-list text-success"></i> adalah periode penerimaan bantuan rumah yang telah selesai, tetapi untuk <i class="fas fa-fw fa-list text-primary"></i> adalah periode penerimaan bantuan rumah yang baru dibuka.</p>
+          <p class="card-text" style="text-align: justify;">Simbol 'list' berwarna hijau (<i class="fas fa-fw fa-list text-success"></i>) pada daftar periode disamping melambangkan periode penerimaan bantuan rumah yang telah selesai. Sedangkan simbol 'list' berwarna biru (<i class="fas fa-fw fa-list text-primary"></i>) menunjukkan periode penerimaan bantuan rumah yang baru dibuka atau sedang berjalan.</p>
         </div>
       </div>
     </div>
