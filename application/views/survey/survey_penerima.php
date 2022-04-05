@@ -12,8 +12,18 @@
           <div class="form-group row">
             <input type="hidden" name="id_kriteria[]" value="<?= $kriteria['id'] ?>">
             <label for="deskripsi_<?= $kriteria['id'] ?>" class="col-sm-4"><?= $kriteria['kriteria'] ?></label>
+
             <div class="col-sm-8">
-              <input type="text" name="deskripsi_<?= $kriteria['id'] ?>" id="" class="form-control" required>
+              <?php if ($k['punya_sub'] == 1) : ?>
+                <select name="deskripsi_<?= $kriteria['id'] ?>" id="" class="custom-select" required>
+                  <option value="">Pilih Salah Satu</option>
+                  <?php foreach ($k['sub_kriteria'] as $sub) : ?>
+                    <option value="<?= $sub['nama_sub'] ?>"><?= $sub['nama_sub'] ?></option>
+                  <?php endforeach; ?>
+                </select>
+              <?php else : ?>
+                <input type="text" name="deskripsi_<?= $kriteria['id'] ?>" id="" class="form-control" required>
+              <?php endif; ?>
             </div>
           </div>
         <?php endforeach; ?>

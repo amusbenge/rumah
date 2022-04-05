@@ -247,7 +247,17 @@
             })
     })()
 </script>
-
+<script>
+    function setJumlah(id) {
+        var chkbox = document.getElementById('punya_sub' + id);
+        if (chkbox.checked == false) {
+            document.getElementById('jumlah' + id).value = '0';
+            document.getElementById('jumlah' + id).disabled = true;
+        } else {
+            document.getElementById('jumlah' + id).disabled = false;
+        }
+    }
+</script>
 </body>
 
 </html>

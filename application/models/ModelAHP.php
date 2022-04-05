@@ -4,7 +4,14 @@ class ModelAHP extends CI_Model
 {
     public function getAllKriteria() //AMBIL SEMUA KRITERIA
     {
-        return $this->db->get('kriteria')->result_array();
+        $kritera = $this->db->get('kriteria')->result_array();
+        foreach ($kritera as $i => $k) {
+            $kriteria[$i]['sub_kriteria'] = [];
+            if ($k['punya_sub']) {
+                $kriteria[$i]['sub_kriteria'] = $this->db->get_where('sub_kriteria', ['id_kriteria' => $k['id']])->result_array();
+            }
+        }
+        return $kritera;
     }
     public function getSingleKriteria($id)
     {
@@ -33,6 +40,13 @@ class ModelAHP extends CI_Model
     {
         $this->db->where($where);
         $this->db->update($table, $data);
+    }
+
+    public function getSubKriteria($id_kriteria)
+    {
+        $this->db->from('sub_kriteria');
+        $this->db->where('id_kriteria', $id_kriteria);
+        return $this->db->get()->result_array();
     }
 
     public function getAllKepalaKeluarga($where = null) //Ambil semua kepala Keluarga 

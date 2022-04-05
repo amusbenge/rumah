@@ -45,6 +45,94 @@ class AHP extends CI_Controller
         }
     }
 
+    public function update_kriteria()
+    {
+        $id_kriteria = $this->input->post('id_kriteria');
+        $kriteria = $this->input->post('kriteria');
+        $jumlah = $this->input->post('jumlah');
+        if ($this->input->post('punya_sub')) {
+            $punya_sub = 1;
+        } else {
+            $punya_sub = 0;
+            $this->db->where('id_kriteria', $id_kriteria);
+            $this->db->delete('sub_kriteria');
+        }
+        $data = [
+            'kriteria' => $kriteria,
+            'punya_sub' => $punya_sub
+        ];
+        $this->db->where('id', $id_kriteria);
+        $this->db->update('kriteria', $data);
+        if ($jumlah > 0) {
+            $this->tambah_sub_kriteria($id_kriteria, $jumlah);
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil update kriteria.</div>');
+        }
+    }
+
+    public function sub_kriteria($id_kriteria)
+    {
+        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required');
+        if (!$this->form_validation->run()) {
+            $data['title'] = 'Sub Kriteria';
+            $data['kriteria'] = $this->ModelAHP->getSingleKriteria($id_kriteria);
+            $data['sub_kriteria'] = $this->ModelAHP->getSubKriteria($id_kriteria);
+            $userdata = $this->session->userdata();
+            $username = $userdata['user']['username'];
+            $data['user'] = $this->ModelUser->getUser($username);
+            $this->load->view('header', $data);
+            $this->load->view('sidebar');
+            $this->load->view('topbar');
+            $this->load->view('ahp/sub_kriteria');
+            $this->load->view('footer');
+        } else {
+            $jumlah = $this->input->post('jumlah');
+            $this->tambah_sub_kriteria($id_kriteria, $jumlah);
+        }
+    }
+
+    public function delete_sub_kriteria($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('sub_kriteria');
+        redirect('ahp/sub_kriteria/' . $id);
+    }
+
+    public function tambah_sub_kriteria($id, $jumlah)
+    {
+        $data['title'] = 'Sub Kriteria';
+        $data['kriteria'] = $this->ModelAHP->getSingleKriteria($id);
+        $data['jumlah'] = $jumlah;
+        $data['id'] = $id;
+        $userdata = $this->session->userdata();
+        $username = $userdata['user']['username'];
+        $data['user'] = $this->ModelUser->getUser($username);
+        $this->load->view('header', $data);
+        $this->load->view('sidebar');
+        $this->load->view('topbar');
+        $this->load->view('ahp/tambah_sub_kriteria');
+        $this->load->view('footer');
+    }
+
+    public function simpan_sub_kriteria()
+    {
+        $id_kriteria = $this->input->post('id_kriteria');
+        $sub_kriteria = $this->input->post('sub_kriteria');
+
+        foreach ($sub_kriteria as $key => $nama_sub) {
+            $data = [
+                'id_kriteria' => $id_kriteria,
+                'nama_sub' => $nama_sub
+            ];
+            if (!$this->ModelAHP->dataExists($data, 'sub_kriteria')) {
+                $this->db->insert('sub_kriteria', $data);
+            }
+        }
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil tambahkan kriteria dan sub Kriteria.</div>');
+
+        redirect('ahp');
+    }
+
     public function skala()
     {
         $userdata = $this->session->userdata();
