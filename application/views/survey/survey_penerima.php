@@ -17,7 +17,7 @@
               <?php if ($kriteria['punya_sub'] == 1) : ?>
                 <select name="deskripsi_<?= $kriteria['id'] ?>" id="" class="custom-select" required>
                   <option value="">Pilih Salah Satu</option>
-                  <?php foreach ($k['sub_kriteria'] as $sub) : ?>
+                  <?php foreach ($kriteria['sub_kriteria'] as $sub) : ?>
                     <option value="<?= $sub['nama_sub'] ?>"><?= $sub['nama_sub'] ?></option>
                   <?php endforeach; ?>
                 </select>

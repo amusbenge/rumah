@@ -4,14 +4,14 @@ class ModelAHP extends CI_Model
 {
     public function getAllKriteria() //AMBIL SEMUA KRITERIA
     {
-        $kritera = $this->db->get('kriteria')->result_array();
-        foreach ($kritera as $i => $k) {
+        $kriteria = $this->db->get('kriteria')->result_array();
+        foreach ($kriteria as $i => $k) {
             $kriteria[$i]['sub_kriteria'] = [];
-            if ($k['punya_sub']) {
+            if ($k['punya_sub'] == 1) {
                 $kriteria[$i]['sub_kriteria'] = $this->db->get_where('sub_kriteria', ['id_kriteria' => $k['id']])->result_array();
             }
         }
-        return $kritera;
+        return $kriteria;
     }
     public function getSingleKriteria($id)
     {
@@ -161,7 +161,7 @@ class ModelAHP extends CI_Model
     public function getAlternatif($id_periode, $id = null)
     {
         // $this->db->distinct('alternatif.id');
-        $this->db->select('kep_keluarga.*, alternatif.id as id_alternatif, periode.periode, periode.status, dusun.nama_dusun, (SELECT distinct COUNT(kriteria_alternatif.id) FROM kriteria_alternatif, alternatif WHERE alternatif.id = kriteria_alternatif.id_alternatif and alternatif.id_periode = ' . $id_periode . ' group by alternatif.id) as jumlah_survey');
+        $this->db->select('kep_keluarga.*, alternatif.id as id_alternatif, periode.periode, periode.status, dusun.nama_dusun, (SELECT distinct COUNT(kriteria_alternatif.id) FROM kriteria_alternatif WHERE alternatif.id = kriteria_alternatif.id_alternatif group by alternatif.id) as jumlah_survey');
         $this->db->from('alternatif');
         $this->db->join('kep_keluarga', 'kep_keluarga.no_kk = alternatif.no_kk');
         $this->db->join('periode', 'periode.id = alternatif.id_periode');
