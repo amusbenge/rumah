@@ -6,14 +6,14 @@
         <div class="card-body">
 
             <!-- Tombol Tambah User dengan MODAL -->
-            <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#staticBackdrop">
+            <!-- <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#staticBackdrop">
                 <i class="fas fa-user-plus mr-1"></i>
                 Tambah
-            </button>
-            <button type="button" class="btn btn-secondary btn-sm mb-3">
+            </button> -->
+            <!-- <button type="button" class="btn btn-secondary btn-sm mb-3">
                 <i class="fas fa-file-import mr-1"></i>
                 Import
-            </button>
+            </button> -->
             <a href="<?= base_url('admin/cetak_kepkel') ?>" target="_blank">
                 <button type="button" class="btn btn-warning btn-sm mb-3">
                     <i class="fas fa-file mr-1"></i>

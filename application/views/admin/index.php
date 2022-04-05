@@ -1,9 +1,9 @@
 <div class="container-fluid">
-  <h3 class="mb-2 text-gray-900"><?= $title; ?></h3>
+  <h3 class="mb-4 text-gray-900"><?= $title; ?></h3>
   <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="modal" data-target="#tambahPeriode">
     <i class="fas fa-plus mr-1"></i>Tambah Periode</button>
 
-  <div class="col-lg-6 col-md-6">
+  <div class="col-lg-6 col-md-6 ">
     <?= $this->session->flashdata('message'); ?>
   </div>
   <!-- Isi Dalam bentuk Card -->
@@ -13,7 +13,7 @@
         <div class="card-header"></div>
         <div class="card-body">
           <h5 class="card-title">Informasi Daftar Penerimaan Bantuan Rumah</h5>
-          <p class="card-text" style="text-align: justify;">Untuk <i class="fas fa-fw fa-list text-success"></i> adalah periode penerimaan bantuan rumah yang telah selesai, tetapi untuk <i class="fas fa-fw fa-list text-primary"></i> adalah periode penerimaan bantuan rumah yang baru dibuka.</p>
+          <p class="card-text" style="text-align: justify;">Simbol 'list' berwarna hijau (<i class="fas fa-fw fa-list text-success"></i>) pada daftar periode disamping melambangkan periode penerimaan bantuan rumah yang telah selesai. Sedangkan simbol 'list' berwarna biru (<i class="fas fa-fw fa-list text-primary"></i>) menunjukkan periode penerimaan bantuan rumah yang baru dibuka atau sedang berjalan.</p>
         </div>
       </div>
     </div>
@@ -61,7 +61,5 @@
       </div>
     </div>
   </div>
-
-</div>
 </div>
 <!-- End of Main Content -->
