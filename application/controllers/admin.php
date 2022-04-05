@@ -313,10 +313,10 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('role_id', 'Role', 'required');
         if ($this->form_validation->run()) {
             $dusun = $this->ModelUser->getAllDusun($this->input->post('id_dusun'));
+            $this->ModelUser->hapusUser('user', $dusun['id_user']);
             $id_user = $this->insert_user();
             $data['id_user'] = $id_user;
             $this->ModelUser->updateDusun($data, $dusun['id']);
-            $this->ModelUser->hapusUser('user', $dusun['id_user']);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Kepala Dusun berhasil diubah.</div>');
         } else {
             $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
