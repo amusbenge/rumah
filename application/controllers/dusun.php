@@ -67,6 +67,49 @@ class Dusun extends CI_Controller
         redirect('dusun/kep_keluarga');
     }
 
+    public function edit_kepkel($no_kk)
+    {
+        $data['title'] = 'Edit';
+        $userdata = $this->session->userdata();
+        $username = $userdata['user']['username'];
+        $data['user'] = $this->ModelUser->getUser($username);
+        $data['kepkel'] = $this->ModelAHP->getKepalaKelByNoKK($no_kk);
+
+        $this->load->view('header', $data);
+        $this->load->view('sidebar', $data);
+        $this->load->view('topbar', $data);
+        $this->load->view('dusun/edit_kepkel.php', $data);
+        $this->load->view('footer', $data);
+    }
+
+    public function update_kepkel($no_kk)
+    {
+        $data = [
+            'no_kk' => $this->input->post('no_kk'),
+            'nm_kpl_kel' => $this->input->post('nm_kpl_kel'),
+            'alamat' => $this->input->post('alamat'),
+            'rt' => $this->input->post('rt'),
+            'rw' => $this->input->post('rw'),
+            'desa' => $this->input->post('desa'),
+            'kec' => $this->input->post('kec'),
+            'kab' => $this->input->post('kab')
+        ];
+
+        $this->db->where('no_kk', $no_kk);
+        $this->db->update('kep_keluarga', $data);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Kepala Keluarga has been updated.</div>');
+        redirect('dusun/kep_keluarga');
+    }
+    public function hapus_kepkel($no_kk)
+    {
+        $this->db->where('no_kk', $no_kk);
+        $this->db->delete('kep_keluarga');
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Kepala Keluarga berhasil dihapus.</div>');
+        redirect('dusun/kep_keluarga');
+    }
+
     public function pengajuan()
     {
         $kk = $this->input->post('no_kk');

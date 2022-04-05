@@ -62,12 +62,12 @@
                                 <td><?= $kk['rt'] ?>/<?= $kk['rw'] ?></td>
                                 <td><?= $kk['desa'] ?></td>
                                 <td>
-                                    <a class="btn btn-warning btn-circle btn-sm" href="<?= base_url('admin/edit_kepkel/') ?><?= $kk['no_kk']; ?>" data-toggle="tooltip" title="Edit">
+                                    <a class="btn btn-warning btn-circle btn-sm" href="<?= base_url('dusun/edit_kepkel/') ?><?= $kk['no_kk']; ?>" data-toggle="tooltip" title="Edit">
                                         <i class="fas fa-edit fa-sm"></i>
                                     </a>
                                     <!-- JIKA USER YANG SEDANG AKTIF, TOMBOL HAPUS TIDAK MUNCUL -->
                                     <?php if ($user['username'] != 'admin') : ?>
-                                        <a href="<?= base_url('admin/hapus_kepkel/') ?><?= $kk['no_kk']; ?>" class="btn btn-danger btn-circle btn-sm" data-toggle="tooltip" title="Hapus" onclick="return confirm('Yakin ingin menghapus User ini?')">
+                                        <a href="<?= base_url('dusun/hapus_kepkel/') ?><?= $kk['no_kk']; ?>" class="btn btn-danger btn-circle btn-sm" data-toggle="tooltip" title="Hapus" onclick="return confirm('Yakin ingin menghapus User ini?')">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     <?php endif; ?>
