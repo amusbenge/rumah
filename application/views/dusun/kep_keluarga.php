@@ -54,7 +54,7 @@
                         $no = 1;
                         foreach ($kepkel as $kk) : ?>
                             <tr>
-                                <td><input type='checkbox' class='check-item' name='no_kk[]' value='<?= $kk['no_kk']; ?>'></td>
+                                <td><input type='checkbox' class='check-item' name='no_kk[]' value='<?= $kk['no_kk']; ?>' <?= ($kk['jumlah'] > 0) ? 'disabled' : '' ?>></td>
                                 <td><?= $no++ ?></td>
                                 <td><?= $kk['no_kk'] ?></td>
                                 <td><?= $kk['nm_kpl_kel'] ?></td>

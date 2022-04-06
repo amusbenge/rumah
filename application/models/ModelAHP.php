@@ -68,7 +68,7 @@ class ModelAHP extends CI_Model
     {
         $periode = $this->getPeriode(['status' => 1])['id'];
         if ($id == null) { //PANGGIL SEMUA DUSUN DAN PRENSENTASE SURVEYNYA
-            $sql = "SELECT DISTINCT dusun.*, (SELECT COUNT(*) FROM alternatif JOIN kep_keluarga ON alternatif.no_kk = kep_keluarga.no_kk WHERE alternatif.id_periode = 1 AND kep_keluarga.id_dusun = dusun.id) as jumlah_alternatif, (SELECT COUNT(*) FROM kriteria_alternatif JOIN alternatif on kriteria_alternatif.id_alternatif = alternatif.id JOIN kep_keluarga on kep_keluarga.no_kk = alternatif.no_kk WHERE alternatif.id_periode = '$periode' AND kep_keluarga.id_dusun = dusun.id) as jumlah_ada FROM `dusun` LEFT JOIN kep_keluarga ON kep_keluarga.id_dusun = dusun.id LEFT JOIN alternatif ON alternatif.no_kk = kep_keluarga.no_kk LEFT JOIN kriteria_alternatif ON kriteria_alternatif.id_alternatif = alternatif.id GROUP BY dusun.id";
+            $sql = "SELECT DISTINCT dusun.*, (SELECT COUNT(*) FROM alternatif JOIN kep_keluarga ON alternatif.no_kk = kep_keluarga.no_kk WHERE alternatif.id_periode = '$periode' AND kep_keluarga.id_dusun = dusun.id) as jumlah_alternatif, (SELECT COUNT(*) FROM kriteria_alternatif JOIN alternatif on kriteria_alternatif.id_alternatif = alternatif.id JOIN kep_keluarga on kep_keluarga.no_kk = alternatif.no_kk WHERE alternatif.id_periode = '$periode' AND kep_keluarga.id_dusun = dusun.id) as jumlah_ada FROM `dusun` LEFT JOIN kep_keluarga ON kep_keluarga.id_dusun = dusun.id LEFT JOIN alternatif ON alternatif.no_kk = kep_keluarga.no_kk LEFT JOIN kriteria_alternatif ON kriteria_alternatif.id_alternatif = alternatif.id GROUP BY dusun.id";
             return $this->db->query($sql)->result_array();
         } else { //MENAMPILKAN KRITERIA BERDASARKAN DUSUN BESERTA JUMLAH YG SUDAH DIHITUNG PER KRITERIA
             $sql = "SELECT DISTINCT kriteria.*, (SELECT COUNT(*) FROM perbandingan_alternatif JOIN kriteria_alternatif on kriteria_alternatif.id = perbandingan_alternatif.id_kriteria_alternatif JOIN alternatif on alternatif.id = kriteria_alternatif.id_alternatif JOIN kep_keluarga on alternatif.no_kk = kep_keluarga.no_kk WHERE kep_keluarga.id_dusun = '$id' AND alternatif.id_periode = '$periode' AND kriteria_alternatif.id_kriteria = kriteria.id) as jumlah_perbandingan FROM kriteria GROUP BY kriteria.id";
@@ -158,7 +158,7 @@ class ModelAHP extends CI_Model
         }
     }
 
-    public function getAlternatif($id_periode, $id = null)
+    public function getAlternatif($id_periode, $id = null, $id_dusun = null)
     {
         // $this->db->distinct('alternatif.id');
         $this->db->select('kep_keluarga.*, alternatif.id as id_alternatif, periode.periode, periode.status, dusun.nama_dusun, (SELECT distinct COUNT(kriteria_alternatif.id) FROM kriteria_alternatif WHERE alternatif.id = kriteria_alternatif.id_alternatif group by alternatif.id) as jumlah_survey');
@@ -167,7 +167,9 @@ class ModelAHP extends CI_Model
         $this->db->join('periode', 'periode.id = alternatif.id_periode');
         $this->db->join('dusun', 'dusun.id = kep_keluarga.id_dusun');
         $this->db->where('alternatif.id_periode', $id_periode);
-        // $this->db->;
+        if ($id_dusun != null) {
+            $this->db->where('kep_keluarga.id_dusun', $id_dusun);
+        }
         if ($id != null) {
             $this->db->where('alternatif.id', $id);
             return $this->db->get()->row_array();

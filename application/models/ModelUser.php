@@ -91,11 +91,26 @@ class ModelUser extends CI_Model
 
     public function getKepkelByUser($id_user)
     {
-        $query = $this->db->select('kep_keluarga.*, dusun.nama_dusun, user.jabatan, user.nama')
-            ->from('kep_keluarga')
-            ->join('dusun', 'dusun.id = kep_keluarga.id_dusun', 'LEFT')
-            ->join('user', 'user.id = dusun.id_user', 'LEFT')
-            ->where('user.id = ' . $id_user);
-        return $query = $this->db->get()->result_array();
+        $periode = $this->db->get_where('periode', ['status' => 1])->row_array();
+
+        if ($periode != null) {
+            $this->db->distinct('kep_keluarga.no_kk');
+            $this->db->select('count(alternatif.id) as jumlah_alternatif');
+            $this->db->from('alternatif');
+            $this->db->join('kep_keluarga', 'kep_keluarga.no_kk = alternatif.no_kk');
+            $this->db->where('alternatif.id_periode', $periode['id']);
+            $this->db->group_by('kep_keluarga.no_kk');
+            $q1 = $this->db->get_compiled_select();
+            $this->db->select('kep_keluarga.*, dusun.nama_dusun, user.jabatan, user.nama, (' . $q1 . ') as jumlah');
+        } else {
+            $this->db->select('kep_keluarga.*, dusun.nama_dusun, user.jabatan, user.nama');
+        }
+        $this->db->from('kep_keluarga');
+        $this->db->join('dusun', 'dusun.id = kep_keluarga.id_dusun', 'LEFT');
+        $this->db->join('user', 'user.id = dusun.id_user', 'LEFT');
+        $this->db->where('user.id = ' . $id_user);
+        $query = $this->db->get()->result_array();
+        // var_dump($que
+        return $query;
     }
 }

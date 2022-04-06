@@ -128,4 +128,23 @@ class Dusun extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Kepala Keluarga Berhasil di ajukan.</div>');
         redirect('dusun/kep_keluarga');
     }
+
+    public function data_pengajuan()
+    {
+        $periode = $this->db->get_where('periode', ['status' => 1])->row_array();
+        if ($periode != null) {
+            $kep_keluarga = $this->ModelAHP->getAlternatif($periode['id'], null, $this->session->userdata('dusun')['id']);
+            $data['title'] = 'Daftar Kepala Keluarga Yang Diajukan Periode Ini';
+            $userdata = $this->session->userdata();
+            $username = $userdata['user']['username'];
+            $data['user'] = $this->ModelUser->getUser($username);
+            $data['kepkel'] = $kep_keluarga;
+
+            $this->load->view('header', $data);
+            $this->load->view('sidebar');
+            $this->load->view('topbar');
+            $this->load->view('dusun/data_pengajuan');
+            $this->load->view('footer');
+        }
+    }
 }
