@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2022 at 06:47 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.2.12
+-- Generation Time: Apr 07, 2022 at 04:35 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -45,7 +44,13 @@ INSERT INTO `alternatif` (`id`, `no_kk`, `id_periode`, `hasil`) VALUES
 (3, '5371041906960002', 1, 0.392209),
 (15, '5301192905980002', 13, 0),
 (16, '5371041304980001', 13, 0),
-(17, '5371041906960002', 13, 0);
+(17, '5371041906960002', 13, 0),
+(18, '2745372930598374', 13, 0),
+(19, '5371041304980007', 13, 0),
+(20, '2745372930598213', 13, 0),
+(21, '5304052007920002', 13, 0),
+(22, '5304052008650002', 13, 0),
+(23, '5304052008620002', 13, 0);
 
 -- --------------------------------------------------------
 
@@ -65,7 +70,8 @@ CREATE TABLE `dusun` (
 
 INSERT INTO `dusun` (`id`, `nama_dusun`, `id_user`) VALUES
 (5, 'Dusun 1', 13),
-(7, 'Dusun 2', 11);
+(7, 'Dusun 2', 11),
+(8, 'Dusun 3', 14);
 
 -- --------------------------------------------------------
 
@@ -90,9 +96,14 @@ CREATE TABLE `kep_keluarga` (
 --
 
 INSERT INTO `kep_keluarga` (`no_kk`, `nm_kpl_kel`, `alamat`, `rt`, `rw`, `desa`, `kec`, `kab`, `id_dusun`) VALUES
+('2745372930598213', 'Efentus Goat', 'Fatukorat', '001', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 7),
+('2745372930598374', 'Oswaldus Talo', 'Bautasik', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 7),
 ('5301192905980002', 'Maximilianus Benge', 'Jl. Kelimutu', '004', '003', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304052007920002', 'Andreas Koli', 'Fatukorat', '001', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 8),
+('5304052008620002', 'Ermelinda Gomes', 'Kakuban', '001', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 8),
+('5304052008650002', 'Martinus Dasi', 'Kakuban', '001', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 8),
 ('5371041304980001', 'Kristian Paulino', 'Jl. Perintis', '003', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
-('5371041304980007', 'contoh', 'Kayu Putih, Kota Kupang', '003', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 7),
+('5371041304980007', 'Mario Borges', 'Bautasik', '003', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 7),
 ('5371041906960002', 'Adrian Siribein', 'Jl. Keramat Jati', '003', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5);
 
 -- --------------------------------------------------------
@@ -106,7 +117,7 @@ CREATE TABLE `kriteria` (
   `kriteria` varchar(25) NOT NULL,
   `jumlah` float NOT NULL,
   `bobot` float NOT NULL,
-  `punya_sub` int(1) NOT NULL DEFAULT '0'
+  `punya_sub` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -115,14 +126,14 @@ CREATE TABLE `kriteria` (
 
 INSERT INTO `kriteria` (`id`, `kriteria`, `jumlah`, `bobot`, `punya_sub`) VALUES
 (1, 'Pekerjaan', 14.33, 0.082, 1),
-(2, 'Penghasilan', 11.417, 0.115, 0),
-(3, 'Tanggungan Keluarga', 9.167, 0.127, 0),
-(4, 'Status Rumah dan Tanah', 2.833, 0.314, 0),
-(5, 'Kondisi Atap Rumah', 29, 0.034, 0),
-(6, 'Kondisi Dinding Rumah', 30.5, 0.032, 0),
-(7, 'Kondisi Lantai Rumah', 31, 0.026, 0),
-(8, 'Kondisi MCK', 23.5, 0.048, 0),
-(9, 'Status Menerima Bantuan', 5.629, 0.223, 0);
+(2, 'Penghasilan', 11.417, 0.115, 1),
+(3, 'Tanggungan Keluarga', 9.167, 0.127, 1),
+(4, 'Status Rumah dan Tanah', 2.833, 0.314, 1),
+(5, 'Kondisi Atap Rumah', 29, 0.034, 1),
+(6, 'Kondisi Dinding Rumah', 30.5, 0.032, 1),
+(7, 'Kondisi Lantai Rumah', 31, 0.026, 1),
+(8, 'Kondisi MCK', 23.5, 0.048, 1),
+(9, 'Status Menerima Bantuan', 5.629, 0.223, 1);
 
 -- --------------------------------------------------------
 
@@ -197,7 +208,43 @@ INSERT INTO `kriteria_alternatif` (`id`, `deskripsi`, `id_kriteria`, `id_alterna
 (60, 'dinding bebak', 6, 17, 0, 0),
 (61, 'lantai tanah', 7, 17, 0, 0),
 (62, 'darurat', 8, 17, 0, 0),
-(63, 'belum pernah', 9, 17, 0, 0);
+(63, 'belum pernah', 9, 17, 0, 0),
+(64, 'Tukang', 1, 18, 0, 0),
+(65, '1.000.000-2.000.000', 2, 18, 0, 0),
+(66, '5 Orang', 3, 18, 0, 0),
+(67, 'Kontrak/Sewa', 4, 18, 0, 0),
+(68, 'Atap Seng', 5, 18, 0, 0),
+(69, 'Dinding Bebak', 6, 18, 0, 0),
+(70, 'Lantai Semen', 7, 18, 0, 0),
+(71, 'Ada', 8, 18, 0, 0),
+(72, 'Belum Pernah', 9, 18, 0, 0),
+(73, 'Tukang', 1, 21, 0, 0),
+(74, '<1.000.000', 2, 21, 0, 0),
+(75, '5 Orang', 3, 21, 0, 0),
+(76, 'Milik Sendiri', 4, 21, 0, 0),
+(77, 'Atap Alang-alang', 5, 21, 0, 0),
+(78, 'Dinding Bebak', 6, 21, 0, 0),
+(79, 'Lantai Tanah', 7, 21, 0, 0),
+(80, 'Ada', 8, 21, 0, 0),
+(81, 'Belum Pernah', 9, 21, 0, 0),
+(82, 'Mengurus Rumah Tangga', 1, 22, 0, 0),
+(83, '<1.000.000', 2, 22, 0, 0),
+(84, '4 Orang', 3, 22, 0, 0),
+(85, 'Milik Sendiri', 4, 22, 0, 0),
+(86, 'Atap Seng', 5, 22, 0, 0),
+(87, 'Dinding Kayu', 6, 22, 0, 0),
+(88, 'Lantai Tanah', 7, 22, 0, 0),
+(89, 'Ada', 8, 22, 0, 0),
+(90, 'Belum Pernah', 9, 22, 0, 0),
+(91, 'Pensiunan', 1, 23, 0, 0),
+(92, '1.000.000-2.000.000', 2, 23, 0, 0),
+(93, '5 Orang', 3, 23, 0, 0),
+(94, 'Milik Sendiri', 4, 23, 0, 0),
+(95, 'Atap Seng', 5, 23, 0, 0),
+(96, 'Dinding Kayu', 6, 23, 0, 0),
+(97, 'Lantai Semen', 7, 23, 0, 0),
+(98, 'Ada', 8, 23, 0, 0),
+(99, 'Belum Pernah', 9, 23, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -211,7 +258,7 @@ CREATE TABLE `perbandingan_alternatif` (
   `id_alternatif` int(11) NOT NULL,
   `id_skala` int(11) NOT NULL,
   `normalisasi` float NOT NULL,
-  `skala_inverse` int(1) NOT NULL DEFAULT '0'
+  `skala_inverse` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -319,7 +366,7 @@ INSERT INTO `perbandingan_alternatif` (`id`, `id_kriteria_alternatif`, `id_alter
 CREATE TABLE `periode` (
   `id` int(11) NOT NULL,
   `periode` year(4) NOT NULL,
-  `status` int(1) NOT NULL DEFAULT '0'
+  `status` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -381,7 +428,30 @@ INSERT INTO `sub_kriteria` (`id`, `id_kriteria`, `nama_sub`) VALUES
 (5, 1, 'TNI'),
 (6, 1, 'Polisi'),
 (7, 1, 'PNS'),
-(8, 1, 'Peternak');
+(8, 1, 'Peternak'),
+(9, 2, '<1.000.000'),
+(10, 2, '1.000.000-2.000.000'),
+(11, 2, '2.000.000-5.000.000'),
+(12, 3, '2 Orang'),
+(13, 3, '3 Orang'),
+(14, 3, '4 Orang'),
+(15, 3, '5 Orang'),
+(16, 3, '6 Orang'),
+(17, 3, '7 Orang/Lebih'),
+(18, 5, 'Atap Seng'),
+(19, 5, 'Atap Alang-alang'),
+(20, 4, 'Milik Sendiri'),
+(21, 4, 'Numpang'),
+(22, 4, 'Kontrak/Sewa'),
+(23, 6, 'Dinding Kayu'),
+(24, 6, 'Dinding Bambu'),
+(25, 6, 'Dinding Bebak'),
+(26, 7, 'Lantai Tanah'),
+(27, 7, 'Lantai Semen'),
+(28, 9, 'Belum Pernah'),
+(29, 9, 'Sudah/sedang menerima'),
+(30, 8, 'Ada'),
+(31, 8, 'Tidak ada');
 
 -- --------------------------------------------------------
 
@@ -409,7 +479,8 @@ INSERT INTO `user` (`id`, `nama`, `jabatan`, `jk`, `username`, `foto`, `password
 (1, 'Amos Benge', 'Admin Desa', 'Pria', 'admin', 'daniel.jpg', '$2y$10$PVtdLfTUY595pq0jkoekgOoWysq3VSfbXt2PIdsJ0C/Scgfz4FBMi', 'aktif', '1'),
 (7, 'Ricky Lalo', 'Pegawai/Surveyor', 'Pria', 'survey', 'profile2.png', '$2y$10$SkZRGGfhoai.nx3.Dzfydu32etxx7qBcP5B.O9ONqRgjXsodpG6GS', 'aktif', '2'),
 (11, 'Kevin Bhato', 'Kepala Dusun 03', 'Pria', 'dusun2', 'daniel2111.jpg', '$2y$10$JGCtHBE2cLo0xx1iq4UDSOwq8ZisLuNuopTy/ogqDUlMBnLGAke8e', 'aktif', '3'),
-(13, 'Romi', 'Kepala Dusun', 'Pria', 'dusun1', '', '$2y$10$kzoT1z8KeEhNNT2Ae/8EZe5r0HV67h1b3mgsEKZ2IVZGOsdn/h.Vy', 'aktif', '3');
+(13, 'Romi', 'Kepala Dusun', 'Pria', 'dusun1', '', '$2y$10$kzoT1z8KeEhNNT2Ae/8EZe5r0HV67h1b3mgsEKZ2IVZGOsdn/h.Vy', 'aktif', '3'),
+(14, 'Viktor Selan', 'Kepala Dusun', 'Pria', 'dusun3', '1627825501787.jpg', '$2y$10$MNCLfLfqOruqlpX4lEfRzuVFOfYf51n3IBIao1KlMFWajBY7oTPx2', 'aktif', '3');
 
 -- --------------------------------------------------------
 
@@ -507,7 +578,9 @@ INSERT INTO `user_sub_menu` (`id`, `id_menu`, `title`, `url`, `icon`, `is_active
 (10, 5, 'Kepala Keluarga', 'dusun/kep_keluarga', 'fas fa-fw fa-users', 1),
 (11, 2, 'Dusun', 'admin/dusun', 'fas fa-fw fa-users', 1),
 (12, 4, 'Perbandingan', 'surveyor/perbandingan', 'fas fa-fw fa-file', 1),
-(14, 3, 'Riwayat Hitung', 'ahp/riwayat_hitung', 'fas fa-fw fa-list', 1);
+(14, 3, 'Riwayat Hitung', 'ahp/riwayat_hitung', 'fas fa-fw fa-list', 1),
+(15, 5, 'Pengajuan Periode Ini', 'dusun/data_pengajuan', 'fas fa-fw fa-list', 1),
+(16, 5, 'Riwayat Pengajuan', 'dusun/riwayat_pengajuan', 'fas fa-fw fa-list', 1);
 
 -- --------------------------------------------------------
 
@@ -532,7 +605,7 @@ CREATE TABLE `v_perbandingan_alt` (
 --
 DROP TABLE IF EXISTS `v_perbandingan_alt`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_perbandingan_alt`  AS  select `perbandingan_alternatif`.`id` AS `id`,`perbandingan_alternatif`.`id_kriteria_alternatif` AS `id_kriteria_alternatif`,`perbandingan_alternatif`.`id_alternatif` AS `id_alternatif`,`perbandingan_alternatif`.`id_skala` AS `id_skala`,`perbandingan_alternatif`.`normalisasi` AS `normalisasi`,`perbandingan_alternatif`.`skala_inverse` AS `skala_inverse`,if((`perbandingan_alternatif`.`skala_inverse` = 1),(1 / `skala`.`bobot`),`skala`.`bobot`) AS `bobot` from (`perbandingan_alternatif` join `skala` on((`skala`.`id` = `perbandingan_alternatif`.`id_skala`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_perbandingan_alt`  AS SELECT `perbandingan_alternatif`.`id` AS `id`, `perbandingan_alternatif`.`id_kriteria_alternatif` AS `id_kriteria_alternatif`, `perbandingan_alternatif`.`id_alternatif` AS `id_alternatif`, `perbandingan_alternatif`.`id_skala` AS `id_skala`, `perbandingan_alternatif`.`normalisasi` AS `normalisasi`, `perbandingan_alternatif`.`skala_inverse` AS `skala_inverse`, if(`perbandingan_alternatif`.`skala_inverse` = 1,1 / `skala`.`bobot`,`skala`.`bobot`) AS `bobot` FROM (`perbandingan_alternatif` join `skala` on(`skala`.`id` = `perbandingan_alternatif`.`id_skala`)) ;
 
 --
 -- Indexes for dumped tables
@@ -643,13 +716,13 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `alternatif`
 --
 ALTER TABLE `alternatif`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `dusun`
 --
 ALTER TABLE `dusun`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `kriteria`
@@ -661,7 +734,7 @@ ALTER TABLE `kriteria`
 -- AUTO_INCREMENT for table `kriteria_alternatif`
 --
 ALTER TABLE `kriteria_alternatif`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT for table `perbandingan_alternatif`
@@ -685,13 +758,13 @@ ALTER TABLE `skala`
 -- AUTO_INCREMENT for table `sub_kriteria`
 --
 ALTER TABLE `sub_kriteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
@@ -715,7 +788,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables
