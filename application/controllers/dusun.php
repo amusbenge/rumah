@@ -147,4 +147,36 @@ class Dusun extends CI_Controller
             $this->load->view('footer');
         }
     }
+    public function riwayat_pengajuan($id_periode = null)
+    {
+        if ($id_periode == null) {
+            $periode = $this->ModelAHP->getPeriodeSelesai();
+            $data['title'] = 'Riwayat Periode Selesai';
+            $userdata = $this->session->userdata();
+            $username = $userdata['user']['username'];
+            $data['user'] = $this->ModelUser->getUser($username);
+            $data['periode'] = $periode;
+
+            $this->load->view('header', $data);
+            $this->load->view('sidebar');
+            $this->load->view('topbar');
+            $this->load->view('dusun/riwayat_periode');
+            $this->load->view('footer');
+        } else {
+            $periode = $this->ModelAHP->getPeriode(['id' => $id_periode]);
+            $kep_keluarga = $this->ModelAHP->getAlternatif($periode['id'], null, $this->session->userdata('dusun')['id']);
+
+            $data['title'] = 'Daftar Kepala Keluarga Yang Diajukan Periode ' . $periode['periode'];
+            $userdata = $this->session->userdata();
+            $username = $userdata['user']['username'];
+            $data['user'] = $this->ModelUser->getUser($username);
+            $data['kepkel'] = $kep_keluarga;
+
+            $this->load->view('header', $data);
+            $this->load->view('sidebar');
+            $this->load->view('topbar');
+            $this->load->view('dusun/data_pengajuan');
+            $this->load->view('footer');
+        }
+    }
 }

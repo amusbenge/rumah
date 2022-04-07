@@ -39,7 +39,7 @@
                         <th scope="col">Desa/Kel</th>
                         <th scope="col">Kecamatan</th>
                         <th scope="col">Kabupaten</th>
-                        <th scope="col">Aksi</th>
+                        <!-- <th scope="col">Aksi</th> -->
                     </tr>
                 </thead>
                 <tbody class="text-gray-900">
@@ -57,7 +57,7 @@
                             <td><?= $kk['desa'] ?></td>
                             <td><?= $kk['kec'] ?></td>
                             <td><?= $kk['kab'] ?></td>
-                            <td>
+                            <!-- <td>
                                 <a class="btn btn-warning btn-circle btn-sm" href="<?= base_url('admin/edit_kepkel/') ?><?= $kk['no_kk']; ?>" data-toggle="tooltip" title="Edit">
                                     <i class="fas fa-edit fa-sm"></i>
                                 </a>
@@ -65,12 +65,12 @@
                                     <i class="fas fa-trash fa-sm"></i>
                                 </a>
                                 <!-- JIKA USER YANG SEDANG AKTIF, TOMBOL HAPUS TIDAK MUNCUL -->
-                                <?php if ($user['username'] != 'admin') : ?>
-                                    <a href="<?= base_url('admin/hapus_user/') ?><?= $kk['no_kk']; ?>" class="btn btn-danger btn-circle btn-sm" data-toggle="tooltip" title="Hapus" onclick="return confirm('Yakin ingin menghapus User ini?')">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                <?php endif; ?>
-                            </td>
+                            <?php if ($user['username'] != 'admin') : ?>
+                                <!-- <a href="<?= base_url('admin/hapus_user/') ?><?= $kk['no_kk']; ?>" class="btn btn-danger btn-circle btn-sm" data-toggle="tooltip" title="Hapus" onclick="return confirm('Yakin ingin menghapus User ini?')">
+                                    <i class="fas fa-trash"></i>
+                                </a> -->
+                            <?php endif; ?>
+                            <!-- </td>  -->
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
