@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <h3 class="mb-2 text-gray-900"><?= $title; ?></h3>
-
+  *Jika tidak ada data yang ditampilkan proses perankingan belum selesai.
   <!-- Isi Dalam bentuk Card -->
   <?php foreach ($dusun as $d) : ?>
     <div class="card card-secondary">

@@ -20,10 +20,12 @@
                     Laporan
                 </button>
             </a> -->
-            <button type="button" class="btn btn-success btn-sm mb-3" id="btn-ajukan">
-                <i class="fas fa-file mr-1"></i>
-                Ajukan
-            </button>
+            <?php if (!$cekPengajuan) : ?>
+                <button type="button" class="btn btn-success btn-sm mb-3" id="btn-ajukan">
+                    <i class="fas fa-file mr-1"></i>
+                    Ajukan
+                </button>
+            <?php endif; ?>
 
             <!-- Pesan SUKSES/TIDAK -->
             <div class="row">

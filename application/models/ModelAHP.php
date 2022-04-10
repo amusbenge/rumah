@@ -81,6 +81,23 @@ class ModelAHP extends CI_Model
         return $this->db->query($sql)->result_array();
     }
 
+    public function getSelesai($id_periode, $id_dusun = null)
+    {
+        $sql = "SELECT DISTINCT dusun.*,
+                (SELECT COUNT(alternatif.id) FROM alternatif
+                JOIN kep_keluarga on kep_keluarga.no_kk = alternatif.no_kk
+                WHERE kep_keluarga.id_dusun = dusun.id AND alternatif.id_periode = '$id_periode') as jumlah_alter,
+                (SELECT COUNT(alternatif.id) FROM alternatif
+                JOIN kep_keluarga on kep_keluarga.no_kk = alternatif.no_kk
+                WHERE kep_keluarga.id_dusun = dusun.id AND alternatif.id_periode = '$id_periode' AND alternatif.hasil > 0) as jumlah_hasil
+                FROM dusun
+                JOIN kep_keluarga ON kep_keluarga.id_dusun = dusun.id
+                JOIN alternatif on alternatif.no_kk = kep_keluarga.no_kk
+                GROUP BY dusun.id";
+        $result =  $this->db->query($sql)->result_array();
+        return $result;
+    }
+
     public function getCountPerbandingan($id_dusun, $id_kriteria, $id_periode)
     {
         $sql = "SELECT COUNT(*) as jumlah FROM perbandingan_alternatif JOIN kriteria_alternatif on kriteria_alternatif.id = perbandingan_alternatif.id_kriteria_alternatif JOIN alternatif on alternatif.id = kriteria_alternatif.id_alternatif JOIN kep_keluarga on alternatif.no_kk = kep_keluarga.no_kk WHERE kep_keluarga.id_dusun = '$id_dusun' AND alternatif.id_periode = '$id_periode' AND kriteria_alternatif.id_kriteria = '$id_kriteria'";
@@ -176,6 +193,22 @@ class ModelAHP extends CI_Model
         } else {
             return $this->db->get()->result_array();
         }
+    }
+
+    public function cekPengajuan($id_dusun)
+    {
+        $ada = false;
+        $periode = $this->db->get_where('periode', ['status' => 1])->row();
+        if ($periode != null) {
+            $sql = "SELECT * FROM kep_keluarga join alternatif ON alternatif.no_kk = kep_keluarga.no_kk WHERE alternatif.id_periode = '$periode->id' AND kep_keluarga.id_dusun = '$id_dusun'";
+            $results = $this->db->query($sql)->result_array();
+            if ($results != null) {
+                $ada = true;
+            }
+        } else {
+            $ada = true;
+        }
+        return $ada;
     }
 
     public function getAnyAlternatif($id) //Fungsi ini untuk mengambil data alternatif single tanpa memperhatikan periode

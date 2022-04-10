@@ -298,4 +298,58 @@ class Surveyor extends CI_Controller
         }
         redirect('surveyor/perbandingan/' . $id_dusun);
     }
+    // public function hasil($id_dusun = null) // FUNGSI UNTUK TAMPILKAN HASIL
+    // {
+    //     if ($id_dusun == null) {
+
+    //         $periode = $this->ModelAHP->getPeriode(['status' => 1]);
+    //         $data['title'] = 'Periode ' . $periode['periode'];
+    //         $userdata = $this->session->userdata();
+    //         $username = $userdata['user']['username'];
+    //         $data['user'] = $this->ModelUser->getUser($username);
+    //         $data['data_dusun'] = $this->ModelAHP->getSelesai($periode['id']);
+
+    //         $this->load->view('header', $data);
+    //         $this->load->view('sidebar', $data);
+    //         $this->load->view('topbar', $data);
+    //         $this->load->view('survey/daftar_dusun_hasil', $data);
+    //         $this->load->view('footer', $data);
+    //     } else {
+    //         $userdata = $this->session->userdata();
+    //         $username = $userdata['user']['username'];
+    //         $user = $this->ModelUser->getUser($username);
+    //         $periode = $this->ModelAHP->getPeriode(['status' => 1]);
+    //         $dusun = $this->ModelAHP->getDusun($id_dusun);
+    //         $data = [
+    //             'title' => 'Hasil Rangking Calon Penerima Bantuan di ' . $dusun['nama_dusun'],
+    //             'user' => $user,
+    //             'alternatif' => $this->ModelAHP->getHasilAkhirPerDusun($id_dusun, $periode['id']),
+    //             'periode' => $periode,
+    //         ];
+    //         $this->load->view('header', $data);
+    //         $this->load->view('sidebar');
+    //         $this->load->view('topbar');
+    //         $this->load->view('ahp/hasil');
+    //         $this->load->view('footer');
+    //     }
+    // }
+    public function hasil()
+    {
+        $periode = $this->ModelAHP->getPeriode(['status' => 1]);
+        $userdata = $this->session->userdata();
+        $username = $userdata['user']['username'];
+        $user = $this->ModelUser->getUser($username);
+        $dusun = $this->ModelAHP->getHasilAkhir($periode['id']);
+        $data = [
+            'title' => 'Perankingan Periode ' . $periode['periode'],
+            'user' => $user,
+            'periode' => $periode,
+            'dusun' => $dusun
+        ];
+        $this->load->view('header', $data);
+        $this->load->view('sidebar');
+        $this->load->view('topbar');
+        $this->load->view('ahp/riwayat_hasil');
+        $this->load->view('footer');
+    }
 }

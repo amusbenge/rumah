@@ -28,13 +28,13 @@ class Dusun extends CI_Controller
     public function kep_keluarga() // TAMPIL HALAMAN HOME KEPALA DUSUN
     {
         $data['title'] = 'Kepala Keluarga';
-
         $userdata = $this->session->userdata();
+        $id_dusun = $userdata['dusun']['id'];
         $username = $userdata['user']['username'];
         $id_user = $userdata['user']['id'];
         $data['user'] = $this->ModelUser->getUser($username);
         $data['kepkel'] = $this->ModelUser->getKepkelByUser($id_user);
-
+        $data['cekPengajuan'] = $this->ModelAHP->cekPengajuan($id_dusun);
         // echo "<pre>";
         // var_dump($data['kepkel']);
         // echo "</pre>";
