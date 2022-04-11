@@ -1,4 +1,8 @@
 <?php
+
+use mPDF as GlobalMPDF;
+use Mpdf\Mpdf\mPDF;
+
 defined('BASEPATH') or exit('no redirect script allowed');
 
 class Admin extends CI_Controller

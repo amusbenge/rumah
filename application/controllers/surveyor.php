@@ -352,4 +352,53 @@ class Surveyor extends CI_Controller
         $this->load->view('ahp/riwayat_hasil');
         $this->load->view('footer');
     }
+
+    public function riwayat_hasil($id_periode = null)
+    {
+        $userdata = $this->session->userdata();
+        $username = $userdata['user']['username'];
+        $user = $this->ModelUser->getUser($username);
+        if ($id_periode == null) {
+            $periode = $this->ModelAHP->getPeriodeSelesai();
+            $data = [
+                'title' => 'Riwayat Periode',
+                'user' => $user,
+                'periode' => $periode,
+            ];
+            $this->load->view('header', $data);
+            $this->load->view('sidebar');
+            $this->load->view('topbar');
+            $this->load->view('survey/riwayat_periode');
+            $this->load->view('footer');
+        } else {
+            $dusun = $this->ModelAHP->getHasilAkhir($id_periode);
+            $periode = $this->ModelAHP->getPeriode(['id' => $id_periode]);
+            $data = [
+                'title' => 'Riwayat Perankingan Periode ' . $periode['periode'],
+                'user' => $user,
+                'periode' => $periode,
+                'dusun' => $dusun
+            ];
+            $this->load->view('header', $data);
+            $this->load->view('sidebar');
+            $this->load->view('topbar');
+            $this->load->view('ahp/riwayat_hasil');
+            $this->load->view('footer');
+        }
+    }
+    public function cetak_hasil($id_periode)
+    {
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+        $dusun = $this->ModelAHP->getHasilAkhir($id_periode);
+        $periode = $this->ModelAHP->getPeriode(['id' => $id_periode]);
+        $dusun = $this->ModelAHP->getHasilAkhir($id_periode);
+        $data = [
+            'title' => 'Riwayat Perankingan Periode ' . $periode['periode'],
+            'periode' => $periode,
+            'dusun' => $dusun
+        ];
+        $html = $this->load->view('laporan/hasil', ['data' => $data], TRUE);
+        $mpdf->WriteHTML($html);
+        $mpdf->Output('Perankingan Periode ' . $periode['periode'] . '.pdf', 'I');
+    }
 }

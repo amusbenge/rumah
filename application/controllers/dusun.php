@@ -171,6 +171,7 @@ class Dusun extends CI_Controller
             $username = $userdata['user']['username'];
             $data['user'] = $this->ModelUser->getUser($username);
             $data['kepkel'] = $kep_keluarga;
+            $data['periode'] = $periode;
 
             $this->load->view('header', $data);
             $this->load->view('sidebar');
@@ -178,5 +179,20 @@ class Dusun extends CI_Controller
             $this->load->view('dusun/data_pengajuan');
             $this->load->view('footer');
         }
+    }
+    public function cetak_pengajuan($id_periode)
+    {
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+        $dusun = $this->ModelAHP->getDusun($this->session->userdata('dusun')['id']);
+        $periode = $this->ModelAHP->getPeriode(['id' => $id_periode]);
+        $kep_keluarga = $this->ModelAHP->getAlternatif($periode['id'], null, $this->session->userdata('dusun')['id']);
+        $data = [
+            'title' => 'Riwayat Perankingan Periode ' . $periode['periode'] . ' ' . $dusun['nama_dusun'],
+            'periode' => $periode,
+        ];
+        $data['kepkel'] = $kep_keluarga;
+        $html = $this->load->view('laporan/pengajuan', ['data' => $data], TRUE);
+        $mpdf->WriteHTML($html);
+        $mpdf->Output('Perankingan Periode ' . $periode['periode'] . '.pdf', 'I');
     }
 }

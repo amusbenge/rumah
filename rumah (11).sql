@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2022 at 04:35 AM
+-- Generation Time: Apr 11, 2022 at 09:27 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.2.34
 
@@ -580,7 +580,9 @@ INSERT INTO `user_sub_menu` (`id`, `id_menu`, `title`, `url`, `icon`, `is_active
 (12, 4, 'Perbandingan', 'surveyor/perbandingan', 'fas fa-fw fa-file', 1),
 (14, 3, 'Riwayat Hitung', 'ahp/riwayat_hitung', 'fas fa-fw fa-list', 1),
 (15, 5, 'Pengajuan Periode Ini', 'dusun/data_pengajuan', 'fas fa-fw fa-list', 1),
-(16, 5, 'Riwayat Pengajuan', 'dusun/riwayat_pengajuan', 'fas fa-fw fa-list', 1);
+(16, 5, 'Riwayat Pengajuan', 'dusun/riwayat_pengajuan', 'fas fa-fw fa-list', 1),
+(17, 4, 'Perankingan', 'surveyor/hasil', 'fas fa-fw fa-list', 1),
+(18, 4, 'Riwayat Perankingan', 'surveyor/riwayat_hasil', 'fas fa-fw fa-list', 1);
 
 -- --------------------------------------------------------
 
@@ -788,7 +790,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables

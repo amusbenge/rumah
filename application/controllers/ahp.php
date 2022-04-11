@@ -251,4 +251,18 @@ class AHP extends CI_Controller
             $this->load->view('footer');
         }
     }
+    public function cetak_hasil($id_periode)
+    {
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+        $dusun = $this->ModelAHP->getHasilAkhir($id_periode);
+        $periode = $this->ModelAHP->getPeriode(['id' => $id_periode]);
+        $data = [
+            'title' => 'Perankingan Periode ' . $periode['periode'],
+            'periode' => $periode,
+            'dusun' => $dusun
+        ];
+        $html = $this->load->view('laporan/hasil', ['data' => $data], TRUE);
+        $mpdf->WriteHTML($html);
+        $mpdf->Output('Perankingan Periode ' . $periode['periode'] . '.pdf', 'I');
+    }
 }

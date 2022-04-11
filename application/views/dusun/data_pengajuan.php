@@ -13,33 +13,40 @@
             </div>
 
             <!-- Tampil Tabel Data Users -->
-            <form method="post" action="<?php echo base_url('dusun/pengajuan') ?>" id="form-ajukan">
-                <table class="table table-bordered text-center display compact nowrap" id="jtable">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">No.</th>
-                            <th scope="col">No. KK</th>
-                            <th scope="col">Nama Kepala Keluarga</th>
-                            <th scope="col">RT/RW</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-900">
+            <a href="<?= base_url('dusun/cetak_pengajuan/' . $periode['id']) ?>" class="btn btn-warning mb-2">Laporan</a>
+            <table class="table table-bordered text-center display compact nowrap" id="jtable">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">No. KK</th>
+                        <th scope="col">Nama Kepala Keluarga</th>
+                        <th scope="col">RT/RW</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-900">
 
-                        <!-- LOOPING tampil isi tabel users -->
-                        <?php
-                        $no = 1;
-                        foreach ($kepkel as $kk) : ?>
-                            <tr>
-                                <td><?= $no++ ?></td>
-                                <td><?= $kk['no_kk'] ?></td>
-                                <td><?= $kk['nm_kpl_kel'] ?></td>
-                                <td><?= $kk['rt'] ?>/<?= $kk['rw'] ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-                <!-- Akhir TABEL -->
-            </form>
+                    <!-- LOOPING tampil isi tabel users -->
+                    <?php
+                    $no = 1;
+                    foreach ($kepkel as $kk) : ?>
+                        <tr>
+                            <td><?= $no++ ?></td>
+                            <td><?= $kk['no_kk'] ?></td>
+                            <td><?= $kk['nm_kpl_kel'] ?></td>
+                            <td><?= $kk['rt'] ?>/<?= $kk['rw'] ?></td>
+                            <td>
+                                <?php if ($kk['hasil'] > 0) :  ?>
+                                    <?= ($no >= 2 && $no <= 4) ? 'Menerima' : 'Tidak Menerima' ?>
+                                <?php else : ?>
+                                    sedang diproses
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <!-- Akhir TABEL -->
         </div>
     </div>
 

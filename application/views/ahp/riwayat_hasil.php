@@ -2,6 +2,8 @@
   <h3 class="mb-2 text-gray-900"><?= $title; ?></h3>
   *Jika tidak ada data yang ditampilkan proses perankingan belum selesai.
   <!-- Isi Dalam bentuk Card -->
+  <br>
+  <a href="<?= base_url('ahp/cetak_hasil/' . $periode['id']) ?>" class="btn btn-warning mb-2">Laporan</a>
   <?php foreach ($dusun as $d) : ?>
     <div class="card card-secondary">
       <div class="card-header">
@@ -16,6 +18,7 @@
               <th scope="col">No KK</th>
               <th scope="col">Nama</th>
               <th scope="col">Nilai</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody class="text-gray-900">
@@ -28,6 +31,7 @@
                 <td><?= $hasil['no_kk'] ?></td>
                 <td><?= $hasil['nm_kpl_kel'] ?></td>
                 <td><?= number_format($hasil['hasil'], 3) ?></td>
+                <td><?= ($no <= 4 && $no >= 2) ? 'Menerima' : 'Tidak Menerima' ?></td>
               </tr>
             <?php endforeach; ?>
             <!-- akhir LOOPING -->

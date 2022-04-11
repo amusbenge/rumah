@@ -178,7 +178,7 @@ class ModelAHP extends CI_Model
     public function getAlternatif($id_periode, $id = null, $id_dusun = null)
     {
         // $this->db->distinct('alternatif.id');
-        $this->db->select('kep_keluarga.*, alternatif.id as id_alternatif, periode.periode, periode.status, dusun.nama_dusun, (SELECT distinct COUNT(kriteria_alternatif.id) FROM kriteria_alternatif WHERE alternatif.id = kriteria_alternatif.id_alternatif group by alternatif.id) as jumlah_survey');
+        $this->db->select('kep_keluarga.*, alternatif.id as id_alternatif, alternatif.hasil as hasil, periode.periode, periode.status, dusun.nama_dusun, (SELECT distinct COUNT(kriteria_alternatif.id) FROM kriteria_alternatif WHERE alternatif.id = kriteria_alternatif.id_alternatif group by alternatif.id) as jumlah_survey');
         $this->db->from('alternatif');
         $this->db->join('kep_keluarga', 'kep_keluarga.no_kk = alternatif.no_kk');
         $this->db->join('periode', 'periode.id = alternatif.id_periode');
@@ -189,8 +189,10 @@ class ModelAHP extends CI_Model
         }
         if ($id != null) {
             $this->db->where('alternatif.id', $id);
+            $this->db->order_by('alternatif.hasil', 'desc');
             return $this->db->get()->row_array();
         } else {
+            $this->db->order_by('alternatif.hasil', 'desc');
             return $this->db->get()->result_array();
         }
     }
