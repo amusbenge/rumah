@@ -67,6 +67,54 @@ class Dusun extends CI_Controller
         redirect('dusun/kep_keluarga');
     }
 
+    public function excel_batch_add_kepkel()
+    {
+        $this->load->library('excel');
+        $file = $_FILES['excel']['name'];;
+        if ($file == null) {
+            $this->session->set_flashdata('message', '<div class="alert alert-error" role="alert">File tidak didukung!.</div>');
+            return redirect($_SERVER['HTTP_REFERER']);
+        }
+        $file_tmp = $_FILES['excel']['tmp_name'];
+        try {
+            $object = PHPExcel_IOFactory::load($file_tmp);
+            $count = 0;
+            foreach ($object->getWorksheetIterator() as $worksheet) {
+
+                $highestRow = $worksheet->getHighestRow();
+
+                for ($row = 2; $row <= $highestRow; $row++) {
+
+                    $no_kk = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                    $nama = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                    $alamat = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $rt = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $rw = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                    if (!$this->ModelAHP->dataExists(['no_kk' => $no_kk], 'kep_keluarga')) {
+                        $data = [
+                            'no_kk' => $no_kk,
+                            'nm_kpl_kel' => $nama,
+                            'alamat' => $alamat,
+                            'rt' => $rt,
+                            'rw' => $rw,
+                            'desa' => 'Kabuna',
+                            'kec' => 'Kakuluk Mesak',
+                            'kab' => 'Belu',
+                            'id_dusun' => $this->session->userdata('dusun')['id'],
+                        ];
+                        $this->db->insert('kep_keluarga', $data);
+                        $count++;
+                    }
+                }
+            }
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">' . $count . ' data berhasil ditambahkan!.</div>');
+            return redirect($_SERVER['HTTP_REFERER']);
+        } catch (\Throwable $th) {
+            echo 'gagal';
+            die();
+        }
+    }
+
     public function edit_kepkel($no_kk)
     {
         $data['title'] = 'Edit';

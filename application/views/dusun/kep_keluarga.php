@@ -10,7 +10,7 @@
                 <i class="fas fa-user-plus mr-1"></i>
                 Tambah
             </button>
-            <button type="button" class="btn btn-secondary btn-sm mb-3">
+            <button type="button" class="btn btn-secondary btn-sm mb-3" data-toggle="modal" data-target="#importModal">
                 <i class="fas fa-file-import mr-1"></i>
                 Import
             </button>
@@ -129,6 +129,35 @@
                         <div class="modal-footer">
                             <button type="reset" class="btn btn-secondary btn-sm">Reset</button>
                             <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Import Excel -->
+<div class="modal fade" id="importModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-gray-900" id="importModalLabel">Import Kepala Keluarga</h5>
+                <button type="button" class="close btn-danger" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="p-3">
+                    <!-- FORM isian Data User -->
+                    <form action="<?= base_url('dusun/excel_batch_add_kepkel/') ?>" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="excel">File Excel</label>
+                            <input type="file" name="excel" id="" class="form-control">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-secondary btn-sm">Reset</button>
+                            <button type="submit" class="btn btn-primary btn-sm">Import</button>
                         </div>
                     </form>
                 </div>
