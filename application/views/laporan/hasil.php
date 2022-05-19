@@ -32,6 +32,28 @@
         .tabel1 tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+
+        .table2 {
+            font-family: sans-serif;
+            color: #444;
+            border-collapse: collapse;
+            width: 100%;
+            border: 0px;
+            float: right;
+            position: fixed;
+        }
+
+        .tabel2,
+        th,
+        td {
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        .box {
+            float: right;
+            width: 50%;
+        }
     </style>
 </head>
 
@@ -66,6 +88,22 @@
             </tbody>
         </table>
         <hr>
+        <br>
+        <div class="box">
+            <table class="table2">
+                <tr>
+
+                    <td>
+                        Kabuna, <?= date('d-m-Y') ?>,
+                        <br>
+                        Kepala Desa Kabuna
+                        <br><br><br><br>
+                        Adrianus Yoseph Laka, S.Tp.
+                    </td>
+                </tr>
+            </table>
+        </div>
+
     <?php endforeach; ?>
 </body>
 

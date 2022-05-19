@@ -11,7 +11,11 @@
             <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                 <i class="fa fa-bars"></i>
             </button>
-            <h4 class="">APLIKASI PENENTUAN PENERIMA BANTUAN RUMAH LAYAK HUNI</h4>
+            <img src="<?= base_url('assets/img/icon/logo1.jpg') ?>" alt="" class="img-fluid mr-2" width="50px">
+            <img src="<?= base_url('assets/img/icon/logo2.png') ?>" alt="" class="img-fluid mr-2" width="50px">
+            <img src="<?= base_url('assets/img/icon/logo3.png') ?>" alt="" class="img-fluid mr-2" width="40px">
+
+            <h5 class="mr-2 d-none d-md-block">APLIKASI PENENTUAN PENERIMA BANTUAN RUMAH LAYAK HUNI</h5>
 
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
