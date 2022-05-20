@@ -13,10 +13,12 @@
             </button>
             <img src="<?= base_url('assets/img/icon/logo1.jpg') ?>" alt="" class="img-fluid mr-2" width="50px">
             <img src="<?= base_url('assets/img/icon/logo2.png') ?>" alt="" class="img-fluid mr-2" width="50px">
-            <img src="<?= base_url('assets/img/icon/logo3.png') ?>" alt="" class="img-fluid mr-2" width="40px">
+            <img src="<?= base_url('assets/img/icon/logo3.png') ?>" alt="" class="img-fluid mr-5" width="40px">
 
-            <h5 class="mr-2 d-none d-md-block">APLIKASI PENENTUAN PENERIMA BANTUAN RUMAH LAYAK HUNI</h5>
 
+            <div class="d-flex justify-content-end">
+                <h5 class="mr-2 d-none d-md-block"><b class="text-success">Aplikasi</b> <b>Penentuan Penerima Bantuan Rumah Layak Huni</b></h5>
+            </div>
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
                 <div class="topbar-divider d-none d-sm-block"></div>

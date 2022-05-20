@@ -1,5 +1,17 @@
 <div class="container-fluid">
-  <h3 class="mb-4 text-gray-900"><?= $title; ?></h3>
+  <div class="card mb-2">
+    <div class="card-body">
+      <div class="text-center">
+        <img src="<?= base_url('assets/img/icon/logo1.jpg') ?>" alt="" class="d-none d-md-inline img-fluid mr-2 mb-4" width="80px">
+        <img src="<?= base_url('assets/img/icon/logo2.png') ?>" alt="" class="d-none d-md-inline img-fluid mr-2 mb-4" width="80px">
+        <img src="<?= base_url('assets/img/icon/logo3.png') ?>" alt="" class="d-none d-md-inline img-fluid mr-2 mb-4" width="80px">
+        <h4 class="mb-2 text-gray-900">PEMERINTAHAN KABUPATEN BELU</h4>
+        <h4 class="mb-2 mt-2 text-gray-900">DINAS PU DAN PERUMAHAN RAKYAT</h4>
+        <h4 class="mb-2 mt-2 text-gray-900">PEMERINTAHAN DESA KABUNA</h4>
+
+      </div>
+    </div>
+  </div>
   <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="modal" data-target="#tambahPeriode">
     <i class="fas fa-plus mr-1"></i>Tambah Periode</button>
 
@@ -10,7 +22,6 @@
   <div class="row">
     <div class="col-lg-3">
       <div class="card bg-light mb-3" style="max-width: 18rem;">
-        <div class="card-header"></div>
         <div class="card-body">
           <h5 class="card-title">Informasi Daftar Penerimaan Bantuan Rumah</h5>
           <p class="card-text" style="text-align: justify;">Simbol 'list' berwarna hijau (<i class="fas fa-fw fa-list text-success"></i>) pada daftar periode disamping melambangkan periode penerimaan bantuan rumah yang telah selesai. Sedangkan simbol 'list' berwarna biru (<i class="fas fa-fw fa-list text-primary"></i>) menunjukkan periode penerimaan bantuan rumah yang baru dibuka atau sedang berjalan.</p>

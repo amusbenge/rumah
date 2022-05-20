@@ -1,5 +1,17 @@
 <div class="container-fluid">
-  <h3 class="mb-2 text-gray-900"><?= $title; ?></h3>
+  <div class="card mb-2">
+    <div class="card-body">
+      <div class="text-center">
+        <img src="<?= base_url('assets/img/icon/logo1.jpg') ?>" alt="" class="d-none d-md-inline img-fluid mr-2 mb-4" width="80px">
+        <img src="<?= base_url('assets/img/icon/logo2.png') ?>" alt="" class="d-none d-md-inline img-fluid mr-2 mb-4" width="80px">
+        <img src="<?= base_url('assets/img/icon/logo3.png') ?>" alt="" class="d-none d-md-inline img-fluid mr-2 mb-4" width="80px">
+        <h4 class="mb-2 text-gray-900">PEMERINTAHAN KABUPATEN BELU</h4>
+        <h4 class="mb-2 mt-2 text-gray-900">DINAS PU DAN PERUMAHAN RAKYAT</h4>
+        <h4 class="mb-2 mt-2 text-gray-900">PEMERINTAHAN DESA KABUNA</h4>
+
+      </div>
+    </div>
+  </div>
   <!-- Isi Dalam bentuk Card -->
   <div class="row">
     <div class="col-lg-3">
