@@ -34,6 +34,7 @@ class Dusun extends CI_Controller
         $id_user = $userdata['user']['id'];
         $data['user'] = $this->ModelUser->getUser($username);
         $data['kepkel'] = $this->ModelUser->getKepkelByUser($id_user);
+        // $data['kepkel'] = $this->ModelUser->getKepkelByUser($id_user);
         $data['cekPengajuan'] = $this->ModelAHP->cekPengajuan($id_dusun);
         // echo "<pre>";
         // var_dump($data['kepkel']);

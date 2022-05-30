@@ -58,7 +58,7 @@
                             foreach ($kepkel as $kk) : ?>
                                 <tr>
                                     <td>
-                                        <?php if ($kk['jumlah'] < 1) : ?>
+                                        <?php if (!$cekPengajuan) : ?>
                                             <input type='checkbox' class='check-item' name='no_kk[]' value='<?= $kk['no_kk']; ?>'>
                                         <?php endif; ?>
                                     </td>

@@ -106,11 +106,24 @@ class ModelUser extends CI_Model
             $this->db->select('kep_keluarga.*, dusun.nama_dusun, user.jabatan, user.nama');
         }
         $this->db->from('kep_keluarga');
-        $this->db->join('dusun', 'dusun.id = kep_keluarga.id_dusun', 'LEFT');
-        $this->db->join('user', 'user.id = dusun.id_user', 'LEFT');
+        $this->db->join('dusun', 'dusun.id = kep_keluarga.id_dusun');
+        $this->db->join('user', 'user.id = dusun.id_user');
         $this->db->where('user.id = ' . $id_user);
         $query = $this->db->get()->result_array();
         // var_dump($que
+        return $query;
+    }
+    public function get_jumlah_pengajuan($id_user)
+    {
+        $periode = $this->db->get_where('periode', ['status' => 1])->row_array();
+        $this->db->count('alternatif.*');
+        $this->db->from('alternatif');
+        $this->db->join('kep_keluarga', 'kep_keluarga.no_kk = alternatif.no_kk');
+        $this->db->join('dusun', 'dusun.id = kep_keluarga.id_dusun');
+        $this->db->join('user', 'user.id = dusun.id_user');
+        $this->db->where('user.id = ' . $id_user);
+        $this->db->where('alternatif.id_periode', $periode['id']);
+        $query = $this->db->get()->row_array();
         return $query;
     }
 }
