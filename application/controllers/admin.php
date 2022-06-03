@@ -288,6 +288,7 @@ class Admin extends CI_Controller
 
     public function update_dusun() // FUNGSI TAMBAH DUSUN
     {
+        $this->form_validation->set_rules('nama_dusun', 'Nama Dusun', 'required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Dusun atau Kepala Dusun existed.</div>');
             redirect('admin/dusun');
@@ -295,7 +296,7 @@ class Admin extends CI_Controller
 
             $id = $this->input->post('id');
             $nama_dusun = $this->input->post('nama_dusun');
-            $id_user = $this->input->post('id_user');
+            // $id_user = $this->input->post('id_user');
 
             $data = [
                 'nama_dusun'      => htmlspecialchars($nama_dusun),

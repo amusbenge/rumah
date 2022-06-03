@@ -40,10 +40,13 @@
                             <td><?= $d['nama'] ?></td>
                             <td>
                                 <button type="button" class="btn btn-info btn-sm btn-edit" data-toggle="modal" data-target="#userDusun_<?= $d['id'] ?>">
-                                    <i class="fas fa-recycle fa-sm"></i>
+                                    <i class="fas fa-user fa-sm"></i>
+                                </button>
+                                <button type="button" class="btn btn-warning btn-sm btn-edit" data-toggle="modal" data-target="#editDusun_<?= $d['id'] ?>">
+                                    <i class="fas fa-edit fa-sm"></i>
                                 </button>
                             </td>
-                            <!-- Tambah Ganti Kepala Dusun -->
+                            <!-- Ganti Kepala Dusun -->
                             <div class="modal fade" id="userDusun_<?= $d['id'] ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -89,6 +92,32 @@
                                                         <button type="reset" class="btn btn-secondary btn-sm">Reset</button>
                                                         <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
                                                     </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Ganti Kepala Dusun -->
+                            <div class="modal fade" id="editDusun_<?= $d['id'] ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-gray-900" id="staticBackdropLabel">Edit Dusun</h5>
+                                            <button type="button" class="close btn-danger" data-dismiss="modal">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="p-3">
+                                                <!-- FORM isian Data User -->
+                                                <form action="<?= base_url('admin/update_dusun/') ?>" method="POST" enctype="multipart/form-data">
+                                                    <input type="hidden" name="id" value="<?= $d['id'] ?>" class="d-none">
+                                                    <div class="form-group">
+                                                        <label for="nama">Nama Dusun</label>
+                                                        <input type="text" class="form-control form-control-sm" id="nama_dusun" name="nama_dusun" required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary btn-sm">Ganti Nama Dusun</button>
                                                 </form>
                                             </div>
                                         </div>
