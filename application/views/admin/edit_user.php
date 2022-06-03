@@ -26,7 +26,9 @@
                         </div>
                     </div>
                     <?php if ($user['id'] == $users['id'] && $users['role_id'] != '3') : ?>
-                        <input type="hidden" name="tipe" value="Admin">
+                        <input type="hidden" name="role_id" value="1">
+                    <?php elseif ($users['role_id'] == '3') : ?>
+                        <input type="hidden" name="role_id" value="3">
                     <?php else : ?>
                         <div class="form-group row">
                             <label for="role_id" class="col-sm-2 col-form-label">Tipe</label>

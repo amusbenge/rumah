@@ -110,6 +110,8 @@ class Admin extends CI_Controller
         $username = $userdata['user']['username'];
         $data['user'] = $this->ModelUser->getUser($username);
         $data['users'] = $this->db->get_where('user', ['id' => $id])->row_array();
+        // var_dump($data['users']);
+        // die();
         $data['roles'] = $this->db->get_where('user_role', ['role <>' => 'Kepala Dusun'])->result_array();
 
         $this->load->view('header', $data);
