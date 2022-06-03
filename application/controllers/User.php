@@ -19,7 +19,10 @@ class User extends CI_Controller
         $password = $this->input->post('password');
 
         $upload = $_FILES['foto'];
-
+        $data = [
+            'nama' => htmlspecialchars($nama),
+            'username' => $username,
+        ];
         if ($upload) {
             $config['allowed_types'] = 'jpeg|jpg|png|gif';
             $config['max_size'] = '3000';
@@ -34,17 +37,17 @@ class User extends CI_Controller
                 }
 
                 $new_foto = $this->upload->data('file_name');
-                $this->db->set('foto', $new_foto);
+                // $this->db->set('foto', $new_foto);
+                $data['foto'] = $new_foto;
             } else {
                 echo $this->upload->display_errors();
             }
         }
+        if ($password != null) {
+            $data['password'] = password_hash($password, PASSWORD_DEFAULT);
+        }
 
-        $data = [
-            'nama' => htmlspecialchars($nama),
-            'username' => $username,
-            'password' => password_hash($password, PASSWORD_DEFAULT)
-        ];
+
 
         $this->db->where('id', $id);
         $this->db->update('user', $data);

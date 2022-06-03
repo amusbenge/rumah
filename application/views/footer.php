@@ -106,11 +106,11 @@
                     </div>
                     <div class="form-group">
                         <label for="password" class="col-form-label">Password Baru:</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <input type="password" class="form-control" id="password" name="password">
                     </div>
                     <div class="form-group">
                         <label for="foto" class="col-form-label">Foto :</label>
-                        <input type="file" id="foto" name="foto" required>
+                        <input type="file" id="foto" name="foto">
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-save mr-2"></i>Simpan</button>
