@@ -95,7 +95,7 @@ class AHP extends CI_Controller
     {
         $this->db->where('id', $id);
         $this->db->delete('sub_kriteria');
-        redirect('ahp/sub_kriteria/' . $id);
+        redirect($_SERVER['HTTP_REFERER']);
     }
 
     public function tambah_sub_kriteria($id, $jumlah)
