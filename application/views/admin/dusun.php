@@ -45,6 +45,9 @@
                                 <button type="button" class="btn btn-warning btn-sm btn-edit" data-toggle="modal" data-target="#editDusun_<?= $d['id'] ?>">
                                     <i class="fas fa-edit fa-sm"></i>
                                 </button>
+                                <a type="button" class="btn btn-warning btn-sm btn-edit" href="<?= base_url('admin/hps_dusun/' . $d['id']) ?>" onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                    <i class="fas fa-trash fa-sm"></i>
+                                </a>
                             </td>
                             <!-- Ganti Kepala Dusun -->
                             <div class="modal fade" id="userDusun_<?= $d['id'] ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
