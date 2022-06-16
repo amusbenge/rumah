@@ -267,6 +267,15 @@ class Admin extends CI_Controller
         $this->load->view('footer', $data);
     }
 
+    public function hps_dusun($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('dusun');
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil dihapus.</div>');
+        redirect('admin/dusun');
+    }
+
     public function tambah_dusun() // FUNGSI TAMBAH DUSUN
     {
         $this->form_validation->set_rules('nama_dusun', 'Nama Dusun', 'is_unique[dusun.nama_dusun]');

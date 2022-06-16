@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2022 at 09:27 AM
+-- Generation Time: Jun 10, 2022 at 10:53 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.2.34
 
@@ -39,18 +39,14 @@ CREATE TABLE `alternatif` (
 --
 
 INSERT INTO `alternatif` (`id`, `no_kk`, `id_periode`, `hasil`) VALUES
-(1, '5301192905980002', 1, 0.340883),
-(2, '5371041304980001', 1, 0.267908),
-(3, '5371041906960002', 1, 0.392209),
-(15, '5301192905980002', 13, 0),
-(16, '5371041304980001', 13, 0),
-(17, '5371041906960002', 13, 0),
-(18, '2745372930598374', 13, 0),
-(19, '5371041304980007', 13, 0),
-(20, '2745372930598213', 13, 0),
-(21, '5304052007920002', 13, 0),
-(22, '5304052008650002', 13, 0),
-(23, '5304052008620002', 13, 0);
+(32, '5304012050987000', 13, 0),
+(33, '5304050107400007', 13, 0),
+(34, '5304050107440022', 13, 0),
+(35, '5304050107470027', 13, 0),
+(36, '5304050107600066', 13, 0),
+(37, '5304050107750002', 13, 0),
+(38, '5304050107770042', 13, 0),
+(39, '5304050107800053', 13, 0);
 
 -- --------------------------------------------------------
 
@@ -69,9 +65,15 @@ CREATE TABLE `dusun` (
 --
 
 INSERT INTO `dusun` (`id`, `nama_dusun`, `id_user`) VALUES
-(5, 'Dusun 1', 13),
-(7, 'Dusun 2', 11),
-(8, 'Dusun 3', 14);
+(5, 'Dusun Kakuban', 15),
+(7, 'Dusun Fatukorat', 16),
+(8, 'Dusun Wesasuit', 17),
+(9, 'Dusun Manubaun', 18),
+(10, 'Dusun Haliwen', 19),
+(11, 'Dusun Bautasik', 20),
+(12, 'Dusun Babauk', 21),
+(13, 'Dusun Salala', 22),
+(14, 'Dusun Weraihenek', 23);
 
 -- --------------------------------------------------------
 
@@ -98,13 +100,64 @@ CREATE TABLE `kep_keluarga` (
 INSERT INTO `kep_keluarga` (`no_kk`, `nm_kpl_kel`, `alamat`, `rt`, `rw`, `desa`, `kec`, `kab`, `id_dusun`) VALUES
 ('2745372930598213', 'Efentus Goat', 'Fatukorat', '001', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 7),
 ('2745372930598374', 'Oswaldus Talo', 'Bautasik', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 7),
-('5301192905980002', 'Maximilianus Benge', 'Jl. Kelimutu', '004', '003', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304012050987000', 'Siprianus Seo', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304050107400007', 'Benyamin Bita Lua', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304050107440022', 'Trensus Mau Ati', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304050107470027', 'Andreas Koli Asa', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304050107600066', 'Hendrikus Bere Soro', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304050107750002', 'Siprianus Leto Mau', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304050107770042', 'Armindu Bere Koli', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304050107800053', 'Yulius Musoro', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304050107830075', 'Yoseph Mau Kuru', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304050107860001', 'Yohanis Leto Mau', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304050303200005', 'Doinggus Mau Kuru', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304050404700001', 'Oskar Leto Bili', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304050471245000', 'Ata Bau Sama', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304050606750002', 'Yohanes Dasi Leto', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304050803830002', 'Maria Soi Lelo', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304050811450001', 'Benyamin Mau Kali', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304050883210001', 'Theodorus Mau Lelo', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304051005920001', 'Dominggus Mau', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304051007790001', 'Anselmus Leki Bere', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304051008890001', 'Marianus Lelo Bere', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304051010580002', 'Yasinta Abu Mali', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304051010670002', 'Silvester Leto Mau', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304051012950002', 'Marselinus Asa Mau', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304051203840007', 'Andereas Malibo', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304051212700002', 'Martinus Dasi Loe', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304051403660001', 'Petrus Celestinus Dasi', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304051407690001', 'Idolfonsus Koy', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304051411960001', 'Francisko Dos Santo', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304051510780001', 'Yoseph Mau Dao', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304051608790004', 'Yohanes Leto Loe', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304051608810002', 'Onorio Dos Santos', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304051708620001', 'Markus Sama Lelo', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304051712850002', 'Lazarus Densus Leto Mau', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304051809830001', 'Rofinus Mau Leto', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304052005820002', 'Benyamin Mau Kali', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
 ('5304052007920002', 'Andreas Koli', 'Fatukorat', '001', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 8),
+('5304052008560001', 'Agustinus Mau Bere', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
 ('5304052008620002', 'Ermelinda Gomes', 'Kakuban', '001', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 8),
 ('5304052008650002', 'Martinus Dasi', 'Kakuban', '001', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 8),
-('5371041304980001', 'Kristian Paulino', 'Jl. Perintis', '003', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
-('5371041304980007', 'Mario Borges', 'Bautasik', '003', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 7),
-('5371041906960002', 'Adrian Siribein', 'Jl. Keramat Jati', '003', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5);
+('5304052008810002', 'Joakim Soares', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304052101840001', 'Hilarius Bere Mau', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304052408580001', 'Vinsensius Lelo Mau', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304052906850001', 'Yoseph Mau Gaen', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304053112400001', 'Firminu Seran', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304053112570011', 'Martinus Mau Leki', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304053112590008', 'Elias Laku Leto', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304053112630006', 'Andreas Leto Loe', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304053112720002', 'Dominikus Bere Loe', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304053112760002', 'David Ato Bili', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304053112800001', 'Markus Sama Leto', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304054107500034', 'Blandina Soi Boe', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304054107560033', 'Ermelinda G Da Crus', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304054107580001', 'Agusta Motu Mau', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304054107710005', 'Selviana Meta Bada', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304054610760001', 'Maria Motu Bere', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304057112290002', 'Maria Bui Kau', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5304058112710001', 'Marsianus Mau Asa', 'Kakuban', '001', '002', 'Kabuna', 'Kakuluk Mesak', 'Belu', 5),
+('5371041304980007', 'Mario Borges', 'Bautasik', '003', '001', 'Kabuna', 'Kakuluk Mesak', 'Belu', 7);
 
 -- --------------------------------------------------------
 
@@ -478,9 +531,15 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `nama`, `jabatan`, `jk`, `username`, `foto`, `password`, `aktif`, `role_id`) VALUES
 (1, 'Amos Benge', 'Admin Desa', 'Pria', 'admin', 'daniel.jpg', '$2y$10$PVtdLfTUY595pq0jkoekgOoWysq3VSfbXt2PIdsJ0C/Scgfz4FBMi', 'aktif', '1'),
 (7, 'Ricky Lalo', 'Pegawai/Surveyor', 'Pria', 'survey', 'profile2.png', '$2y$10$SkZRGGfhoai.nx3.Dzfydu32etxx7qBcP5B.O9ONqRgjXsodpG6GS', 'aktif', '2'),
-(11, 'Kevin Bhato', 'Kepala Dusun 03', 'Pria', 'dusun2', 'daniel2111.jpg', '$2y$10$JGCtHBE2cLo0xx1iq4UDSOwq8ZisLuNuopTy/ogqDUlMBnLGAke8e', 'aktif', '3'),
-(13, 'Romi', 'Kepala Dusun', 'Pria', 'dusun1', '', '$2y$10$kzoT1z8KeEhNNT2Ae/8EZe5r0HV67h1b3mgsEKZ2IVZGOsdn/h.Vy', 'aktif', '3'),
-(14, 'Viktor Selan', 'Kepala Dusun', 'Pria', 'dusun3', '1627825501787.jpg', '$2y$10$MNCLfLfqOruqlpX4lEfRzuVFOfYf51n3IBIao1KlMFWajBY7oTPx2', 'aktif', '3');
+(15, 'Yosephb Laku', 'Kepala Dusun', 'Pria', 'dusunkakuban', 'v0caqchbtn741_(2).jpg', '$2y$10$7hg54vbvGcgpvTkSndG54OntXMcMk/HtIeEpfvzPWLX72EJL24JF2', 'aktif', '3'),
+(16, 'Rosalia Motu Mau', 'Kepala Dusun', 'Wanita', 'dusunfatukorat', 'images.jpg', '$2y$10$ly0AkbrbV3TM2tqBESsxwebrKhZvtTlle4.2UeiG2S0WQ2YajSp9e', 'aktif', '3'),
+(17, 'Melkianus Asuk', 'Kepala Dusun', 'Pria', 'dusunwesasuit', 'pexels-photo-771742_(1)5.jpeg', '$2y$10$Cmq1JXMevL0rYYzA20PxNuu7IbpivJv1roxXhVbmxukgEx5c5XXaC', 'aktif', '3'),
+(18, 'Agustina Remince Mali', 'Kepala Dusun', 'Wanita', 'dusunmanubaun', 'ced84a67302c60bd1abaaf93140644331.jpg', '$2y$10$Yg0jKqZOUZ0JQ2espJfHj.WJjfj5cwVOmvvfpLW6paaw4nVbb4MRy', 'aktif', '3'),
+(19, 'Agustinus Kali', 'Kepala Dusun', 'Pria', 'dusunhaliwen', 'profile_(2)2.jpg', '$2y$10$ZuIcOMJHdnK4iA8IYvgAm.s5FDEjSyK3Ct6.vdGUiS3H1eoybOMqC', 'aktif', '3'),
+(20, 'Meliana Loe', 'Kepala Dusun', 'Pria', 'dusunbautasik', 'template_3.jpg', '$2y$10$8OXXq4TQaWiXiHDT8NrL9u.nB7.UBxDeJCaVFwuPfOtH9KnW8ApQ.', 'aktif', '3'),
+(21, 'Siprianus Jemi Mau Bili', 'Kepala Dusun', 'Pria', 'dusunbabauk', 'pexels-photo-771742_(1)6.jpeg', '$2y$10$83EAK.Re.3TUglpiDfsN1Oc61MxBB4bgSHG4T54FSu4rsunGI0Re.', 'aktif', '3'),
+(22, 'Francisko Bere', 'Kepala Dusun', 'Pria', 'dusunsalala', 'c9762b1cfdb87a3d008d584aa9eaf7272.jpg', '$2y$10$DYGmstNDDmVDQKeqkB9HwevJFFUqeeai0UvL4mxjlCNdE1lm3UNFC', 'aktif', '3'),
+(23, 'Petrus Manu Bere', 'Kepala Dusun', 'Pria', 'dusunweraihenek', 'pexels-photo-771742_(1)7.jpeg', '$2y$10$Ijxb1BU6jr/WipquE1ktfutXFOmL.ASjLOl7QT8q8LujmRoWXmrSi', 'aktif', '3');
 
 -- --------------------------------------------------------
 
@@ -578,11 +637,7 @@ INSERT INTO `user_sub_menu` (`id`, `id_menu`, `title`, `url`, `icon`, `is_active
 (10, 5, 'Kepala Keluarga', 'dusun/kep_keluarga', 'fas fa-fw fa-users', 1),
 (11, 2, 'Dusun', 'admin/dusun', 'fas fa-fw fa-users', 1),
 (12, 4, 'Perbandingan', 'surveyor/perbandingan', 'fas fa-fw fa-file', 1),
-(14, 3, 'Riwayat Hitung', 'ahp/riwayat_hitung', 'fas fa-fw fa-list', 1),
-(15, 5, 'Pengajuan Periode Ini', 'dusun/data_pengajuan', 'fas fa-fw fa-list', 1),
-(16, 5, 'Riwayat Pengajuan', 'dusun/riwayat_pengajuan', 'fas fa-fw fa-list', 1),
-(17, 4, 'Perankingan', 'surveyor/hasil', 'fas fa-fw fa-list', 1),
-(18, 4, 'Riwayat Perankingan', 'surveyor/riwayat_hasil', 'fas fa-fw fa-list', 1);
+(14, 3, 'Riwayat Hitung', 'ahp/riwayat_hitung', 'fas fa-fw fa-list', 1);
 
 -- --------------------------------------------------------
 
@@ -718,13 +773,13 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `alternatif`
 --
 ALTER TABLE `alternatif`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `dusun`
 --
 ALTER TABLE `dusun`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `kriteria`
@@ -766,7 +821,7 @@ ALTER TABLE `sub_kriteria`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
@@ -790,7 +845,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
@@ -800,8 +855,8 @@ ALTER TABLE `user_sub_menu`
 -- Constraints for table `alternatif`
 --
 ALTER TABLE `alternatif`
-  ADD CONSTRAINT `alternatif_ibfk_1` FOREIGN KEY (`id_periode`) REFERENCES `periode` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `alternatif_ibfk_2` FOREIGN KEY (`no_kk`) REFERENCES `kep_keluarga` (`no_kk`);
+  ADD CONSTRAINT `alternatif_ibfk_1` FOREIGN KEY (`id_periode`) REFERENCES `periode` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `alternatif_ibfk_2` FOREIGN KEY (`no_kk`) REFERENCES `kep_keluarga` (`no_kk`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
