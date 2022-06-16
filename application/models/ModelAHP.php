@@ -333,6 +333,7 @@ class ModelAHP extends CI_Model
         $this->db->join('kep_keluarga', 'kep_keluarga.no_kk = alternatif.no_kk');
         $this->db->where('alternatif.id_periode', $periode);
         $this->db->where('alternatif.hasil !=', 0);
+        $this->db->where('kep_keluarga.id_dusun !=', $id_dusun);
         $this->db->order_by('hasil', 'desc');
         return $this->db->get()->result_array();
     }
