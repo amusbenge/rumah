@@ -340,6 +340,7 @@ class ModelAHP extends CI_Model
     public function getHasilAkhir($id_periode)
     {
         $this->db->distinct('dusun.*');
+        $this->db->select('dusun.*, kep_keluarga.*, alternatif.id as id_alternatif, alternatif.hasil, alternatif.id_periode');
         $this->db->from('dusun');
         $this->db->join('kep_keluarga', 'kep_keluarga.id_dusun = dusun.id');
         $this->db->join('alternatif', 'alternatif.no_kk = kep_keluarga.no_kk');
